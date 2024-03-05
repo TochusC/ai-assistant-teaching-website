@@ -1,0 +1,33 @@
+@import './base.css';
+
+#app {
+  font-weight: normal;
+}
+
+* {
+  transition: 0.5s;
+}
+
+
+button{
+  padding: 8px 16px;
+  color: #f2f2f2;
+  background: #444444;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid #4242f2;
+}
+
+button:hover {
+  color: #f2f2f2;
+  background: #4242e0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid #4242f2;
+}
+
+p.content {
+  margin: 2px;
+  padding: 0;
+  color: #efefef;
+}
