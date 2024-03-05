@@ -2,11 +2,12 @@
 <h1> AI Empowered Intelligent Teaching Assistant Platform 💯</h1>
 
 ***
+
 A platform for intelligent teaching assistance that supports **natural language interaction**.
 
 [![madewithlove](https://img.shields.io/badge/made_with-%E2%9D%A4-red?style=for-the-badge&labelColor=orange)](https://github.com/TochusC/ai-assistant-teaching-website)
 
-[**简体中文**](./README.md) | [**English**](./docs/cn/README.md)
+[**简体中文**](./README.md) | [**English**](./docs/en/README.md)
 
 </div>
 
