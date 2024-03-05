@@ -1,5 +1,17 @@
-# AI赋能的智能教学辅助平台💯
+<div align="center">
+<h1> AI赋能的智能教学辅助平台💯</h1>
+
 ***
+支持**自然语言交互**的智能教学辅助平台
+
+[![madewithlove](https://img.shields.io/badge/made_with-%E2%9D%A4-red?style=for-the-badge&labelColor=orange)](https://github.com/TochusC/ai-assistant-teaching-website)
+
+[**简体中文**](./README.md) | [**English**](./docs/cn/README.md)
+
+</div>
+
+---
+
 ## Vue + Unity(Webgl)的智能教学辅助平台📚
 ![example.png](example_image/example.png)
 ***
