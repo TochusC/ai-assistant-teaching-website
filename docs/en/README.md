@@ -29,7 +29,11 @@ Interact with the intelligent teaching assistant through text or voice, and it w
 
 Using technologies such as Speech-to-Text (STT), Large Language Models (LLM), Text-to-Speech (TTS), we've created the intelligent teaching assistant Xiao Hui, and now we're introducing her to you 🥰.
 
+<div align="center">
+
 ![example_0.png](..%2F..%2Fexample_image%2Fexample_0.png)
+
+</div>
 
 Don't want to learn the complex business logic of the teaching platform? No problem!
 Let Xiao Hui assist students in submitting assignments, completing tasks, and help teachers with tedious operations such as taking attendance and assigning homework.
