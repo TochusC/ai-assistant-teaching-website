@@ -48,9 +48,26 @@
 ### 如何运行此平台❓
 平台目前仍在建设中...
 
+
+#### 环境准备🔨：
+***
+此GitHub仓库只包含了前端项目，前端使用Vue构建，使用npm（Node Package Manager）
+作为包管理工具，并使用了[Element-Plus](https://element-plus.org/)前端框架。
+
+在运行项目前请先使用
+`npm instal`
+来安装package.json中所需要的库和依赖
+
 使用
 `
-   npm run dev 
+npm run dev
 `
-启动项目，进行抢先预览体验。
+即可启动项目，进行抢先预览体验。
+
+#### 须知❗：
+***
+智能人工助理小慧需要与服务端进行数据通信才可进行工作，
+目前服务端项目仍未上传至GitHub中。
+
+
 

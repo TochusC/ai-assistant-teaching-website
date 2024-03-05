@@ -1,7 +1,7 @@
 <div align="center">
-<h1> AI Empowered Intelligent Teaching Assistant Platform 💯</h1>
+<h1> AI-Enhanced Intelligent Teaching Assistant Platform💯</h1>
 
-A platform for intelligent teaching assistance that supports **natural language interaction**.
+An intelligent teaching assistant platform with **natural language interaction**
 
 [![madewithlove](https://img.shields.io/badge/made_with-%E2%9D%A4-red?style=for-the-badge&labelColor=orange)](https://github.com/TochusC/ai-assistant-teaching-website)
 
@@ -11,23 +11,24 @@ A platform for intelligent teaching assistance that supports **natural language 
 
 ---
 
-## Intelligent Teaching Assistant Platform with Vue + Unity (WebGL) 📚
+## Vue + Unity (WebGL) Intelligent Teaching Assistant Platform📚
 ![example.png](..%2F..%2Fexample_image%2Fexample.png)
 ***
-### Still Under Active Construction 🔨...
+### Still Under Active Development🔨...
 ***
 
-Utilize a large language model as your personal assistant, allowing it to guide you on the teaching platform, search for teaching information, summarize web content, address your queries, meet your requirements, and even engage in casual conversations!
+Utilize a large language model as your personal assistant, enabling it to assist you in navigating the teaching platform, querying teaching information, summarizing web content, solving your difficulties, meeting your requests, and even engaging in chat conversations.
 
 ***
-### Introducing a Brand New Web Interaction Logic 👾!
-No more tedious clicking through various web elements, navigating under complex interfaces with a mouse; no more learning intricate web business logic or operating procedures; no more analyzing cold and rigid chart data.
-#### Navigate through the website using natural language via text and voice ✨!
-Interact with the intelligent teaching assistant through text or voice, and it will help you navigate to the corresponding web modules, assist in summarizing web content, analyze chart data, and smoothly navigate the teaching platform to complete educational tasks without obstacles.
-***
-### Meet Your Intelligent Teaching Assistant - Xiao Hui ❤️!
+### Offering a New Web Interaction Logic👾!
+No more clicking through various webpage items and navigation with a mouse; no need to learn the intricate webpage business logic and operations; no need to analyze cold and rigid chart data displayed on webpages.
+#### Operate webpages through text and voice using natural language✨!
+Engage in text or voice communication with the intelligent teaching assistant, and it will help you navigate to the corresponding webpage modules, assist in summarizing webpage content, analyze chart data, and help you smoothly navigate the teaching platform to complete teaching tasks.
 
-Using technologies such as Speech-to-Text (STT), Large Language Models (LLM), Text-to-Speech (TTS), we've created the intelligent teaching assistant Xiao Hui, and now we're introducing her to you 🥰.
+***
+### Meet Your Intelligent Teaching Assistant - Xiaohui❤️!
+
+Through technologies such as Speech-to-Text (STT), Large Language Model (LLM), Text-to-Speech (TTS), we have created the intelligent teaching assistant Xiaohui and would like to introduce her to you🥰.
 
 <div align="center">
 
@@ -36,21 +37,35 @@ Using technologies such as Speech-to-Text (STT), Large Language Models (LLM), Te
 </div>
 
 Don't want to learn the complex business logic of the teaching platform? No problem!
-Let Xiao Hui assist students in submitting assignments, completing tasks, and help teachers with tedious operations such as taking attendance and assigning homework.
+Let Xiaohui help students submit assignments, complete tasks; assist teachers in taking attendance, assigning homework, and other tedious operations.
 
-For any task, just say a word to Xiao Hui, and she will go through fire and water to fulfill your needs!
+No matter the task, just say a word to Xiaohui, and she will go above and beyond to meet your needs!
 
 ***
-##### Speech-to-Text (STT) is powered by Baidu's Rapid Speech Recognition service.
+##### Speech-to-Text (STT) is powered by Baidu's Rapid Phrase Speech Recognition service.
 ##### Large Language Model (LLM) is Baidu's ERNIE 3.5.
-##### Text-to-Speech (TTS) is implemented through the GitHub project [GPT-SoVits](https://github.com/RVC-Boss/GPT-SoVITS).
-
+##### Text-to-Speech (TTS) is implemented using the GitHub project [GPT-SoVits](https://github.com/RVC-Boss/GPT-SoVITS).
 ***
 ### How to Run This Platform❓
-The platform is still under construction...
+The platform is currently still under construction...
+
+#### Environment Setup🔨:
+***
+This GitHub repository only contains the frontend project, built using Vue, npm (Node Package Manager) as the package manager, and utilizes the [Element-Plus](https://element-plus.org/) frontend framework.
+
+Before running the project, please run
+`npm install`
+to install the necessary libraries and dependencies listed in package.json.
 
 Use
 `
 npm run dev
 `
-to start the project and have an exclusive preview experience.
+to start the project for an early preview experience.
+
+#### Important❗:
+***
+The intelligent assistant Xiaohui needs to communicate with the server for data interaction to function properly.
+The backend server project is not yet uploaded to GitHub.
+
+Please note that the translation might need further adjustments based on the actual content and context.
