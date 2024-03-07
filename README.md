@@ -5,14 +5,14 @@
 
 [![madewithlove](https://img.shields.io/badge/made_with-%E2%9D%A4-red?style=for-the-badge&labelColor=orange)](https://github.com/TochusC/ai-assistant-teaching-website)
 
-[**简体中文**](./README.md) | [**English**](./docs/en/README.md)
+[**简体中文**](./README.md) | [**English**](./docs/en/README.md)[**日本語**](./docs/jp/README.md)
 
 </div>
 
 ---
 
-## Vue + Unity(Webgl)的智能教学辅助平台📚
-![example.png](example_image/example.png)
+## Vue + Unity(WebGL)的智能教学辅助平台📚
+![example.png](docs/example_image/example.png)
 ***
 ### 仍在火热施工中🔨...
 ***
