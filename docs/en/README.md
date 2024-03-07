@@ -5,7 +5,7 @@ An intelligent teaching assistant platform with **natural language interaction**
 
 [![madewithlove](https://img.shields.io/badge/made_with-%E2%9D%A4-red?style=for-the-badge&labelColor=orange)](https://github.com/TochusC/ai-assistant-teaching-website)
 
-[**简体中文**](./README.md) | [**English**](./docs/en/README.md)[**日本語**](./docs/jp/README.md)
+[**简体中文**](./README.md) | [**English**](./docs/en/README.md) | [**日本語**](./docs/jp/README.md)
 
 </div>
 
