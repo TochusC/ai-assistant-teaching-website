@@ -1,6 +1,20 @@
 <script setup>
 
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
+
+const props = defineProps({
+  initialUnityCanvasHeight: {
+    type: Number,
+    required: true
+  },
+  initialUnityCanvasWidth: {
+    type: Number,
+    required: true
+  }
+})
+
+const unityCanvasHeight = ref(props.initialUnityCanvasHeight);
+const unityCanvasWidth = ref(props.initialUnityCanvasWidth);
 
 function unityShowBanner(msg, type) {
   function updateBannerVisibility() {
@@ -20,41 +34,99 @@ function unityShowBanner(msg, type) {
   updateBannerVisibility();
 }
 
-onMounted(() =>{
-  var container = document.querySelector("#unity-container");
-  var canvas = document.querySelector("#unity-canvas");
-  var loadingBar = document.querySelector("#unity-loading-bar");
-  var progressBarFull = document.querySelector("#unity-progress-bar-full");
-  var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-  var warningBanner = document.querySelector("#unity-warning");
-
-  // Shows a temporary message banner/ribbon for a few seconds, or
-  // a permanent error message on top of the canvas if type=='error'.
-  // If type=='warning', a yellow highlight color is used.
-  // Modify or remove this function to customize the visually presented
-  // way that non-critical warnings and error messages are presented to the
-  // user.
-
-
-  var buildUrl = "/src/assets/static/Unity/Build";
-  var loaderUrl = buildUrl + "/what.loader.js";
-  var config = {
-    dataUrl: buildUrl + "/what.data.br",
-    frameworkUrl: buildUrl + "/what.framework.js.br",
-    codeUrl: buildUrl + "/what.wasm.br",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "DefaultCompany",
-    productName: "AI-Asssistant(WebGL)",
-    productVersion: "0.1.0",
-    showBanner: unityShowBanner,
+function initRecord(opt = {}) {
+  let defaultOpt = {
+    serviceCode: "asr_aword",
+    audioFormat: "wav",
+    sampleRate: 16000,
+    sampleBit: 16,
+    audioChannels: 1,
+    bitRate: 96000,
+    audioData: null,
+    punctuation: "true",
+    model: null,
+    intermediateResult: null,
+    maxStartSilence: null,
+    maxEndSilence: null,
   };
 
-  // By default, Unity keeps WebGL canvas render target size matched with
-  // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-  // Set this to false if you want to decouple this synchronization from
-  // happening inside the engine, and you would instead like to size up
-  // the canvas DOM size and WebGL render target sizes yourself.
-  // config.matchWebGLToCanvasSize = false;
+  let options = Object.assign({}, defaultOpt, opt);
+
+  let sampleRate = options.sampleRate || 8000;
+  let bitRate = parseInt(options.bitRate / 1000) || 16;
+  if (RecorderIns) {
+    RecorderIns.close();
+  }
+
+  RecorderIns = Recorder({
+    type: "wav",
+    sampleRate: sampleRate,
+    bitRate: bitRate,
+    onProcess(buffers, powerLevel, bufferDuration, bufferSampleRate) {
+      // 60秒时长限制
+      const LEN = 59 * 1000;
+      if (bufferDuration > LEN) {
+        RecorderIns.recStop();
+      }
+    },
+  });
+  RecorderIns.open(
+      () => {
+        // 打开麦克风授权获得相关资源
+        console.log("打开麦克风成功");
+      },
+      (msg, isUserNotAllow) => {
+        // 用户拒绝未授权或不支持
+        console.log((isUserNotAllow ? "UserNotAllow，" : "") + "无法录音:" + msg);
+      }
+  );
+}
+
+var container = null
+var canvas = null
+var loadingBar = null
+var progressBarFull = null
+var fullscreenButton = null
+var warningBanner = null
+
+var buildUrl = "/src/assets/static/Unity/Build";
+var loaderUrl = buildUrl + "/what.loader.js";
+var config = {
+  dataUrl: buildUrl + "/what.data.br",
+  frameworkUrl: buildUrl + "/what.framework.js.br",
+  codeUrl: buildUrl + "/what.wasm.br",
+  streamingAssetsUrl: "StreamingAssets",
+  companyName: "DefaultCompany",
+  productName: "AI-Asssistant(WebGL)",
+  productVersion: "0.1.0",
+  showBanner: unityShowBanner,
+};
+var script = null;
+
+// Shows a temporary message banner/ribbon for a few seconds, or
+// a permanent error message on top of the canvas if type=='error'.
+// If type=='warning', a yellow highlight color is used.
+// Modify or remove this function to customize the visually presented
+// way that non-critical warnings and error messages are presented to the
+// user.
+
+
+// By default, Unity keeps WebGL canvas render target size matched with
+// the DOM size of the canvas element (scaled by window.devicePixelRatio)
+// Set this to false if you want to decouple this synchronization from
+// happening inside the engine, and you would instead like to size up
+// the canvas DOM size and WebGL render target sizes yourself.
+// config.matchWebGLToCanvasSize = false;
+
+onMounted(() =>{
+  container = document.querySelector("#unity-container");
+  canvas = document.querySelector("#unity-canvas");
+  loadingBar = document.querySelector("#unity-loading-bar");
+  progressBarFull = document.querySelector("#unity-progress-bar-full");
+  fullscreenButton = document.querySelector("#unity-fullscreen-button");
+  warningBanner = document.querySelector("#unity-warning");
+
+  loadingBar.style.display = "block";
 
   if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
     // Mobile device style: fill the whole browser client area with the game canvas:
@@ -65,22 +137,18 @@ onMounted(() =>{
     document.getElementsByTagName('head')[0].appendChild(meta);
     container.className = "unity-mobile";
     canvas.className = "unity-mobile";
-
     // To lower canvas resolution on mobile devices to gain some
     // performance, uncomment the following line:
     // config.devicePixelRatio = 1;
 
-
   } else {
-    // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-    canvas.style.width = "420px";
-    canvas.style.height = "860px";
+    // Desktop style: Render the game canvas in a
+    // window that can be maximized to fullscreen:
+    canvas.style.width = unityCanvasWidth.value + "px";
+    canvas.style.height = unityCanvasHeight.value + "px";
   }
 
-  loadingBar.style.display = "block";
-
-  var script = document.createElement("script");
+  script = document.createElement("script");
   script.src = loaderUrl;
   script.onload = () => {
     createUnityInstance(canvas, config, (progress) => {
@@ -97,54 +165,6 @@ onMounted(() =>{
     });
   };
   document.body.appendChild(script);
-
-  function initRecord(opt = {}) {
-    let defaultOpt = {
-      serviceCode: "asr_aword",
-      audioFormat: "wav",
-      sampleRate: 16000,
-      sampleBit: 16,
-      audioChannels: 1,
-      bitRate: 96000,
-      audioData: null,
-      punctuation: "true",
-      model: null,
-      intermediateResult: null,
-      maxStartSilence: null,
-      maxEndSilence: null,
-    };
-
-    let options = Object.assign({}, defaultOpt, opt);
-
-    let sampleRate = options.sampleRate || 8000;
-    let bitRate = parseInt(options.bitRate / 1000) || 16;
-    if (RecorderIns) {
-      RecorderIns.close();
-    }
-
-    RecorderIns = Recorder({
-      type: "wav",
-      sampleRate: sampleRate,
-      bitRate: bitRate,
-      onProcess(buffers, powerLevel, bufferDuration, bufferSampleRate) {
-        // 60秒时长限制
-        const LEN = 59 * 1000;
-        if (bufferDuration > LEN) {
-          RecorderIns.recStop();
-        }
-      },
-    });
-    RecorderIns.open(
-        () => {
-          // 打开麦克风授权获得相关资源
-          console.log("打开麦克风成功");
-        },
-        (msg, isUserNotAllow) => {
-          // 用户拒绝未授权或不支持
-          console.log((isUserNotAllow ? "UserNotAllow，" : "") + "无法录音:" + msg);
-        }
-    );
-  }
 })
 </script>
 

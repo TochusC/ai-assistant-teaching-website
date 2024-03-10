@@ -1,9 +1,6 @@
 <template>
-  <el-menu
-      :default-active="activeIndex"
-      mode="horizontal"
-  >
-    <el-container>
+  <div class="Header-Container" >
+    <div class="Header-Item" ref="logoContainer">
       <el-popover
           placement="top-start"
           :width="200"
@@ -12,110 +9,198 @@
         <template #reference>
           <img
               class="icon"
-              src="../../assets/static/img/turbine_icon.png" alt="" style="height:64px; width: auto"/>
+              src="../assets/static/img/unity-logo-light.png" alt="" style="height:64px; width: auto"/>
         </template>
-        <span>守得云开见月明</span>
+        <span style=" white-space: nowrap;">守得云开见月明</span>
         <span>
-        <el-switch
-            v-model="isDark"
-            @change="$emit('changeTheme', isDark)"
-            style="margin-left: 22px"
-            inline-prompt
-            :active-icon="MoonNight"
-            :inactive-icon="Sunset"
-        /></span>
+      <el-switch
+          v-model="isDark"
+          @change="$emit('changeTheme', isDark)"
+          style="margin-left: 22px"
+          inline-prompt
+          :active-icon="MoonNight"
+          :inactive-icon="Sunset"
+      /></span>
       </el-popover>
-      <el-container
-          style="margin-left: 8px"
-          v-if="!isCollapse"
+      <div class="Multiple-Header-Item-Container">
+        <h1 class="keyword">
+          AI赋能 |
+        </h1>
+        <h1 class="tittle">
+          &nbsp 智能教学运营服务平台
+        </h1>
+      </div>
+    </div>
+
+    <el-divider direction="vertical" />
+
+    <div class="Header-Item" :style="{width:dynamicSearchBarWidth}">
+      <el-input
+          placeholder="搜索更多好课..."
+          class="input-with-select"
+          size="large"
       >
-        <p
-            class="proverb"
-            ref="proverb"
-        >云龙相得起，风电一时来。</p>
-      </el-container>
-    </el-container>
-    <el-menu-item index="1" @click="$emit('changePage', '1')">预测系统</el-menu-item>
-    <el-menu-item index="2" @click="$emit('changePage', '2')">使用指南</el-menu-item>
-    <el-menu-item
-        index="3"
-        style="
-        color: #5968f4;
-        font-size: 16px;
-        text-shadow: #fff 0 0 16px"
-        @mouseenter="dynamicClass = 'is-loading'"
-        @mouseleave="dynamicClass = ''"
-        @click="$emit('changePage', '3')"
-    >
-      AI
-      <el-icon
-          :class="dynamicClass"
-          size="14px"
+        <template #prepend>
+          <el-select  placeholder="搜索内容" style="width: 115px" size="large">
+            <el-option label="课程" value="1" />
+            <el-option label="文章" value="2" />
+            <el-option label="视频" value="3" />
+          </el-select>
+        </template>
+        <template #append>
+          <el-button :icon="Search" size="large"/>
+        </template>
+      </el-input>
+    </div>
+
+    <el-divider direction="vertical" />
+
+    <div class="Header-Item" style="margin-right: 24px" ref="mineContainer">
+
+      <div class="Multiple-Header-Item-Container">
+
+      <el-switch
+          v-model="isDark"
+          style="margin-right: 38px"
+          size="large"
+          inline-prompt
+          :active-icon="MoonNight"
+          :inactive-icon="Sunset"
+      />
+
+      <el-link type="primary"
+               style="margin-right: 36px;
+               font-size: 20px;
+                white-space: nowrap;
+               font-weight: bolder"
+      >我的学堂</el-link>
+
+      </div>
+
+<!--          头像-->
+      <el-popover
+          placement="top-start"
+          :width="160"
+          trigger="hover"
       >
-        <Star
-            color="#5968f4"/>
-      </el-icon>
-    </el-menu-item>
-    <el-menu-item index="4" @click="$emit('changePage', '4')">关于我们</el-menu-item>
-  </el-menu>
+        <template #reference>
+          <img
+              class="icon"
+              src="../assets/static/img/boy.png" alt="" style="height:64px; width: auto"/>
+        </template>
+        <el-menu>
+          <el-menu-item index="1">个人中心</el-menu-item>
+          <el-menu-item index="2">退出登录</el-menu-item>
+        </el-menu>
+      </el-popover>
+
+    </div>
+
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted ,defineEmits } from 'vue'
+import {ref, onMounted, inject} from 'vue'
 const activeIndex = ref('1')
 import { useDark } from '@vueuse/core'
-import {MoonNight, Star, Sunset} from "@element-plus/icons-vue";
+import {MoonNight, Star, Sunset, Search} from "@element-plus/icons-vue";
 
-const proverb = ref(null)
-const isDark = useDark()
+const tittle = ref(null)
 const isCollapse = ref(true)
-const dynamicClass = ref('')
-const emits = defineEmits(['changePage', 'changeTheme'])
 
-onMounted(() => {
-  if(isDark.value) {
-    isDark.value = false
+// 响应式搜索栏宽度
+const dynamicSearchBarWidth = ref('560px')
+
+// 注入全局状态
+const showAssistant = inject('showAssistant')
+const isDark = useDark()
+
+// 盛放页面Logo和Mine的容器
+const logoContainer = ref(null)
+const mineContainer = ref(null)
+
+const windowWidth = ref(null)
+const windowHeight = ref(null)
+
+// 响应式调整元素
+const rescaleElement = () => {
+  if(showAssistant.value){
+    windowWidth.value = window.innerWidth / 4 * 3;
   }
-  if (window.innerWidth < 620) {
-    if(proverb.value){
-      proverb.value.style.fontSize = '0px'
+  else {
+    windowWidth.value = window.innerWidth;
+  }
+
+  dynamicSearchBarWidth.value = windowWidth.value / 4 * 3 - logoContainer.value.offsetWidth - mineContainer.value.offsetWidth + 'px'
+
+  if (windowWidth < 620) {
+    if(tittle.value){
+      tittle.value.style.fontSize = '0px'
     }
   }
   else {
-    if(proverb.value) {
-      proverb.value.style.fontSize = '18px'
+    if(tittle.value) {
+      tittle.value.style.fontSize = '18px'
     }
     isCollapse.value = false
   }
-  emits('changeTheme', isDark.value)
+}
+
+onMounted(() => {
+  rescaleElement()
+
   window.addEventListener('resize', () => {
-    if (window.innerWidth < 620) {
-      if(proverb.value){
-        proverb.value.style.fontSize = '0px'
-      }
-    }
-    else {
-      if(proverb.value) {
-        proverb.value.style.fontSize = '18px'
-      }
-      isCollapse.value = false
-    }
+    rescaleElement()
+  })
+  window.addEventListener('showAssistant', () => {
+    rescaleElement()
   })
 })
 
 </script>
 
 <style scoped>
-p.proverb{
-  text-align: center;
-  font-size: 18px;
-  text-shadow: 0 0 4px #fff;
-  transition: all ease 0.3s;
-}
-p.proverb:hover{
-  text-align: center;
-  text-shadow: 0 0 12px #fff;
-  transition: all ease 0.3s;
+
+.Header-Container {
+  width: 100%;
+  margin: 0px;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  box-shadow: 0 0 4px #101010;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
 }
 
+.Multiple-Header-Item-Container{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header-Item {
+  display: inline-flex;
+}
+
+.tittle{
+  color: #000000;
+  font-size: 18px;
+  white-space: nowrap;
+}
+.tittle:hover{
+  color: #101010;
+  white-space: nowrap;
+}
+.keyword{
+  white-space: nowrap;
+  text-shadow: 0 0 36px #fff;
+  color: #8080FF;
+}
+.keyword:hover{
+  white-space: nowrap;
+  font-size: 24px;
+  text-shadow: 0 0 24px #fff;
+  color: #4242e0;
+}
 </style>

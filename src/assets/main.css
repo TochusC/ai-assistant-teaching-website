@@ -6,8 +6,15 @@
 
 * {
   transition: 0.5s;
+  animation: ease-in-out 0.3s;
+
 }
 
+.Center-Flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 button{
   padding: 8px 16px;
