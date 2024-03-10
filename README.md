@@ -55,13 +55,15 @@
 作为包管理工具，并使用了[Element-Plus](https://element-plus.org/)前端框架。
 
 在运行项目前请先使用
-`npm instal`
+```shell
+npm instal
+```
 来安装package.json中所需要的库和依赖
 
 使用
-`
+```shell
 npm run dev
-`
+```
 即可启动项目，进行抢先预览体验。
 
 #### 须知❗：

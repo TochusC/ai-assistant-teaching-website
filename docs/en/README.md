@@ -54,13 +54,15 @@ The platform is currently still under construction...
 This GitHub repository only contains the frontend project, built using Vue, npm (Node Package Manager) as the package manager, and utilizes the [Element-Plus](https://element-plus.org/) frontend framework.
 
 Before running the project, please run
-`npm install`
+```shell
+npm instal
+```
 to install the necessary libraries and dependencies listed in package.json.
 
 Use
-`
+```shell
 npm run dev
-`
+```
 to start the project for an early preview experience.
 
 #### Important❗:

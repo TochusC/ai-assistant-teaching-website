@@ -53,12 +53,14 @@
 このGitHubリポジトリにはフロントエンドプロジェクトのみが含まれており、フロントエンドはVueで構築されています。npm（Node Package Manager）をパッケージ管理ツールとして使用し、[Element-Plus](https://element-plus.org/)フロントエンドフレームワークを使用しています。
 
 プロジェクトを実行する前に、
-`npm install`
+```shell
+npm instal
+```
 を使用して、package.jsonで必要なライブラリと依存関係をインストールしてください。
 
-`
+```shell
 npm run dev
-`
+```
 を使用してプロジェクトを起動し、先行してプレビューをお楽しみください。
 
 #### 注意❗：
