@@ -33,7 +33,6 @@
     --color-heading: var(--vt-c-text-light-1);
     --color-text: var(--vt-c-text-light-1);
 
-    --section-gap: 160px;
 }
 
 /*@media (prefers-color-scheme: dark) {*/
@@ -78,7 +77,6 @@ body {
             'Droid Sans',
             'Helvetica Neue',
             sans-serif;
-    font-size: 15px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

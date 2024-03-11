@@ -9,7 +9,7 @@
         <template #reference>
           <img
               class="icon"
-              src="../assets/static/img/unity-logo-light.png" alt="" style="height:64px; width: auto"/>
+              src="../../assets/static/img/unity-logo-light.png" alt="" style="height:64px; width: auto"/>
         </template>
         <span style=" white-space: nowrap;">守得云开见月明</span>
         <span>
@@ -86,7 +86,7 @@
         <template #reference>
           <img
               class="icon"
-              src="../assets/static/img/boy.png" alt="" style="height:64px; width: auto"/>
+              src="../../assets/static/img/boy.png" alt="" style="height:64px; width: auto"/>
         </template>
         <el-menu>
           <el-menu-item index="1">个人中心</el-menu-item>

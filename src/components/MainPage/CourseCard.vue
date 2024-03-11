@@ -18,16 +18,17 @@ const props = defineProps({
 </script>
 
 <template>
-  <el-card shadow="hover"
-           style="width: 280px;
+  <el-card
+      shadow="hover"
+      style="width: 280px;
            height: 250px;
            margin-right: 36px">
     <slot>
     </slot>
     <div style="padding: 14px;">
-      <h4>{{props.courseName}}</h4>
-      <p>
-        {{ props.courseDescription }}</p>
+      <el-text style="display: block">{{props.courseName}}</el-text>
+      <el-text>
+        {{ props.courseDescription }}</el-text>
     </div>
   </el-card>
 </template>

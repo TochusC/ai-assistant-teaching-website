@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import HeadNavi from "@/components/HeadNavi.vue";
-import CourseCard from "@/components/CourseCard.vue";
+import HeadNavi from "@/components/MainPage/HeadNavi.vue";
+import CourseCard from "@/components/MainPage/CourseCard.vue";
 </script>
 
 <template>

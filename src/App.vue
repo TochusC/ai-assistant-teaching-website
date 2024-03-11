@@ -2,6 +2,7 @@
 import {onMounted, provide, ref} from 'vue'
 import UnityComponent from "@/components/UnityComponent.vue";
 import MainPage from "@/views/MainPage.vue";
+import LoginPage from "@/views/LoginPage.vue";
 
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
@@ -51,10 +52,7 @@ onMounted(() => {
   window.addEventListener('showAssistant', () => {
     rescaleElement()
   })
-  window.addEventListener('fullscreenchange', () => {
-    const event = new Event('resize')
-    window.dispatchEvent(event)
-  })
+
 })
 
 // 点击按钮，显示或隐藏AI助手
@@ -70,30 +68,32 @@ const CallAssistant = () => {
 
 <template>
   <div id="AllContainer">
+    <LoginPage/>
 
-<!--    用来放置教学网站的容器-->
-    <div id="WebsiteContainer">
-      <MainPage/>
-      <el-button
-          type="primary"
-          class="floating-button"
-          size="large"
-          :style="{right: buttonDynamicLeft}"
-          @click="CallAssistant" round>
-        {{ buttonText }}
-      </el-button>
+    <div v-if="false">
+  <!--    用来放置教学网站的容器-->
+      <div id="WebsiteContainer">
+        <MainPage/>
+        <el-button
+            type="primary"
+            class="floating-button"
+            size="large"
+            :style="{right: buttonDynamicLeft}"
+            @click="CallAssistant" round>
+          {{ buttonText }}
+        </el-button>
 
-    </div>
+      </div>
 
-<!--    用来存放AI教学助理的容器-->
-    <div id="AssistantContainer">
-        <UnityComponent
-            ref="unityComponent"
-            v-if="showAssistant"
-            :initial-unity-canvas-height="windowHeight - 48"
-            :initial-unity-canvas-width="windowWidth / 3"
-        />
-
+  <!--    用来存放AI教学助理的容器-->
+      <div id="AssistantContainer">
+          <UnityComponent
+              ref="unityComponent"
+              v-if="showAssistant"
+              :initial-unity-canvas-height="windowHeight - 48"
+              :initial-unity-canvas-width="windowWidth / 3"
+          />
+      </div>
     </div>
   </div>
 </template>
