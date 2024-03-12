@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {Lock, OfficeBuilding, User} from "@element-plus/icons-vue";
+import {useAuth} from "@/assets/static/js/useAuth"
+import router from "@/router";
 
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
 const rescaleElement = () => {
   windowWidth.value = window.innerWidth
   windowHeight.value = window.innerHeight
+}
+
+const {login} = useAuth()
+const handleLogin = () => {
+  login({name:"Guest", role:"user"})
+  router.push('/')
 }
 
 onMounted(() => {
@@ -111,6 +119,7 @@ const activeTab = ref('student')
         <el-button
             type="primary"
             class="loginButton"
+            @click="handleLogin"
             size="large">
           登录</el-button>
       </div>

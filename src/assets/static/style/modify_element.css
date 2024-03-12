@@ -1,3 +1,10 @@
 :root {
     --el-color-primary: #8080FF;
+    --el-color-primary-light-3: #B2B2FF;
+    --el-color-primary-light-5: #B2B2FF;
+    --el-color-primary-dark-3: #4D4DFF;
+    --el-color-primary-dark-5: #3333FF;
+    --el-color-primary-dark-7: #1919FF;
+    --color-featured : #FFbb00;
+    --color-intelligent : #409eff;
 }

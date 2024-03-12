@@ -9,10 +9,6 @@ const props = defineProps({
     type: String,
     required: true
   },
-  "courseImage": {
-    type: String,
-    required: true
-  }
 })
 
 </script>

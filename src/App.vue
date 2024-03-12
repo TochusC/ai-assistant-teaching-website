@@ -52,6 +52,10 @@ onMounted(() => {
   window.addEventListener('showAssistant', () => {
     rescaleElement()
   })
+  window.addEventListener('fullscreenchange', () => {
+    const event = new Event('resize')
+    window.dispatchEvent(event)
+  })
 
 })
 
@@ -68,21 +72,16 @@ const CallAssistant = () => {
 
 <template>
   <div id="AllContainer">
-    <LoginPage/>
-
-    <div v-if="false">
-  <!--    用来放置教学网站的容器-->
       <div id="WebsiteContainer">
-        <MainPage/>
-        <el-button
-            type="primary"
-            class="floating-button"
-            size="large"
-            :style="{right: buttonDynamicLeft}"
-            @click="CallAssistant" round>
-          {{ buttonText }}
-        </el-button>
-
+        <RouterView/>
+          <el-button
+              type="primary"
+              class="floating-button"
+              size="large"
+              :style="{right: buttonDynamicLeft}"
+              @click="CallAssistant" round>
+            {{ buttonText }}
+          </el-button>
       </div>
 
   <!--    用来存放AI教学助理的容器-->
@@ -95,7 +94,6 @@ const CallAssistant = () => {
           />
       </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
@@ -113,7 +111,7 @@ const CallAssistant = () => {
 }
 #AssistantContainer {
   flex: 0;
-  transition: 300ms;
+  transition: 0.5s;
   border: 1px solid #ccc;
   height: 100%;
 }

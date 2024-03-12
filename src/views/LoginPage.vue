@@ -7,8 +7,7 @@
       <SloganCarousel/>
     </div>
     <div id="login-container">
-      <WelcomeAside
-      />
+      <WelcomeAside/>
     </div>
   </div>
 </template>
@@ -17,6 +16,18 @@
 <script setup lang="ts">
 import SloganCarousel from "@/components/LoginPage/SloganCarousel.vue";
 import WelcomeAside from "@/components/LoginPage/WelcomeAside.vue";
+import {useAuth} from "@/assets/static/js/useAuth"
+import {onMounted} from "vue";
+import router from "@/router";
+
+const { isAuthenticated} = useAuth();
+
+
+onMounted(() => {
+  if(isAuthenticated.value == true){
+    router.push('/')
+  }
+})
 </script>
 
 <style scoped>

@@ -1,7 +1,24 @@
 <script setup lang="ts">
-
 import HeadNavi from "@/components/MainPage/HeadNavi.vue";
 import CourseCard from "@/components/MainPage/CourseCard.vue";
+import {useAuth} from "@/assets/static/js/useAuth"
+import {onMounted, ref} from "vue";
+import router from "@/router";
+
+const { isAuthenticated, user } = useAuth();
+const dynamicCarouselHeight = ref('480px')
+const rescaleElement = ref('')
+
+const handleClickCourse = (id : number) => {
+  router.push('/course/' + id)
+}
+
+onMounted(() => {
+  if(isAuthenticated.value != true){
+    router.push('/login')
+  }
+})
+
 </script>
 
 <template>
@@ -11,12 +28,11 @@ import CourseCard from "@/components/MainPage/CourseCard.vue";
       <HeadNavi/>
     </el-header>
 
-    <el-main style="padding-left: 36px;
-padding-top: 12px; padding-bottom: 12px; padding-top: 36px">
+    <el-main id = content-container>
       <el-carousel
           motion-blur
           direction="horizontal"
-          height="360px"
+          height="500px"
           indicator-position="outside"
       >
         <el-carousel-item v-for="item in 4" :key="item">
@@ -32,74 +48,28 @@ padding-top: 12px; padding-bottom: 12px; padding-top: 36px">
         <course-card
           course-name="计算机网络原理"
           course-description="深入剖析数字世界的联通之道"
+          @click = "handleClickCourse(1)"
         >
           <img
               style="width: 230px"
-              src="@/assets/static/img/course/course1.jpg"
+              src="../assets/static/img/course/1/course.jpg"
               class="image"
               alt="计算机网络原理"
           />
         </course-card>
 
-        <course-card
-            course-name="计算机网络原理"
-            course-description="深入剖析数字世界的联通之道"
-        >
-          <img
-              style="width: 236px"
-              src="@/assets/static/img/course/course1.jpg"
-              class="image"
-              alt="计算机网络原理"
-          />
-        </course-card>
-
-        <course-card
-            course-name="计算机网络原理"
-            course-description="深入剖析数字世界的联通之道"
-        >
-          <img
-              style="width: 236px"
-              src="@/assets/static/img/course/course1.jpg"
-              class="image"
-              alt="计算机网络原理"
-          />
-        </course-card>
       </div>
 
-      <el-divider content-position="left">
+      <el-divider content-position="left"
+        style="margin-top: 36px; margin-bottom: 36px"
+      >
         <h1>我的课程</h1>
       </el-divider>
 
       <div class="course-container">
-        <course-card
-            course-name="计算机网络原理"
-            course-description="深入剖析数字世界的联通之道"
-        >
-          <img
-              style="width: 230px"
-              src="@/assets/static/img/course/course1.jpg"
-              class="image"
-              alt="计算机网络原理"
-          />
-        </course-card>
-
-        <course-card
-            course-name="计算机网络原理"
-            course-description="深入剖析数字世界的联通之道"
-        >
-          <img
-              style="width: 236px"
-              src="@/assets/static/img/course/course1.jpg"
-              class="image"
-              alt="计算机网络原理"
-          />
-        </course-card>
       </div>
     </el-main>
-
   </el-container>
-
-
 </template>
 
 <style scoped>
@@ -125,5 +95,9 @@ padding-top: 12px; padding-bottom: 12px; padding-top: 36px">
   align-items: center;
   margin-top: 32px;
   margin-bottom: 32px;
+}
+
+#content-container {
+  padding: 36px 64px 12px;
 }
 </style>
