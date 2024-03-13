@@ -1,9 +1,24 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, ref, reactive} from "vue";
 import {Lock, OfficeBuilding, User} from "@element-plus/icons-vue";
 
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
+
+// dialog中v-model绑定内容
+interface registerForm{
+  university:String
+  userName:String
+  password:String
+  rePassword:String
+}
+const registerForm = reactive <registerForm> ({
+  university:'',
+  userName:'',
+  password:'',
+  rePassword:''
+})
+
 const rescaleElement = () => {
   windowWidth.value = window.innerWidth
   windowHeight.value = window.innerHeight
@@ -27,11 +42,12 @@ const activeTab = ref('student')
       <el-tabs v-model="activeTab" style="margin-top: 72px">
         <el-tab-pane label="学生" name="student">
           <div class="Center-Flex" style="margin-top: 46px">
-            <el-form>
+            <el-form :model="registerForm">
               <el-form-item>
                 <el-input
                     class="registryInput"
                     placeholder="输入你的学校"
+                    v-model="registerForm.university"
                     size="large">
                   <template #prepend>
                     <el-button :icon="OfficeBuilding" />
@@ -42,6 +58,7 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="你的学号"
+                    v-model="registerForm.userName"
                     size="large">
                   <template #prepend>
                     <el-button :icon="User" />
@@ -53,8 +70,9 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="请输入密码"
+                    v-model="registerForm.password"
                     size="large"
-                    show-passwor>
+                    show-password>
                   <template #prepend>
                     <el-button :icon="Lock" />
                   </template>
@@ -64,8 +82,9 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="请重复输入密码"
+                    v-model="registerForm.rePassword"
                     size="large"
-                    show-passwor>
+                    show-password>
                   <template #prepend>
                     <el-button :icon="Lock" />
                   </template>
@@ -77,11 +96,12 @@ const activeTab = ref('student')
 
         <el-tab-pane label="教师" name="teacher">
           <div class="Center-Flex" style="margin-top: 46px">
-            <el-form>
+            <el-form :model="registerForm">
               <el-form-item>
                 <el-input
                     class="registryInput"
                     placeholder="输入你的学校"
+                    v-model="registerForm.university"
                     size="large">
                   <template #prepend>
                     <el-button :icon="OfficeBuilding" />
@@ -92,6 +112,7 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="你的教工号"
+                    v-model="registerForm.userName"
                     size="large">
                   <template #prepend>
                     <el-button :icon="User" />
@@ -103,8 +124,9 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="请输入密码"
+                    v-model="registerForm.password"
                     size="large"
-                    show-passwor>
+                    show-password>
                   <template #prepend>
                     <el-button :icon="Lock" />
                   </template>
@@ -115,8 +137,9 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="请重复输入密码"
+                    v-model="registerForm.rePassword"
                     size="large"
-                    show-passwor>
+                    show-password>
                   <template #prepend>
                     <el-button :icon="Lock" />
                   </template>
@@ -126,6 +149,7 @@ const activeTab = ref('student')
           </div>
         </el-tab-pane>
       </el-tabs>
+
 
       <div class="Center-Flex">
         <el-button
