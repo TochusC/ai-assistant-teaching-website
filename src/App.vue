@@ -22,7 +22,8 @@ const isDark = ref(false)
 
 
 // 提供给子组件的数据
-provide('showAssistant', showAssistant)
+provide('showAssistant', showAssistant);
+provide('windowWidth', windowWidth);
 provide('isDark', isDark);
 
 // 根据窗口重新计算按钮的位置

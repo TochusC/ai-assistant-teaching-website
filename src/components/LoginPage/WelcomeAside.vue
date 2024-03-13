@@ -29,7 +29,7 @@ onMounted(() => {
       <el-divider style="display: block; margin-top: 24px; margin-bottom: 64px"/>
 
       <div class="Center-Flex">
-        <h1 style="color: #101010">
+        <h1>
           开始使用
         </h1>
       </div>
@@ -51,8 +51,7 @@ onMounted(() => {
       </div>
 
       <div class="Center-Flex" style="margin-top: 108px">
-        <h3 style="color: #101010;
-         margin-right: 8px">
+        <h3 style="margin-right: 8px">
           Powered by</h3>
         <img
             style="width: 128px; margin-right: 6px"

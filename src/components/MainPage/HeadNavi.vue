@@ -26,15 +26,14 @@
         <h1 class="keyword">
           AI赋能 |
         </h1>
-        <h1 class="tittle">
+        <h1 class="tittle" ref="tittle">
           &nbsp 智能教学运营服务平台
         </h1>
       </div>
     </div>
 
-    <el-divider direction="vertical" />
-
-    <div class="Header-Item" :style="{width:dynamicSearchBarWidth}">
+    <div class="Header-Item"
+         :style="{width:dynamicSearchBarWidth}">
       <el-input
           placeholder="搜索更多好课..."
           class="input-with-select"
@@ -53,31 +52,28 @@
       </el-input>
     </div>
 
-    <el-divider direction="vertical" />
-
     <div class="Header-Item" style="margin-right: 24px" ref="mineContainer">
-
       <div class="Multiple-Header-Item-Container">
 
-      <el-switch
-          v-model="isDark"
-          style="margin-right: 38px"
-          size="large"
-          inline-prompt
-          :active-icon="MoonNight"
-          :inactive-icon="Sunset"
-      />
+        <el-switch
+            v-model="isDark"
+            style="margin-right: 38px"
+            size="large"
+            inline-prompt
+            :active-icon="MoonNight"
+            :inactive-icon="Sunset"
+        />
 
-      <el-link type="primary"
-               style="margin-right: 36px;
+        <el-link type="primary"
+                 style="margin-right: 36px;
                font-size: 20px;
                 white-space: nowrap;
                font-weight: bolder"
-      >我的学堂</el-link>
+        >我的学堂</el-link>
 
       </div>
 
-<!--          头像-->
+      <!--          头像-->
       <el-popover
           placement="top-start"
           :width="160"
@@ -135,17 +131,15 @@ const rescaleElement = () => {
     windowWidth.value = window.innerWidth;
   }
 
-  dynamicSearchBarWidth.value = windowWidth.value / 4 * 3 - logoContainer.value.offsetWidth - mineContainer.value.offsetWidth + 'px'
+  dynamicSearchBarWidth.value = (windowWidth.value - logoContainer.value.offsetWidth - mineContainer.value.offsetWidth) * 0.75 + 'px'
 
-  if (windowWidth < 620) {
-    if(tittle.value){
-      tittle.value.style.fontSize = '0px'
-    }
+
+  if (windowWidth.value < 1024) {
+    tittle.value.style.fontSize = '0px'
+    isCollapse.value = true
   }
   else {
-    if(tittle.value) {
-      tittle.value.style.fontSize = '18px'
-    }
+    tittle.value.style.fontSize = '18px'
     isCollapse.value = false
   }
 }
@@ -191,15 +185,15 @@ const handleLogout = () => {
 }
 
 .tittle{
-  color: #000000;
+  transition: 0.5s;
   font-size: 18px;
   white-space: nowrap;
 }
 .tittle:hover{
-  color: #101010;
   white-space: nowrap;
 }
 .keyword{
+  transition: 0.5s;
   white-space: nowrap;
   text-shadow: 0 0 36px #fff;
   color: #8080FF;
@@ -209,5 +203,12 @@ const handleLogout = () => {
   font-size: 24px;
   text-shadow: 0 0 24px #fff;
   color: #4242e0;
+}
+
+html.dark .keyword:hover{
+  white-space: nowrap;
+  font-size: 24px;
+  text-shadow: 0 0 24px #fff;
+  color: #dedede;
 }
 </style>

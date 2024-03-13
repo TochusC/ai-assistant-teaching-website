@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import router from "@/router";
-import HeadBar from "@/components/CoursePage/HeadBar.vue";
-import InfoTabs from "@/components/CoursePage/InfoTabs.vue";
-import CourseHeader from "@/components/CoursePage/CourseHeader.vue";
-import {inject, onMounted, ref} from "vue";
+// 用户数据
+const user = {
+  role: "teacher",
+  name: "Guest",
+  password: "pwd,
+}
 
-const route = router.currentRoute.value
-const courseId = route.params.id
 
+// 课程数据
 const course = {
   id: 1,
   name: "计算机网络原理",
@@ -188,121 +188,12 @@ const course = {
     chapter: 4
   }
 }
-
-
-const dynamicBannerPadding = ref(128)
-const windowWidth = inject("windowWidth")
-const updatePadding = () => {
-  // 示例：根据窗口宽度动态调整padding值
-  dynamicBannerPadding.value = windowWidth.value / 2000 * 164;
-  if(windowWidth.value < 1024){
-    dynamicBannerPadding.value = 16
-  }
-};
-const rescaleElements = ()=>{
-  updatePadding();
-}
-
-const tittle = ref(null)
-onMounted(() => {
-  rescaleElements();
-  setTimeout(() => {
-    if(tittle.value){
-      tittle.value.style.letterSpacing = '4px'
-    }
-  }, 500);
-
-  window.addEventListener('resize',  rescaleElements);
-})
-
 </script>
 
 <template>
-  <el-container>
-    <el-header style="padding: 0">
-      <HeadBar/>
-    </el-header>
-    <el-main
-        :style="{ paddingLeft: dynamicBannerPadding + 'px',
-         paddingRight: dynamicBannerPadding + 'px'}">
-      <div id="banner">
-        <div id="decorative-divider">
-          <h1 ref="tittle" id="tittle">{{ course.name }}</h1>
-          <p id="illustration">
-            {{ course.illustration }}
-          </p>
-        </div>
-      </div>
-      <div class="Center-Flex">
-        <div id="course-info-container">
-          <CourseHeader
-              :image-url="course.image"
-              :introduction="course.introduction"
-              :statistics="course.statistics"
-          />
-          <el-divider/>
-          <InfoTabs :course="course"/>
-        </div>
-      </div>
-    </el-main>
-  </el-container>
 
 </template>
 
 <style scoped>
-#banner{
-  margin-top: 16px;
-  background: radial-gradient(circle,
-  var(--el-color-primary),
-  var(--el-color-primary-light-3));
-  border-radius: 8px;
-  box-shadow: #8080FF 0 0 16px;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 128px;
-  padding-bottom: 24px;
-  transition: 0.5s;
-}
-#tittle{
-  color: var(--el-color-white);
-  font-size: 32px;
-  margin-bottom: 12px;
-  letter-spacing: 0px;
-  transition: 1s;
-}
-#illustration{
-  color: var(--el-color-white);
-  font-size: 14px;
-}
 
-#course-info-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 128px;
-  margin-right: 128px;
-  margin-top: -24px;
-  border: #8080FF 1px solid;
-  border-radius: 8px;
-  box-shadow: #8080FF 0 0 16px;
-  margin-bottom: 0px;
-  flex-direction: column;
-  padding: 32px;
-  background: var(--el-bg-color);
-}
-
-#decorative-divider{
-  padding-left: 32px;
-  padding-right: 32px;
-  border-left: #efefefaa 1px solid;
-  border-right: #efefefaa 1px solid;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 </style>

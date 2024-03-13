@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import 'dayjs/locale/zh-cn'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/dist/index.css'
 import './assets/static/style/modify_element.css'
 

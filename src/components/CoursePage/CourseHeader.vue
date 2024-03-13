@@ -27,7 +27,7 @@ const showIntroduction = ref(false)
         id="course-image"/>
     <div>
       <div class="Space-Between-Flex" style="margin-bottom: 12px">
-        <h2 >课程介绍</h2>
+        <h2 style="white-space: nowrap">课程介绍</h2>
         <div>
           <el-tag
               id="intelligent-tag"
@@ -56,7 +56,7 @@ const showIntroduction = ref(false)
       </el-link>
       <div class="Space-Between-Flex" style="margin-right: 96px; margin-top:18px">
         <div>
-          <el-text>
+          <el-text style="white-space: nowrap">
             <el-icon
                 size="large"
                 color="var(--color-featured)">
@@ -67,7 +67,7 @@ const showIntroduction = ref(false)
         </div>
 
         <div>
-          <el-text>
+          <el-text style="white-space: nowrap">
             <el-icon
                 size="large">
               <User />
@@ -77,7 +77,7 @@ const showIntroduction = ref(false)
         </div>
 
         <div>
-          <el-text>
+          <el-text style="white-space: nowrap">
             <el-icon size="large">
               <MessageBox />
             </el-icon>
