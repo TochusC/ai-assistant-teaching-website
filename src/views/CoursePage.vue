@@ -240,7 +240,7 @@ onMounted(() => {
               :introduction="course.introduction"
               :statistics="course.statistics"
           />
-          <el-divider/>
+          <el-divider> <el-button round style="width: 180px"  type="primary">加入课程</el-button></el-divider>
           <InfoTabs :course="course"/>
         </div>
       </div>
