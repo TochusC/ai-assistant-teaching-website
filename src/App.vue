@@ -3,6 +3,8 @@ import {onMounted, provide, ref} from 'vue'
 import UnityComponent from "@/components/UnityComponent.vue";
 import MainPage from "@/views/MainPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
+import UnityInteraction from "@/components/UnityInteraction.vue";
+import {useRoute} from "vue-router";
 
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
@@ -19,7 +21,6 @@ const buttonText = ref('嗨，小慧！')
 const unityComponent = ref(null)
 // 是否是深色模式
 const isDark = ref(false)
-
 
 // 提供给子组件的数据
 provide('showAssistant', showAssistant);
@@ -57,7 +58,6 @@ onMounted(() => {
     const event = new Event('resize')
     window.dispatchEvent(event)
   })
-
 })
 const isCallBtnLoading = ref(false)
 // 点击按钮，显示或隐藏AI助手
@@ -67,7 +67,7 @@ const CallAssistant = () => {
 
     setTimeout(() => {
       isCallBtnLoading.value = false
-    }, 1200)
+    }, 2000)
   }
 
   showAssistant.value = !showAssistant.value
@@ -77,11 +77,16 @@ const CallAssistant = () => {
   const event = new Event('showAssistant')
   window.dispatchEvent(event)
 }
+
+const handleChangeRemoteServer = (id) => {
+  console.log(id)
+}
+
 </script>
 
 <template>
   <div id="AllContainer">
-      <div id="WebsiteContainer">
+      <div id="WebsiteContainer" ref="websiteContainer">
           <RouterView v-slot="{ Component }">
             <transition name="fade">
               <component :is="Component" />
@@ -100,6 +105,11 @@ const CallAssistant = () => {
 
   <!--    用来存放AI教学助理的容器-->
       <div id="AssistantContainer">
+        <UnityInteraction
+            :is-call-btn-loading="isCallBtnLoading"
+            :show-assistant="showAssistant"
+            @changeRemoteServer="handleChangeRemoteServer"
+            />
           <UnityComponent
               ref="unityComponent"
               v-if="showAssistant"
@@ -124,6 +134,7 @@ const CallAssistant = () => {
   width: 100%;
 }
 #AssistantContainer {
+  position: relative;
   flex: 0;
   transition: 0.5s;
   border: 1px solid #ccc;

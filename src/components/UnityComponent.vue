@@ -1,9 +1,8 @@
 <script setup>
-
 import {onMounted, ref} from "vue";
 import router from "@/router";
 import {useAuth} from "@/assets/static/js/useAuth.js";
-const { isAuthenticated, login, logout } = useAuth();
+const { login, logout } = useAuth();
 
 const props = defineProps({
   initialUnityCanvasHeight: {
@@ -207,7 +206,7 @@ onMounted(() =>{
     <div id="unity-footer">
       <div id="unity-webgl-logo"></div>
       <div id="unity-fullscreen-button"></div>
-      <div id="unity-build-title">AI Asssistant</div>
+      <div id="unity-build-title">AI Assistant</div>
     </div>
   </div>
 </template>
