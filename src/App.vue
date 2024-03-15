@@ -59,9 +59,17 @@ onMounted(() => {
   })
 
 })
-
+const isCallBtnLoading = ref(false)
 // 点击按钮，显示或隐藏AI助手
 const CallAssistant = () => {
+  if(showAssistant.value == false){
+    isCallBtnLoading.value = true
+
+    setTimeout(() => {
+      isCallBtnLoading.value = false
+    }, 1200)
+  }
+
   showAssistant.value = !showAssistant.value
 
   buttonText.value = showAssistant.value ? '再见，小慧！' : '嗨，小慧！'
@@ -74,11 +82,16 @@ const CallAssistant = () => {
 <template>
   <div id="AllContainer">
       <div id="WebsiteContainer">
-        <RouterView/>
+          <RouterView v-slot="{ Component }">
+            <transition name="fade">
+              <component :is="Component" />
+            </transition>
+          </RouterView>
           <el-button
               type="primary"
               class="floating-button"
               size="large"
+              :loading="isCallBtnLoading"
               :style="{right: buttonDynamicLeft}"
               @click="CallAssistant" round>
             {{ buttonText }}

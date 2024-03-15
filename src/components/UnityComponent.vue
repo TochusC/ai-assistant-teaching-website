@@ -1,6 +1,9 @@
 <script setup>
 
 import {onMounted, ref} from "vue";
+import router from "@/router";
+import {useAuth} from "@/assets/static/js/useAuth.js";
+const { isAuthenticated, login, logout } = useAuth();
 
 const props = defineProps({
   initialUnityCanvasHeight: {
@@ -90,11 +93,11 @@ var fullscreenButton = null
 var warningBanner = null
 
 var buildUrl = "/src/assets/static/Unity/Build";
-var loaderUrl = buildUrl + "/what.loader.js";
+var loaderUrl = buildUrl + "/WebGL_Build.loader.js";
 var config = {
-  dataUrl: buildUrl + "/what.data.br",
-  frameworkUrl: buildUrl + "/what.framework.js.br",
-  codeUrl: buildUrl + "/what.wasm.br",
+  dataUrl: buildUrl + "/WebGL_Build.data.br",
+  frameworkUrl: buildUrl + "/WebGL_Build.framework.js.br",
+  codeUrl: buildUrl + "/WebGL_Build.wasm.br",
   streamingAssetsUrl: "StreamingAssets",
   companyName: "DefaultCompany",
   productName: "AI-Asssistant(WebGL)",
@@ -119,6 +122,29 @@ var script = null;
 // config.matchWebGLToCanvasSize = false;
 
 onMounted(() =>{
+
+  window.handleUnityTransmission = function(str) {
+    var currentRoute = router.path;
+    if(str === "打开注册表单" || str === "打开登录表单" || str === "退出登录"){
+      if(currentRoute !== '/login'){
+        logout();
+      }
+
+      if (str === "打开注册表单") {
+        router.push({path: '/login', query: {form: 'register'}})
+      }
+      else if (str === "打开登录表单") {
+        router.push({path: '/login', query: {form: 'login'}})
+      }
+      else{
+        router.push({path: '/login'})
+      }
+    }
+    if(str === "打开课程：计算机网络原理"){
+      router.push({path: '/course/1'})
+    }
+  }
+
   container = document.querySelector("#unity-container");
   canvas = document.querySelector("#unity-canvas");
   loadingBar = document.querySelector("#unity-loading-bar");

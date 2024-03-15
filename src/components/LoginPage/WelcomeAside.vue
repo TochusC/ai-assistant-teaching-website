@@ -3,14 +3,32 @@
 import {defineEmits, onMounted, ref} from 'vue'
 import RegistryDialog from "@/components/LoginPage/RegistryDialog.vue";
 import LoginDialog from "@/components/LoginPage/LoginDialog.vue";
+import {useRoute} from "vue-router";
+
 
 const emit = defineEmits(['openLoginDialog', 'openRegisterDialog'])
 
 const showLoginDialog = ref(false)
 const showRegistryDialog = ref(false)
+const route = useRoute()
+
 
 const websiteTittle = ref(null)
 onMounted(() => {
+
+  // 获取 query 参数中的 form 属性
+  const formValue = route.query.form
+  if(route.query){
+    const form = route.query.form
+
+    if(form == 'login'){
+      showLoginDialog.value = true
+    }
+    else if(form == 'register'){
+      showRegistryDialog.value = true
+    }
+  }
+
   setTimeout(() => {
     websiteTittle.value.style.letterSpacing = '4px'
   }, 500)

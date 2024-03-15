@@ -3,19 +3,21 @@ import HeadNavi from "@/components/MainPage/HeadNavi.vue";
 import CourseCard from "@/components/MainPage/CourseCard.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import {onMounted, ref} from "vue";
-import router from "@/router";
+import {useRouter} from "vue-router";
+
+const router = useRouter()
 
 const { isAuthenticated, user } = useAuth();
 const dynamicCarouselHeight = ref('480px')
 const rescaleElement = ref('')
 
 const handleClickCourse = (id : number) => {
-  router.push('/course/' + id)
+  router.push(`/course/${id}`)
 }
 
 onMounted(() => {
   if(isAuthenticated.value != true){
-    router.push('/login')
+    router.replace('/login')
   }
 })
 
