@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import {Notebook } from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";
 
@@ -16,12 +16,12 @@ const tagTextClass = ref('primary-text')
 
 onMounted(()=>{
   if(props.notice){
-    if(props.notice.type == "作业")
+    if(props.notice.type === "作业")
     {
       tagType.value = "primary"
       tagTextClass.value = "primary-text"
     }
-    else if(props.notice.type == "考勤"){
+    else if(props.notice.type === "考勤"){
       tagType.value = "success"
       tagTextClass.value = "success-text"
     }

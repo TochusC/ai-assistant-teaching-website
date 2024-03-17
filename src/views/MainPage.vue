@@ -4,6 +4,7 @@ import CourseCard from "@/components/MainPage/CourseCard.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import * as url from "url";
 
 const router = useRouter()
 
@@ -38,6 +39,28 @@ const course_brief = [
   }
 ]
 
+const propagandaImages = [
+  {
+    name: "AI Empowered",
+    image: "../assets/static/img/propaganda/1.jpg"
+  },
+  {
+    name: "AI Empowered",
+    image: "@/assets/static/img/propaganda/2.jpg"
+  },
+  {
+    name: "AI Empowered",
+    image: "@/assets/static/img/propaganda/2.jpg"
+  },
+  {
+    name: "AI Empowered",
+    image: "@/assets/static/img/propaganda/2.jpg"
+  },
+  {
+    name: "AI Empowered",
+    image: "@/assets/static/img/propaganda/2.jpg"
+  },
+]
 </script>
 
 <template>
@@ -54,8 +77,9 @@ const course_brief = [
           height="500px"
           indicator-position="outside"
       >
-        <el-carousel-item v-for="item in 4" :key="item">
-          <h1 text="2xl" justify="center">{{ item }}</h1>
+
+        <el-carousel-item v-for="item in 5" :key="item">
+          <img src="@/assets/static/img/propaganda/2.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
         </el-carousel-item>
       </el-carousel>
 

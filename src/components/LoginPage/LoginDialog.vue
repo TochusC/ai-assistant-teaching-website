@@ -180,7 +180,7 @@ const activeTab = ref('student')
 .loginButton {
   width: 400px;
   margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 #login-tab-container {
   margin: 26px;

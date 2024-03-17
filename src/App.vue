@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import {onMounted, provide, ref} from 'vue'
 import UnityComponent from "@/components/UnityComponent.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
@@ -59,7 +59,7 @@ onMounted(() => {
 const isCallBtnLoading = ref(false)
 // 点击按钮，显示或隐藏AI助手
 const CallAssistant = () => {
-  if(showAssistant.value == false){
+  if(showAssistant.value === false){
     isCallBtnLoading.value = true
 
     setTimeout(() => {
