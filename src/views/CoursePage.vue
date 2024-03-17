@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import router from "@/router";
-import HeadBar from "@/components/CoursePage/HeadBar.vue";
+import HeadNavi from "@/components/utils/HeadNavi.vue";
 import InfoTabs from "@/components/CoursePage/InfoTabs.vue";
 import CourseHeader from "@/components/CoursePage/CourseHeader.vue";
 import {inject, onMounted, ref} from "vue";
@@ -220,7 +220,7 @@ onMounted(() => {
 <template>
   <el-container>
     <el-header style="padding: 0">
-      <HeadBar/>
+      <HeadNavi/>
     </el-header>
     <el-main
         :style="{ paddingLeft: dynamicBannerPadding + 'px',
@@ -240,7 +240,11 @@ onMounted(() => {
               :introduction="course.introduction"
               :statistics="course.statistics"
           />
-          <el-divider> <el-button round style="width: 180px"  type="primary">加入课程</el-button></el-divider>
+
+          <el-divider id="add-course-divider">
+            <el-button round style="width: 180px"  type="primary">加入课程</el-button>
+          </el-divider>
+
           <InfoTabs :course="course"/>
         </div>
       </div>
@@ -250,6 +254,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+#add-course-divider{
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
 #banner{
   margin-top: 16px;
   background: radial-gradient(circle,
@@ -282,24 +290,20 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 128px;
-  margin-right: 128px;
-  margin-top: -24px;
   border: #8080FF 1px solid;
   border-radius: 8px;
-  box-shadow: #8080FF 0 0 16px;
-  margin-bottom: 0px;
+  box-shadow: #8080FF 0 0 8px;
+  margin: -24px 128px 0px;
   flex-direction: column;
   padding: 32px;
   background: var(--el-bg-color);
 }
 
 #decorative-divider{
-  padding-left: 32px;
-  padding-right: 32px;
+  padding-left: 18px;
+  padding-right: 18px;
   border-left: #efefefaa 1px solid;
   border-right: #efefefaa 1px solid;
-  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;

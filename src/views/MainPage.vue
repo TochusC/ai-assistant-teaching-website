@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeadNavi from "@/components/MainPage/HeadNavi.vue";
+import HeadNavi from "@/components/utils/HeadNavi.vue";
 import CourseCard from "@/components/MainPage/CourseCard.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import {onMounted, ref} from "vue";
@@ -21,6 +21,23 @@ onMounted(() => {
   }
 })
 
+const course_brief = [
+  {
+    id: 1,
+    name: "计算机网络原理",
+    description: "深入剖析数字世界的联通之道",
+    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
+    image: "@/assets/static/img/course/1/course.jpg",
+  },
+  {
+    id: 1,
+    name: "计算机网络原理",
+    description: "深入剖析数字世界的联通之道",
+    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
+    image: "@/assets/static/img/course/1/course.jpg",
+  }
+]
+
 </script>
 
 <template>
@@ -30,7 +47,7 @@ onMounted(() => {
       <HeadNavi/>
     </el-header>
 
-    <el-main id = content-container>
+    <el-main id="content-container">
       <el-carousel
           motion-blur
           direction="horizontal"
@@ -42,33 +59,31 @@ onMounted(() => {
         </el-carousel-item>
       </el-carousel>
 
-      <el-divider content-position="left">
-        <h1>精选好课</h1>
-      </el-divider>
+      <div class="primary-container">
+        <el-divider content-position="left">
+          <h1>精选好课</h1>
+        </el-divider>
 
-      <div class="course-container">
-        <course-card
-          course-name="计算机网络原理"
-          course-description="深入剖析数字世界的联通之道"
-          @click = "handleClickCourse(1)"
-        >
-          <img
-              style="width: 230px"
-              src="../assets/static/img/course/1/course.jpg"
-              class="image"
-              alt="计算机网络原理"
-          />
-        </course-card>
+        <div class="course-container">
+          <el-scrollbar>
+            <course-card
+                style="display: inline-flex"
+                v-for="course in course_brief"
+                :key="course.id"
+                :brief="course"
+                @click = "handleClickCourse(course.id)"
+              />
+          </el-scrollbar>
+        </div>
 
-      </div>
+        <el-divider
+            content-position="left"
+            class="info-divider">
+           <h1>我的课程</h1>
+        </el-divider>
 
-      <el-divider content-position="left"
-        style="margin-top: 36px; margin-bottom: 36px"
-      >
-        <h1>我的课程</h1>
-      </el-divider>
-
-      <div class="course-container">
+        <div class="course-container">
+        </div>
       </div>
     </el-main>
   </el-container>
@@ -82,7 +97,10 @@ onMounted(() => {
   margin: 0;
   text-align: center;
 }
-
+.info-divider{
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
 }
@@ -92,9 +110,8 @@ onMounted(() => {
 }
 
 .course-container {
-  display: flex;
-  justify-content: left;
-  align-items: center;
+  padding-left: 32px;
+  padding-right: 32px;
   margin-top: 32px;
   margin-bottom: 32px;
 }
@@ -102,4 +119,8 @@ onMounted(() => {
 #content-container {
   padding: 36px 64px 12px;
 }
+html.dark #content-container {
+}
+
+
 </style>

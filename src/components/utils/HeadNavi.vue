@@ -6,23 +6,33 @@
           :width="200"
           trigger="hover"
       >
-        <template #reference>
+        <template #reference @click="toMainPage">
           <img
-              class="icon"
-              src="../../assets/static/img/unity-logo-light.png" alt="" style="height:64px; width: auto"/>
+              v-if="!isDark"
+              class="website-logo"
+              src="../../assets/static/img/unity-logo-light.png"
+              alt=""
+          />
+          <img
+              v-if="isDark"
+              class="website-logo"
+              src="../../assets/static/img/unity-logo-dark.png"
+              alt=""
+          />
         </template>
         <span style=" white-space: nowrap;">守得云开见月明</span>
         <span>
-      <el-switch
-          v-model="isDark"
-          @change="$emit('changeTheme', isDark)"
-          style="margin-left: 22px"
-          inline-prompt
-          :active-icon="MoonNight"
-          :inactive-icon="Sunset"
-      /></span>
+          <el-switch
+              v-model="isDark"
+              @change="$emit('changeTheme', isDark)"
+              style="margin-left: 22px"
+              inline-prompt
+              :active-icon="MoonNight"
+              :inactive-icon="Sunset"
+          />
+        </span>
       </el-popover>
-      <div class="Multiple-Header-Item-Container">
+      <div class="Multiple-Header-Item-Container" @click="toMainPage">
         <h1 class="keyword">
           AI赋能 |
         </h1>
@@ -55,25 +65,26 @@
     <div class="Header-Item" style="margin-right: 24px" ref="mineContainer">
       <div class="Multiple-Header-Item-Container">
 
-      <el-switch
-          v-model="isDark"
-          style="margin-right: 38px"
-          size="large"
-          inline-prompt
-          :active-icon="MoonNight"
-          :inactive-icon="Sunset"
-      />
+        <el-switch
+            v-model="isDark"
+            style="margin-right: 38px"
+            size="large"
+            inline-prompt
+            :active-icon="MoonNight"
+            :inactive-icon="Sunset"
+        />
 
-      <el-link type="primary"
-               style="margin-right: 36px;
+        <el-link type="primary"
+                 style="margin-right: 36px;
                font-size: 20px;
                 white-space: nowrap;
                font-weight: bolder"
-      >我的学堂</el-link>
+                 @click="handleToMyAcademy"
+        >我的学堂</el-link>
 
       </div>
 
-<!--          头像-->
+      <!--          头像-->
       <el-popover
           placement="top-start"
           :width="160"
@@ -100,7 +111,7 @@
 import {ref, onMounted, inject} from 'vue'
 const activeIndex = ref('1')
 import { useDark } from '@vueuse/core'
-import {MoonNight, Star, Sunset, Search} from "@element-plus/icons-vue";
+import {MoonNight, Sunset, Search} from "@element-plus/icons-vue";
 import router from "@/router";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
 
@@ -122,6 +133,9 @@ const mineContainer = ref(null)
 const windowWidth = ref(null)
 const windowHeight = ref(null)
 
+const toMainPage = () => {
+  router.push('/')
+}
 // 响应式调整元素
 const rescaleElement = () => {
   if(showAssistant.value){
@@ -155,13 +169,17 @@ onMounted(() => {
   })
 })
 
-const handleLogout = () => {
-
+const handleToMyAcademy = ()=>{
+  router.push("academy")
 }
 </script>
 
 <style scoped>
-
+.website-logo {
+  cursor: pointer;
+  height: 64px;
+  width: auto;
+}
 .Header-Container {
   width: 100%;
   margin: 0px;
@@ -173,8 +191,20 @@ const handleLogout = () => {
   justify-content: space-between;
   height: 100%;
 }
+html.dark .Header-Container{
+  width: 100%;
+  margin: 0px;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  box-shadow: 0 0 4px var(--el-color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
 
 .Multiple-Header-Item-Container{
+  cursor: pointer;
   display: inline-flex;
   justify-content: center;
   align-items: center;

@@ -25,7 +25,7 @@ const { isAuthenticated} = useAuth();
 
 onMounted(() => {
   if(isAuthenticated.value == true){
-    router.push('/')
+    router.replace('/')
   }
 })
 </script>

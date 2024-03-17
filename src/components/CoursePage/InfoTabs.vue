@@ -18,10 +18,7 @@ const props = defineProps({
 
 <template>
   <el-tabs
-      style="
-              width: 100%;
-              height: 600px;
-              border-radius: 8px;"
+      id="info-tabs"
       tab-position="left">
 
     <el-tab-pane>
@@ -99,6 +96,11 @@ const props = defineProps({
 </template>
 
 <style scoped>
+#info-tabs{
+  width: 100%;
+  height: 600px;
+  border-radius: 8px;
+}
 .tab-icon{
   margin-right: 6px;
 }

@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import {onMounted, provide, ref} from 'vue'
 import UnityComponent from "@/components/UnityComponent.vue";
-import MainPage from "@/views/MainPage.vue";
-import LoginPage from "@/views/LoginPage.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
-import {useRoute} from "vue-router";
 
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
@@ -87,11 +84,11 @@ const handleChangeRemoteServer = (id) => {
 <template>
   <div id="AllContainer">
       <div id="WebsiteContainer" ref="websiteContainer">
+
           <RouterView v-slot="{ Component }">
-            <transition name="fade">
-              <component :is="Component" />
-            </transition>
+            <component :is="Component" />
           </RouterView>
+
           <el-button
               type="primary"
               class="floating-button"

@@ -1,12 +1,8 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  "courseName": {
-    type: String,
-    required: true
-  },
-  "courseDescription": {
-    type: String,
+  brief: {
+    type: Object,
     required: true
   },
 })
@@ -14,21 +10,31 @@ const props = defineProps({
 </script>
 
 <template>
-  <el-card
-      shadow="hover"
-      style="width: 280px;
-           height: 250px;
-           margin-right: 36px">
-    <slot>
-    </slot>
-    <div style="padding: 14px;">
-      <el-text style="display: block">{{props.courseName}}</el-text>
+  <el-card shadow="hover" id="course-card">
+    <img
+        style="width: 196px"
+        src="@/assets/static/img/course/1/course.jpg"
+        class="image"
+        alt="计算机网络原理"
+    />
+    <div id="info-container">
+      <el-text style="display: block">
+        {{props.brief.name}}
+      </el-text>
       <el-text>
-        {{ props.courseDescription }}</el-text>
+        {{ props.brief.description }}
+      </el-text>
     </div>
   </el-card>
 </template>
 
 <style scoped>
-
+#course-card{
+  cursor: pointer;
+  margin-right: 36px;
+}
+#info-container{
+  padding: 8px;
+  padding-bottom: 0;
+}
 </style>

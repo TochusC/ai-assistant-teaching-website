@@ -17,26 +17,38 @@
   align-items: center;
 }
 
+:root{
+  --base-bg-color: #fff;
+  --base-bg-color-dark: #1a1a1a;
+  --base-text-color: #333;
+  --base-text-color-dark: #e0e0e0;
+
+  --primay-bg-color: #fefefe;
+  --primay-bg-color-dark: #2d2d2d;
+  --primay-text-color: #222;
+  --primay-text-color-dark: #efefef;
+}
+
+html{
+    background-color: var(--base-bg-color);
+    color: var(--base-text-color); /* 设置文本颜色为黑色 */
+}
+
+html body{
+    background-color: var(--base-bg-color);
+    color: var(--base-text-color); /* 设置文本颜色为黑色 */
+}
+
+
 /* 基础暗黑模式样式 */
 html.dark {
-  background-color: #1a1a1a; /* 暗背景色 */
-  color: #e0e0e0; /* 浅字体色 */
+    background-color: var(--base-bg-color-dark);
+    color: var(--base-text-color-dark); /* 设置文本颜色为白色 */
 }
 
 
 /* 输入框样式 */
 html.dark body{
-  background-color: #1a1a1a;
-  color: #fff; /* 设置文本颜色为白色 */
-}
-/* 调整链接颜色 */
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+    background-color: var(--base-bg-color-dark);
+    color: var(--base-text-color-dark); /* 设置文本颜色为白色 */
 }
