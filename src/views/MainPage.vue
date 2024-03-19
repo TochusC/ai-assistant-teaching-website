@@ -4,11 +4,9 @@ import CourseCard from "@/components/MainPage/CourseCard.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
-import * as url from "url";
 
 const router = useRouter()
 
-const { isAuthenticated, user } = useAuth();
 const dynamicCarouselHeight = ref('480px')
 const rescaleElement = ref('')
 
@@ -17,9 +15,7 @@ const handleClickCourse = (id : number) => {
 }
 
 onMounted(() => {
-  if(isAuthenticated.value != true){
-    router.replace('/login')
-  }
+
 })
 
 const course_brief = [
@@ -70,45 +66,49 @@ const propagandaImages = [
       <HeadNavi/>
     </el-header>
 
-    <el-main id="content-container">
-      <el-carousel
-          motion-blur
-          direction="horizontal"
-          height="500px"
-          indicator-position="outside"
-      >
+    <el-main >
+      <el-scrollbar>
+        <div id="content-container">
+          <el-carousel
+              motion-blur
+              direction="horizontal"
+              height="500px"
+              indicator-position="outside"
+          >
 
-        <el-carousel-item v-for="item in 5" :key="item">
-          <img src="@/assets/static/img/propaganda/2.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
-        </el-carousel-item>
-      </el-carousel>
+            <el-carousel-item v-for="item in 5" :key="item">
+              <img src="@/assets/static/img/propaganda/2.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
+            </el-carousel-item>
+          </el-carousel>
 
-      <div class="primary-container">
-        <el-divider content-position="left">
-          <h1>精选好课</h1>
-        </el-divider>
+          <div id="primary-container">
+            <el-divider content-position="left">
+              <h1>精选好课</h1>
+            </el-divider>
 
-        <div class="course-container">
-          <el-scrollbar>
-            <course-card
-                style="display: inline-flex"
-                v-for="course in course_brief"
-                :key="course.id"
-                :brief="course"
-                @click = "handleClickCourse(course.id)"
-              />
-          </el-scrollbar>
+            <div class="course-container">
+              <el-scrollbar>
+                <course-card
+                    style="display: inline-flex"
+                    v-for="course in course_brief"
+                    :key="course.id"
+                    :brief="course"
+                    @click = "handleClickCourse(course.id)"
+                  />
+              </el-scrollbar>
+            </div>
+
+            <el-divider
+                content-position="left"
+                class="info-divider">
+               <h1>我的课程</h1>
+            </el-divider>
+
+            <div class="course-container">
+            </div>
+          </div>
         </div>
-
-        <el-divider
-            content-position="left"
-            class="info-divider">
-           <h1>我的课程</h1>
-        </el-divider>
-
-        <div class="course-container">
-        </div>
-      </div>
+      </el-scrollbar>
     </el-main>
   </el-container>
 </template>
@@ -119,6 +119,9 @@ const propagandaImages = [
   opacity: 0.75;
   line-height: 300px;
   margin: 0;
+  border: #8080FF 1px solid;
+  border-radius: 8px;
+  box-shadow: #8080FF 0 0 4px;
   text-align: center;
 }
 .info-divider{
@@ -133,6 +136,15 @@ const propagandaImages = [
   background-color: #d3dce6;
 }
 
+#primary-container{
+  margin-top: 24px;
+  background: var(--el-bg-color);
+  padding: 16px;
+  border: #8080FF 1px solid;
+  border-radius: 8px;
+  box-shadow: #8080FF 0 0 4px;
+}
+
 .course-container {
   padding-left: 32px;
   padding-right: 32px;
@@ -141,10 +153,13 @@ const propagandaImages = [
 }
 
 #content-container {
-  padding: 36px 64px 12px;
+  padding-left: 36px;
+  padding-right: 36px;
+  padding-top: 12px;
+  width: 100%;
+  height: 100%;
 }
-html.dark #content-container {
-}
+
 
 
 </style>

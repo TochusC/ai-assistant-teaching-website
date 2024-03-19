@@ -12,13 +12,16 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@tsparticles/vue3": "^3.0.1",
+    "axios": "^1.6.8",
     "element-plus": "^2.6.0",
     "install": "^0.13.0",
     "npm": "^10.5.0",
     "pinia": "^2.1.7",
+    "tsparticles": "^3.3.0",
     "vue": "^3.4.15",
-    "vue-router": "^4.2.5",
-    "vue-unity-webgl": "^1.2.0"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",

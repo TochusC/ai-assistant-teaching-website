@@ -23,8 +23,7 @@
         <span style=" white-space: nowrap;">守得云开见月明</span>
         <span>
           <el-switch
-              v-model="isDark"
-              @change="$emit('changeTheme', isDark)"
+              v-model="showParticles"
               style="margin-left: 22px"
               inline-prompt
               :active-icon="MoonNight"
@@ -115,9 +114,11 @@ import {MoonNight, Sunset, Search} from "@element-plus/icons-vue";
 import router from "@/router";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
 
+
 const tittle = ref(null)
 const isCollapse = ref(true)
 const showLogoutDialog = ref(false)
+const showParticles = inject('showParticles')
 
 // 响应式搜索栏宽度
 const dynamicSearchBarWidth = ref('560px')
@@ -170,7 +171,7 @@ onMounted(() => {
 })
 
 const handleToMyAcademy = ()=>{
-  router.push("academy")
+  router.push("/academy")
 }
 </script>
 
@@ -186,6 +187,7 @@ const handleToMyAcademy = ()=>{
   padding-top: 36px;
   padding-bottom: 36px;
   box-shadow: 0 0 4px #101010;
+  background: var(--el-bg-color);
   display: inline-flex;
   align-items: center;
   justify-content: space-between;

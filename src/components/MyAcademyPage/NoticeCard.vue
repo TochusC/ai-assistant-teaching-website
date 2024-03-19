@@ -1,6 +1,7 @@
 <script setup>
 import {Notebook } from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";
+import router from "@/router";
 
 const props = defineProps(
     {
@@ -32,6 +33,18 @@ onMounted(()=>{
   }
 })
 
+const handleCheckout = () => {
+  if(props.notice.type === "作业"){
+    router.push('/academy/homework/' + props.notice.id)
+  }
+  else if(props.notice.type === "考勤"){
+    router.push('/academy/attendance/' + props.notice.id)
+  }
+  else{
+    router.push('/academy/course/' + props.notice.id)
+  }
+}
+
 </script>
 
 <template>
@@ -47,7 +60,11 @@ onMounted(()=>{
           {{ props.notice.type }}
         </el-text>
       </el-tag>
-      <el-button type="primary" size="small">查看</el-button>
+      <el-button
+          type="primary"
+          size="small"
+          @click="handleCheckout"
+      >查看</el-button>
     </div>
   </template>
     <el-text>

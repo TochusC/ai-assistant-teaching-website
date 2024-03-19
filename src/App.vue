@@ -2,6 +2,8 @@
 import {onMounted, provide, ref} from 'vue'
 import UnityComponent from "@/components/UnityComponent.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
+import {useAuth} from "@/assets/static/js/useAuth.js";
+import router from "@/router";
 
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
@@ -18,11 +20,17 @@ const buttonText = ref('嗨，小慧！')
 const unityComponent = ref(null)
 // 是否是深色模式
 const isDark = ref(false)
+const cdnServerUrl = ref("http://localhost:3000/assests/")
+// 是否显示粒子效果
+const showParticles = ref(true)
 
 // 提供给子组件的数据
 provide('showAssistant', showAssistant);
 provide('windowWidth', windowWidth);
 provide('isDark', isDark);
+provide('unityComponent', unityComponent);
+provide('cdnServerUrl', cdnServerUrl);
+provide('showParticles', showParticles);
 
 // 根据窗口重新计算按钮的位置
 function rescaleElement() {
@@ -42,7 +50,13 @@ function rescaleElement() {
   }
 }
 
+const { isAuthenticated, user } = useAuth();
+
 onMounted(() => {
+  if(isAuthenticated.value !== true){
+    router.replace('/login')
+  }
+
   rescaleElement()
 
   window.addEventListener('resize', () => {
@@ -82,39 +96,102 @@ const handleChangeRemoteServer = (id) => {
 </script>
 
 <template>
-  <div id="AllContainer">
-      <div id="WebsiteContainer" ref="websiteContainer">
+  <div id="AllContainer" >
+    <div id="WebsiteContainer" ref="websiteContainer">
 
-          <RouterView v-slot="{ Component }">
-            <component :is="Component" />
-          </RouterView>
+        <RouterView v-slot="{ Component }" style="height: 100%">
+          <component :is="Component" />
+        </RouterView>
 
-          <el-button
-              type="primary"
-              class="floating-button"
-              size="large"
-              :loading="isCallBtnLoading"
-              :style="{right: buttonDynamicLeft}"
-              @click="CallAssistant" round>
-            {{ buttonText }}
-          </el-button>
-      </div>
+        <el-button
+            type="primary"
+            class="floating-button"
+            size="large"
+            :loading="isCallBtnLoading"
+            :style="{right: buttonDynamicLeft}"
+            @click="CallAssistant" round>
+          {{ buttonText }}
+        </el-button>
+    </div>
 
   <!--    用来存放AI教学助理的容器-->
-      <div id="AssistantContainer">
-        <UnityInteraction
-            :is-call-btn-loading="isCallBtnLoading"
-            :show-assistant="showAssistant"
-            @changeRemoteServer="handleChangeRemoteServer"
-            />
-          <UnityComponent
-              ref="unityComponent"
-              v-if="showAssistant"
-              :initial-unity-canvas-height="windowHeight - 48"
-              :initial-unity-canvas-width="windowWidth / 3"
+    <div id="AssistantContainer">
+      <UnityInteraction
+          :is-call-btn-loading="isCallBtnLoading"
+          :show-assistant="showAssistant"
+          @changeRemoteServer="handleChangeRemoteServer"
           />
-      </div>
+        <UnityComponent
+            ref="unityComponent"
+            v-if="showAssistant"
+            :initial-unity-canvas-height="windowHeight - 48"
+            :initial-unity-canvas-width="windowWidth / 3"
+        />
     </div>
+  </div>
+  <vue-particles
+      v-if="showParticles"
+      id="tsparticles"
+      :options="{
+                    fpsLimit: 120,
+                    interactivity: {
+                        events: {
+                            onClick: {
+                                enable: true,
+                                mode: 'push'
+                            },
+                            onHover: {
+                                enable: true,
+                                mode: 'repulse'
+                            },
+                        },
+                        modes: {
+                            bubble: {
+                                distance: 400,
+                                duration: 2,
+                                opacity: 0.8,
+                                size: 40
+                            },
+                            push: {
+                                quantity: 2
+                            },
+                            repulse: {
+                                distance: 50,
+                                duration: 0.4
+                            }
+                        }
+                    },
+                    particles: {
+                        color: {
+                            value: '#8080ff'
+                        },
+                        move: {
+                            direction: 'down',
+                            enable: true,
+                            outModes: 'bounce',
+                            random: false,
+                            speed: 0.4,
+                            straight: false
+                        },
+                        number: {
+                            density: {
+                                enable: true,
+                            },
+                            value: 160
+                        },
+                        opacity: {
+                            value: 0.5
+                        },
+                        shape: {
+                            type: 'circle'
+                        },
+                        size: {
+                            value: { min: 2, max: 6 }
+                        }
+                    },
+                    detectRetina: true
+                }"
+  />
 </template>
 
 <style scoped>
@@ -128,11 +205,13 @@ const handleChangeRemoteServer = (id) => {
 #WebsiteContainer {
   flex: 3;
   height: 100%;
+  z-index: 2;
   width: 100%;
 }
 #AssistantContainer {
   position: relative;
   flex: 0;
+  z-index: 2;
   transition: 0.5s;
   border: 1px solid #ccc;
   height: 100%;
@@ -142,5 +221,14 @@ const handleChangeRemoteServer = (id) => {
   position: absolute;
   bottom: 50%
 }
-
+#tsparticles {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>

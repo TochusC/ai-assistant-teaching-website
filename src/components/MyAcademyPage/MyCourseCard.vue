@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import router from "@/router";
+
 const props = defineProps({
   brief: {
     type: Object,
@@ -45,7 +47,7 @@ const props = defineProps({
               {{ props.brief.illustration }}
             </el-text>
           </div>
-          <el-button type="primary" style="width: 128px">去学习</el-button>
+          <el-button type="primary" style="width: 128px" @click="router.push('academy/my-course/' + props.brief.id)">去学习</el-button>
         </div>
 
       </div>

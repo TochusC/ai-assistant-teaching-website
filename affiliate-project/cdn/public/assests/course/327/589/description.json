@@ -1,0 +1,40 @@
+{
+  "resources_number": 4,
+  "type": ["video", "doc", "ppt"],
+  "pdf": [
+
+  ],
+  "video": [
+    {
+      "name": "StarLight.mp4",
+      "url": "video/StarLight.mp4",
+      "size": "1.2MB",
+      "update_date": "2021-07-01"
+    }
+  ],
+  "doc": [
+    {
+      "name": "python.docx",
+      "url": "docs/python.docx",
+      "preview": "docs/python_preview.pdf",
+      "size": "1.2MB",
+      "update_date": "2021-07-01"
+    },
+    {
+      "name": "course.pdf",
+      "url": "docs/course.pdf",
+      "size": "1.2MB",
+      "update_date": "2021-07-01"
+    }
+  ],
+  "ppt": [
+    {
+      "name": "dip.pptx",
+      "url": "ppt/dip.pptx",
+      "preview": "ppt/dip_preview.pdf",
+      "size": "1.2MB",
+      "update_date": "2021-07-01"
+    }
+
+  ]
+}
