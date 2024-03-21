@@ -26,14 +26,14 @@ const props = defineProps({
 
 <template>
   <div class="Space-Between-Flex" style="align-items: normal">
-    <div style="display: flex">
+    <div style="display: flex; width: 100%">
       <img
           style="width:240px; height: 135px; background-size: cover;"
           src="@/assets/static/img/course/1/course.jpg"
           id="course-image"/>
-      <div style="display:flex; flex-direction: column;" >
+      <div style="display:flex; flex-direction: column; width: 100%" >
 
-        <div style="display: flex; justify-content: center">
+        <div style="display: flex; justify-content: left">
           <span>
             <h2 style="white-space: nowrap;">{{ props.name }}</h2>
           </span>
@@ -45,6 +45,15 @@ const props = defineProps({
         </div>
 
         <el-text style="white-space: nowrap; width: 100%">{{props.illustration}}</el-text>
+        <el-text>
+          课程进度：
+        </el-text>
+        <el-progress
+            style="margin: 24px;
+            width: 100%"
+            :text-inside="true"
+            :stroke-width="26"
+            :percentage="70" />
       </div>
     </div>
     <div style="display: flex; height: 100%">
@@ -63,6 +72,7 @@ const props = defineProps({
       </el-tag>
     </div>
   </div>
+
 </template>
 
 <style scoped>

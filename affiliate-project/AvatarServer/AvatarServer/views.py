@@ -31,10 +31,8 @@ def chat_with_llm(user_text):
 
     print("大语言模型的回复: " + llm_reply + "\n")
 
-    # response_audio = TTS.get_audio_from_text(reply,
-    #                                          voice_access_token)
-
-    response_audio = TTS.sovits_get_audio_from_text(reply)
+    response_audio = TTS.get_audio_from_text(reply,
+                                             voice_access_token)
 
     with open("out.wav", 'wb') as f:
         f.write(response_audio)
@@ -43,7 +41,7 @@ def chat_with_llm(user_text):
 
     response = HttpResponse(content_type="audio/wav")
     response.write(response_audio)
-    response["Reply"] = reply
+    response["Command"] = reply
     response["Expression"] = expression
     response["Action"] = action
     return response

@@ -198,9 +198,10 @@ const course = {
           :image-url="course.image"
           :name="course.name"
           :illustration="course.illustration"
-       course-id=""/>
-      <el-divider id="add-course-divider">
-      </el-divider>
+          :course-id="course.id"
+          :progress="70"
+      />
+      <el-divider/>
       <CourseTabs :course="course"/>
     </template>
   </BlankPage>

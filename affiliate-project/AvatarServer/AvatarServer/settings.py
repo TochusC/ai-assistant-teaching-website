@@ -57,7 +57,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
 CORS_EXPOSE_HEADERS = [
-    "reply", "action", "expression"
+    "command", "action", "expression"
 ]
 
 ROOT_URLCONF = 'AvatarServer.urls'

@@ -121,9 +121,8 @@ var script = null;
 // config.matchWebGLToCanvasSize = false;
 
 onMounted(() =>{
-
   window.handleUnityTransmission = function(str) {
-    var currentRoute = router.path;
+    const currentRoute = router.path;
     if(str === "打开注册表单" || str === "打开登录表单" || str === "退出登录"){
       if(currentRoute !== '/login'){
         logout();
