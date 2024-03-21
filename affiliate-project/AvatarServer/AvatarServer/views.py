@@ -18,13 +18,14 @@ def chat_with_llm(user_text):
     response_llm = LLM.chat_with_LLM(user_text, LLM_access_token)
     llm_reply = response_llm.get("result")
     if "><" in llm_reply:
-        expression, action, reply = llm_reply.split("><")[0:3]
+        expression, action, reply, command = llm_reply.split("><")[0:4]
         expression = expression[1:]
-        reply = reply[:-1]
+        command = command[:-1]
     else:
         reply = llm_reply
         expression = "无"
         action = "无"
+        command = "无"
 
     reply.replace(" ", "")
     reply.replace("\n", "")
@@ -41,7 +42,7 @@ def chat_with_llm(user_text):
 
     response = HttpResponse(content_type="audio/wav")
     response.write(response_audio)
-    response["Command"] = reply
+    response["Command"] = command
     response["Expression"] = expression
     response["Action"] = action
     return response

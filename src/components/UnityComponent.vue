@@ -4,6 +4,28 @@ import router from "@/router";
 import {useAuth} from "@/assets/static/js/useAuth.js";
 const { login, logout } = useAuth();
 
+window.handleUnityTransmission = function(str) {
+  const currentRoute = router.path;
+  if(str === "打开注册表单" || str === "打开登录表单" || str === "退出登录"){
+    if(currentRoute !== '/login'){
+      logout();
+    }
+
+    if (str === "打开注册表单") {
+      router.push({path: '/login', query: {form: 'register'}})
+    }
+    else if (str === "打开登录表单") {
+      router.push({path: '/login', query: {form: 'login'}})
+    }
+    else{
+      router.push({path: '/login'})
+    }
+  }
+  if(str === "打开课程：计算机网络原理"){
+    router.push({path: '/course/1'})
+  }
+}
+
 const props = defineProps({
   initialUnityCanvasHeight: {
     type: Number,
@@ -121,28 +143,6 @@ var script = null;
 // config.matchWebGLToCanvasSize = false;
 
 onMounted(() =>{
-  window.handleUnityTransmission = function(str) {
-    const currentRoute = router.path;
-    if(str === "打开注册表单" || str === "打开登录表单" || str === "退出登录"){
-      if(currentRoute !== '/login'){
-        logout();
-      }
-
-      if (str === "打开注册表单") {
-        router.push({path: '/login', query: {form: 'register'}})
-      }
-      else if (str === "打开登录表单") {
-        router.push({path: '/login', query: {form: 'login'}})
-      }
-      else{
-        router.push({path: '/login'})
-      }
-    }
-    if(str === "打开课程：计算机网络原理"){
-      router.push({path: '/course/1'})
-    }
-  }
-
   container = document.querySelector("#unity-container");
   canvas = document.querySelector("#unity-canvas");
   loadingBar = document.querySelector("#unity-loading-bar");

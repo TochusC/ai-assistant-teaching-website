@@ -1,2 +1,2 @@
-python manage.py runserver
+runtime\Scripts\python.exe manage.py runserver
 pause
