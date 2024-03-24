@@ -44,7 +44,7 @@ function unityShowBanner(msg, type) {
   function updateBannerVisibility() {
     warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
   }
-  var div = document.createElement('div');
+  let div = document.createElement('div');
   div.innerHTML = msg;
   warningBanner.appendChild(div);
   if (type == 'error') div.style = 'background: red; padding: 10px;';
@@ -106,16 +106,16 @@ function initRecord(opt = {}) {
   );
 }
 
-var container = null
-var canvas = null
-var loadingBar = null
-var progressBarFull = null
-var fullscreenButton = null
-var warningBanner = null
+let container = null
+let canvas = null
+let loadingBar = null
+let progressBarFull = null
+let fullscreenButton = null
+let warningBanner = null
 
-var buildUrl = "/src/assets/static/Unity/Build";
-var loaderUrl = buildUrl + "/WebGL_Build.loader.js";
-var config = {
+let buildUrl = "/src/assets/static/Unity/Build";
+let loaderUrl = buildUrl + "/WebGL_Build.loader.js";
+let config = {
   dataUrl: buildUrl + "/WebGL_Build.data.br",
   frameworkUrl: buildUrl + "/WebGL_Build.framework.js.br",
   codeUrl: buildUrl + "/WebGL_Build.wasm.br",
@@ -125,7 +125,7 @@ var config = {
   productVersion: "0.1.0",
   showBanner: unityShowBanner,
 };
-var script = null;
+let script = null;
 
 // Shows a temporary message banner/ribbon for a few seconds, or
 // a permanent error message on top of the canvas if type=='error'.
@@ -155,7 +155,7 @@ onMounted(() =>{
   if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
     // Mobile device style: fill the whole browser client area with the game canvas:
 
-    var meta = document.createElement('meta');
+    let meta = document.createElement('meta');
     meta.name = 'viewport';
     meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
     document.getElementsByTagName('head')[0].appendChild(meta);
