@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import HeadNavi from "@/components/utils/HeadNavi.vue";
 import NoticeCard from "@/components/MyAcademyPage/NoticeCard.vue";
 import MyCourseCard from "@/components/MyAcademyPage/MyCourseCard.vue";
 import BlankPage from "@/views/BlankPage.vue";
+import {useAuth} from "@/assets/static/js/useAuth"
+import { onMounted , ref } from "vue";
+import axios from "axios";
+
+const {user} = useAuth();
 
 const notice = [
   {
@@ -33,17 +37,36 @@ const notice = [
     announceTime: "2024.03.16 21:23",
   },
 ]
+//根据学生的id找到学生的选课，然后根据学生的选课的信息取请求后端，后端对每一个id请求应该返回的是这个json对象
+// const course_brief = [ 
+//     {
+//     id: 327,
+//     name: "计算机网络原理",
+//     lable:"判断课程的类型（AI赋能精选课等等）",
+//     description: "深入剖析数字世界的联通之道",
+//     illustration: "国家级 | 工学 (08)/计算机类 (0809)",
+//     image: "@/assets/static/img/course/1/course.jpg",
+//   }
+// ]
 
-const course_brief = [
-    {
-    id: 327,
-    name: "计算机网络原理",
-    description: "深入剖析数字世界的联通之道",
-    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
-    image: "@/assets/static/img/course/1/course.jpg",
-  }
-]
+const course_brief = ref([])
 
+onMounted( //用户选课信息已经初始化了
+  async() => {
+    const formData = new URLSearchParams();
+    let GetLessonUrl = 'http://127.0.0.1:8000/api/choose/' + user.value.id;
+    const response = await axios.get(GetLessonUrl);
+    const resource = response.data;
+    for (let lesson of resource){
+      //console.log(lesson.Lesson_id) //用户选课的id
+      let GetClassUrl = 'http://127.0.0.1:8000/api/course/' + lesson.Lesson_id;
+      const course = await axios.get(GetClassUrl)
+      const CouseData = course.data
+      //console.log(CouseData[0])
+      course_brief.value.push(CouseData[0])
+    }
+}
+)
 </script>
 
 <template>

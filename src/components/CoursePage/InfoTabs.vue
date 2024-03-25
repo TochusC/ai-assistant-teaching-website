@@ -48,7 +48,7 @@ const props = defineProps({
       <template #label>
                 <span>
                   <el-icon class="tab-icon">
-                    <DataBoard />
+                      <DataBoard />
                   </el-icon>
                   <span>课程公告</span>
                 </span>

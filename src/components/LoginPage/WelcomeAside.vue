@@ -11,7 +11,13 @@ const emit = defineEmits(['openLoginDialog', 'openRegisterDialog'])
 const showLoginDialog = ref(false)
 const showRegistryDialog = ref(false)
 const route = useRoute()
-
+const handleRegister = () => {
+  showLoginDialog.value = false;
+  showRegistryDialog.value = true;
+}
+const handlecloseRegister = () => {
+  showRegistryDialog.value = false;
+}
 
 const websiteTittle = ref(null)
 onMounted(() => {
@@ -85,8 +91,8 @@ onMounted(() => {
     </div>
   </div>
 
-  <LoginDialog v-model="showLoginDialog"/>
-  <RegistryDialog v-model="showRegistryDialog"/>
+  <LoginDialog v-model="showLoginDialog" @showregister="handleRegister"/>
+  <RegistryDialog v-model="showRegistryDialog" @closeregister="handlecloseRegister"/>
 
 </template>
 

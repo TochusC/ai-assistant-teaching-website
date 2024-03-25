@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { StarFilled, User, MessageBox } from "@element-plus/icons-vue";
-import {ref} from "vue";
+<script setup lang="ts">;
 import router from "@/router";
 
 const props = defineProps({
