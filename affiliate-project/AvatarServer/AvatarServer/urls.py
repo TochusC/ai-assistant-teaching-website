@@ -19,6 +19,8 @@ from django.urls import path
 from AvatarServer import views
 
 urlpatterns = [
-    path('chat/voice/', views.voice_chat),
-    path("chat/text/", views.text_chat),
+    path('chat/synthesis/', views.voice_synthesis),
+    path("chat/llm/", views.chat_with_llm),
+    path('test/', views.testField),
+    path("chat/recognize/", views.voice_recognize),
 ]

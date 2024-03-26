@@ -48,6 +48,8 @@ def get_audio_from_text(text, access_token, per=111):
 
     return response.content
 
+
+
 def sovits_get_audio_from_text(text):
     url = "http://127.0.0.1:9880/?text=" + text + "&text_language=zh"
 
@@ -77,11 +79,11 @@ def main():
     }
 
     parameter = {
-        "tex":"你好我是小助手",
+        "tex":"哈喽，我听到你的请求啦，请等小慧思考一下",
         "lan":"zh",
         "ctp":"1",
         "cuid":"toch",
-        "per":"5",
+        "aue":"6",
         "tok":get_access_token()
     }
 
@@ -93,4 +95,7 @@ def main():
         f.write(response.content)
 
 if __name__ == '__main__':
-    main()
+    response_audio = get_audio_from_text("我听到你的请求啦，请等小慧思考一下", get_access_token())
+
+    with open("out.wav", 'wb') as f:
+        f.write(response_audio)

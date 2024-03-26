@@ -81,6 +81,11 @@ const propagandaImages = [
             </el-carousel-item>
           </el-carousel>
 
+          <el-divider style="margin: 32px">
+            <el-button type="primary">
+              点击下载桌面端VR程序
+            </el-button>
+          </el-divider>
           <div id="primary-container">
             <el-divider content-position="left">
               <h1>精选好课</h1>

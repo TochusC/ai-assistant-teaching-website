@@ -40,11 +40,11 @@ onMounted(()=>{
   <el-card id="course-card" style="margin-bottom: 24px">
     <div class="Space-Between-Flex">
       <div id="resource-logo" class="Center-Flex">
-       <el-icon  size="36" color="#f2f2f2">
-         <VideoPlay v-if="props.resource_type === 'video'" />
-         <DataAnalysis v-else-if="props.resource_type === 'ppt'" />
-         <Document v-else/>
-       </el-icon>
+        <el-icon  size="36" color="#f2f2f2">
+          <VideoPlay v-if="props.resource_type === 'video'" />
+          <DataAnalysis v-else-if="props.resource_type === 'ppt'" />
+          <Document v-else/>
+        </el-icon>
       </div>
       <div id="info-container">
         <div class="Space-Between-Flex">

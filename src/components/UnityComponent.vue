@@ -2,29 +2,9 @@
 import {onMounted, ref} from "vue";
 import router from "@/router";
 import {useAuth} from "@/assets/static/js/useAuth.js";
-const { login, logout } = useAuth();
 
-window.handleUnityTransmission = function(str) {
-  const currentRoute = router.path;
-  if(str === "打开注册表单" || str === "打开登录表单" || str === "退出登录"){
-    if(currentRoute !== '/login'){
-      logout();
-    }
 
-    if (str === "打开注册表单") {
-      router.push({path: '/login', query: {form: 'register'}})
-    }
-    else if (str === "打开登录表单") {
-      router.push({path: '/login', query: {form: 'login'}})
-    }
-    else{
-      router.push({path: '/login'})
-    }
-  }
-  if(str === "打开课程：计算机网络原理"){
-    router.push({path: '/course/1'})
-  }
-}
+
 
 const props = defineProps({
   initialUnityCanvasHeight: {
@@ -114,11 +94,11 @@ let fullscreenButton = null
 let warningBanner = null
 
 let buildUrl = "/src/assets/static/Unity/Build";
-let loaderUrl = buildUrl + "/WebGL_Build.loader.js";
+let loaderUrl = buildUrl + "/AI-Assistant(WebGL).loader.js";
 let config = {
-  dataUrl: buildUrl + "/WebGL_Build.data.br",
-  frameworkUrl: buildUrl + "/WebGL_Build.framework.js.br",
-  codeUrl: buildUrl + "/WebGL_Build.wasm.br",
+  dataUrl: buildUrl + "/AI-Assistant(WebGL).data",
+  frameworkUrl: buildUrl + "/AI-Assistant(WebGL).framework.js",
+  codeUrl: buildUrl + "/AI-Assistant(WebGL).wasm",
   streamingAssetsUrl: "StreamingAssets",
   companyName: "DefaultCompany",
   productName: "AI-Asssistant(WebGL)",
@@ -126,21 +106,6 @@ let config = {
   showBanner: unityShowBanner,
 };
 let script = null;
-
-// Shows a temporary message banner/ribbon for a few seconds, or
-// a permanent error message on top of the canvas if type=='error'.
-// If type=='warning', a yellow highlight color is used.
-// Modify or remove this function to customize the visually presented
-// way that non-critical warnings and error messages are presented to the
-// user.
-
-
-// By default, Unity keeps WebGL canvas render target size matched with
-// the DOM size of the canvas element (scaled by window.devicePixelRatio)
-// Set this to false if you want to decouple this synchronization from
-// happening inside the engine, and you would instead like to size up
-// the canvas DOM size and WebGL render target sizes yourself.
-// config.matchWebGLToCanvasSize = false;
 
 onMounted(() =>{
   container = document.querySelector("#unity-container");
