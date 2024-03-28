@@ -1,8 +1,8 @@
-<script setup lang="ts">
-import { StarFilled, User, MessageBox } from "@element-plus/icons-vue";
-import {ref} from "vue";
+<script setup>
+import {inject, onMounted, ref} from "vue";
 import router from "@/router";
 
+const showTag = ref(true)
 const props = defineProps({
   name:{
     type: String,
@@ -22,54 +22,59 @@ const props = defineProps({
   }
 })
 
+
+onMounted(()=>{
+  rescaleElements()
+  window.addEventListener('resize', rescaleElements)
+})
 </script>
 
 <template>
-  <div class="Space-Between-Flex" style="align-items: normal">
-    <div style="display: flex; width: 100%">
+  <div style="display: flex">
+    <div>
       <img
           style="width:240px; height: 135px; background-size: cover;"
           src="@/assets/static/img/course/1/course.jpg"
           id="course-image"/>
-      <div style="display:flex; flex-direction: column; width: 100%" >
-
-        <div style="display: flex; justify-content: left">
-          <span>
-            <h2 style="white-space: nowrap;">{{ props.name }}</h2>
-          </span>
-          <span style="height: 100%; display: flex; align-items: center; margin-left: 16px">
-            <el-link style="font-size: 16px" type="primary" @click="router.push(`/course/`+ props.courseId)">
-              课程主页
-            </el-link>
-          </span>
+    </div>
+    <div style="width: 100%">
+      <div style="width: 100%" class="Space-Between-Flex">
+        <div>
+          <div style="display: flex; white-space: nowrap">
+              <h2 style="white-space: nowrap;">{{ props.name }}</h2>
+              <el-link style="font-size: 16px; margin-left: 16px" type="primary" @click="router.push(`/course/`+ props.courseId)">
+                课程主页
+              </el-link>
+          </div>
+          <el-text style="white-space: nowrap; width: 100%">{{props.illustration}}</el-text>
         </div>
-
-        <el-text style="white-space: nowrap; width: 100%">{{props.illustration}}</el-text>
-        <el-text>
+        <div>
+          <el-tag
+              id="intelligent-tag"
+              effect="plain"
+              style="margin-right: 16px"
+          >
+            AI助学 | 智能课
+          </el-tag>
+          <el-tag
+              id="featured-tag"
+              effect="plain"
+          >
+            AI赋能 | 精选课
+          </el-tag>
+        </div>
+      </div>
+      <div style="display:flex;">
+        <el-text style="white-space: nowrap">
           课程进度：
         </el-text>
         <el-progress
             style="margin: 24px;
-            width: 100%"
+              width: 100%"
             :text-inside="true"
             :stroke-width="26"
             :percentage="70" />
       </div>
-    </div>
-    <div style="display: flex; height: 100%">
-      <el-tag
-          id="intelligent-tag"
-          effect="plain"
-          style="margin-right: 16px"
-      >
-        AI助学 | 智能课
-      </el-tag>
-      <el-tag
-          id="featured-tag"
-          effect="plain"
-      >
-        AI赋能 | 精选课
-      </el-tag>
     </div>
   </div>
 

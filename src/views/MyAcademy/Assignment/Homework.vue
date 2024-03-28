@@ -3,6 +3,7 @@ import {useRoute} from "vue-router";
 import {UploadFilled} from "@element-plus/icons-vue";
 import BlankPage from "@/views/BlankPage.vue";
 import {ref} from "vue";
+import AIOpinion from "@/components/utils/AIOpinion.vue";
 
 const route = useRoute()
 
@@ -44,6 +45,8 @@ const userInput = ref("")
                 </el-tag>
               </div>
               <el-text style="display: block">{{ homework.description}}</el-text>
+              <AIOpinion style="margin-top: 24px"
+                         :prompt="'请用简单的两三句话说明一下如何完成这个作业' + homework.description"/>
             </div>
           </el-tab-pane>
           <el-tab-pane label="作业提交">

@@ -3,13 +3,13 @@ import HeadNavi from "@/components/utils/HeadNavi.vue";
 </script>
 
 <template>
-  <el-container>
+  <el-container >
 
     <el-header style="padding: 0">
       <HeadNavi/>
     </el-header>
 
-    <el-main>
+    <el-main >
       <div class="Center-Flex">
         <div id="content">
          <slot/>

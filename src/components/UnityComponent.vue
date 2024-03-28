@@ -3,9 +3,6 @@ import {onMounted, ref} from "vue";
 import router from "@/router";
 import {useAuth} from "@/assets/static/js/useAuth.js";
 
-
-
-
 const props = defineProps({
   initialUnityCanvasHeight: {
     type: Number,

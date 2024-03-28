@@ -63,7 +63,6 @@
 
     <div class="Header-Item" style="margin-right: 24px" ref="mineContainer">
       <div class="Multiple-Header-Item-Container">
-
         <el-switch
             v-model="isDark"
             style="margin-right: 38px"
@@ -73,14 +72,41 @@
             :inactive-icon="Sunset"
         />
 
-        <el-link type="primary"
-                 style="margin-right: 36px;
-               font-size: 20px;
-                white-space: nowrap;
-               font-weight: bolder"
-                 @click="handleToMyAcademy"
-        >我的学堂</el-link>
+        <el-button
+            plain
+            :type="route.path==='/'?'primary':'default'"
+            style="margin-right: 24px">
+          <el-link type="primary"
+                   style="
+                       font-size: 18px;
+                        white-space: nowrap;
+                       font-weight: bolder"
+                   @click="handleToMainPage"
+          >首页</el-link>
+        </el-button>
 
+        <el-popover placement="bottom-start">
+          <template #reference>
+            <el-badge :value="3" style="margin-right: 36px">
+              <el-button
+                         :type="route.path==='/academy'?'primary':'default'"
+                         plain>
+                <el-link type="primary"
+                         style="
+                       font-size: 18px;
+                        white-space: nowrap;
+                       font-weight: bolder"
+                         @click="handleToMyAcademy"
+                >我的学堂</el-link>
+              </el-button>
+            </el-badge>
+          </template>
+          <div class="Space-Between-Flex">
+            <el-statistic title="课程" :value="1" />
+            <el-statistic title="考勤" :value="1" />
+          </div>
+          <el-statistic title="待完成作业" :value="1" />
+        </el-popover>
       </div>
 
       <!--          头像-->
@@ -92,16 +118,14 @@
         <template #reference>
           <img
               class="icon"
-              src="../../assets/static/img/boy.png" alt="" style="height:64px; width: auto"/>
+              src="../../assets/static/img/boy.png" alt="" style="height:52px; width: auto"/>
         </template>
         <el-menu>
           <el-menu-item index="1">个人中心</el-menu-item>
           <el-menu-item @click="showLogoutDialog=true">退出登录</el-menu-item>
         </el-menu>
       </el-popover>
-
     </div>
-
   </div>
   <LogoutDialog v-model="showLogoutDialog"/>
 </template>
@@ -113,6 +137,8 @@ import { useDark } from '@vueuse/core'
 import {MoonNight, Sunset, Search} from "@element-plus/icons-vue";
 import router from "@/router";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
+import {useRoute} from "vue-router";
+import {ElMessage, ElNotification} from "element-plus";
 
 
 const tittle = ref(null)
@@ -133,6 +159,13 @@ const mineContainer = ref(null)
 
 const windowWidth = ref(null)
 const windowHeight = ref(null)
+
+const notification = [
+  {
+    type: '作业',
+    num: 1,
+  }
+]
 
 const toMainPage = () => {
   router.push('/')
@@ -159,6 +192,8 @@ const rescaleElement = () => {
   }
 }
 
+const route = useRoute();
+
 onMounted(() => {
   rescaleElement()
 
@@ -170,8 +205,29 @@ onMounted(() => {
   })
 })
 
-const handleToMyAcademy = ()=>{
+const handleToMyAcademy = () => {
+  if(route.path === '/academy'){
+    ElNotification({
+      message: '你已经在我的学堂啦',
+      type: 'success',
+      offset: 64,
+      duration: 1000
+    })
+    return
+  }
   router.push("/academy")
+}
+const handleToMainPage = () => {
+  if(route.path === '/'){
+    ElNotification({
+      message: '你已经在首页啦',
+      type: 'success',
+      offset: 64,
+      duration: 1000
+    })
+    return
+  }
+  router.push("/")
 }
 </script>
 

@@ -37,7 +37,6 @@ const props = defineProps({
             </el-tag>
           </div>
         </div>
-
         <div class="Space-Between-Flex">
           <div id="description-container">
             <el-text class="description-text">
@@ -49,9 +48,7 @@ const props = defineProps({
           </div>
           <el-button type="primary" style="width: 128px" @click="router.push('academy/my-course/' + props.brief.id)">去学习</el-button>
         </div>
-
       </div>
-
     </div>
   </el-card>
 </template>

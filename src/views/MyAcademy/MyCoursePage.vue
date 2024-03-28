@@ -1,10 +1,6 @@
 <script setup lang="ts">
 
-import router from "@/router";
 import BlankPage from "@/views/BlankPage.vue";
-import InfoTabs from "@/components/CoursePage/InfoTabs.vue";
-import CourseHeader from "@/components/CoursePage/CourseHeader.vue";
-import HeadNavi from "@/components/utils/HeadNavi.vue";
 import MyCourseHeader from "@/components/MyAcademyPage/MyCoursePage/MyCourseHeader.vue";
 import CourseTabs from "@/components/MyAcademyPage/MyCoursePage/CourseTabs.vue";
 
@@ -188,6 +184,8 @@ const course = {
     chapter: 4
   }
 }
+
+
 
 </script>
 

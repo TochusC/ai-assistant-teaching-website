@@ -41,7 +41,7 @@ def voice_recognize(request):
 
 @csrf_exempt
 @require_http_methods(["POST", "OPTIONS"])
-def voice_synthesis(request):
+def voice_synthesize(request):
     llm_reply = request.POST["llmReply"]
     response_audio = TTS.get_audio_from_text(llm_reply,
                                              voice_access_token)

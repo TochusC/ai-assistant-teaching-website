@@ -106,6 +106,7 @@ const course_brief = [
 
 #info-div{
   width: 100%;
+  height: 100%;
 }
 #course-div{
   width: 100%;

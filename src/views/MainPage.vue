@@ -1,16 +1,17 @@
-<script setup lang="ts">
+<script setup>
 import HeadNavi from "@/components/utils/HeadNavi.vue";
 import CourseCard from "@/components/MainPage/CourseCard.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import AIOpinion from "@/components/utils/AIOpinion.vue";
 
 const router = useRouter()
 
 const dynamicCarouselHeight = ref('480px')
 const rescaleElement = ref('')
 
-const handleClickCourse = (id : number) => {
+const handleClickCourse = (id) => {
   router.push(`/course/${id}`)
 }
 
@@ -70,22 +71,26 @@ const propagandaImages = [
       <el-scrollbar>
         <div id="content-container">
           <el-carousel
+              style="
+              margin-bottom: 24px;
+              background: var(--el-bg-color);
+              box-shadow: 0 0 8px #8080FF;
+              border-radius: 8px"
               motion-blur
               direction="horizontal"
-              height="500px"
+              height="480px"
               indicator-position="outside"
           >
-
-            <el-carousel-item v-for="item in 5" :key="item">
-              <img src="@/assets/static/img/propaganda/2.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
+            <el-carousel-item
+                v-for="item in 5"
+                :key="item">
+              <img src="@/assets/static/img/propaganda/poster.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
             </el-carousel-item>
           </el-carousel>
 
-          <el-divider style="margin: 32px">
-            <el-button type="primary">
-              点击下载桌面端VR程序
-            </el-button>
-          </el-divider>
+          <AIOpinion :prompt="'你好小慧，给大家说一句激起未来希望的话！'"/>
+
+
           <div id="primary-container">
             <el-divider content-position="left">
               <h1>精选好课</h1>
