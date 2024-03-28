@@ -21,12 +21,6 @@ const props = defineProps({
     required: true
   }
 })
-
-
-onMounted(()=>{
-  rescaleElements()
-  window.addEventListener('resize', rescaleElements)
-})
 </script>
 
 <template>
@@ -34,7 +28,7 @@ onMounted(()=>{
     <div>
       <img
           style="width:240px; height: 135px; background-size: cover;"
-          src="@/assets/static/img/course/1/course.jpg"
+          :src="imageUrl"
           id="course-image"/>
     </div>
     <div style="width: 100%">

@@ -14,14 +14,17 @@
 
 
 <script setup lang="ts">
+
+
 import SloganCarousel from "@/components/LoginPage/SloganCarousel.vue";
 import WelcomeAside from "@/components/LoginPage/WelcomeAside.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
-import {onMounted} from "vue";
+import {inject, onMounted} from "vue";
 import router from "@/router";
 
 const { isAuthenticated} = useAuth();
 
+const windowHeight = inject('windowHeight')
 
 onMounted(() => {
   if(isAuthenticated.value == true){

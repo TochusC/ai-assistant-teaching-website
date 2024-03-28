@@ -75,66 +75,65 @@ const propagandaImages = [
 </script>
 
 <template>
-  <el-container>
+  <el-scrollbar>
+    <el-container>
+      <el-header style="padding: 0">
+        <HeadNavi/>
+      </el-header>
+      <el-main>
+          <div id="content-container">
+            <el-carousel
+                style="
+                margin-bottom: 24px;
+                background: var(--el-bg-color);
+                box-shadow: 0 0 8px #8080FF;
+                border-radius: 8px"
+                motion-blur
+                direction="horizontal"
+                height="480px"
+                indicator-position="outside"
+            >
+              <el-carousel-item>
+                <img src="@/assets/static/img/propaganda/poster1.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
+              </el-carousel-item>
+              <el-carousel-item>
+                <img src="@/assets/static/img/propaganda/poster2.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
+              </el-carousel-item>
+              <el-carousel-item>
+                <img src="@/assets/static/img/propaganda/poster3.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
+              </el-carousel-item>
+              <el-carousel-item>
+                <img src="@/assets/static/img/propaganda/poster4.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
+              </el-carousel-item>
+              <el-carousel-item>
+                <img src="@/assets/static/img/propaganda/poster5.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
+              </el-carousel-item>
+            </el-carousel>
 
-    <el-header style="padding: 0">
-      <HeadNavi/>
-    </el-header>
-
-    <el-main >
-      <el-scrollbar>
-        <div id="content-container">
-          <el-carousel
-              style="
-              margin-bottom: 24px;
-              background: var(--el-bg-color);
-              box-shadow: 0 0 8px #8080FF;
-              border-radius: 8px"
-              motion-blur
-              direction="horizontal"
-              height="480px"
-              indicator-position="outside"
-          >
-            <el-carousel-item
-                v-for="item in 5"
-                :key="item">
-              <img src="@/assets/static/img/propaganda/poster.png" style="width: 100%; height: 100%; object-fit: cover; " alt=""/>
-            </el-carousel-item>
-          </el-carousel>
-
-          <AIOpinion :prompt="'你好小慧，给大家说一句激起未来希望的话！'"/>
+            <AIOpinion :prompt="'你好小慧，给大家说一句激起未来希望的话！'"/>
 
 
-          <div id="primary-container">
-            <el-divider content-position="left">
-              <h1>精选好课</h1>
-            </el-divider>
+            <div id="primary-container">
+              <el-divider content-position="left">
+                <h1>精选好课</h1>
+              </el-divider>
 
-            <div class="course-container">
-              <el-scrollbar>
-                <course-card
-                    style="display: inline-flex"
-                    v-for="course in course_brief"
-                    :key="course.id"
-                    :brief="course"
-                    @click = "handleClickCourse(course.id)"
-                  />
-              </el-scrollbar>
-            </div>
-
-            <!-- <el-divider
-                content-position="left"
-                class="info-divider">
-               <h1>我的课程</h1>
-            </el-divider> -->
-
-            <div class="course-container">
+              <div class="course-container">
+                <el-scrollbar>
+                  <course-card
+                      style="display: inline-flex"
+                      v-for="course in course_brief"
+                      :key="course.id"
+                      :brief="course"
+                      @click = "handleClickCourse(course.id)"
+                    />
+                </el-scrollbar>
+              </div>
             </div>
           </div>
-        </div>
-      </el-scrollbar>
-    </el-main>
-  </el-container>
+      </el-main>
+    </el-container>
+  </el-scrollbar>
 </template>
 
 <style scoped>

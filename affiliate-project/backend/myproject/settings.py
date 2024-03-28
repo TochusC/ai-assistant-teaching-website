@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "music",
+    # 跨域
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -48,8 +51,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # 跨域
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True  # 如果为True，将不使用白名单，并且将接受所有来源。默认为False。
 ROOT_URLCONF = "myproject.urls"
 
 TEMPLATES = [

@@ -76,10 +76,10 @@ const regenerate = ()=>{
            style="
            border: 0 0 8px var(--el-color-primary);
            border-radius: 5px;
-           box-shadow: 0 0 8px var(--el-color-primary)">
+           box-shadow: 0 0 12px var(--el-color-primary)">
     <div class="Space-Between-Flex">
       <div>
-        <el-text type="primary" style="text-shadow: 2px 2px 8px var(--el-color-primary)">
+        <el-text type="primary" style="text-shadow: 2px 2px 12px var(--el-color-primary)">
           <el-icon class="is-loading">
             <StarFilled/>
           </el-icon>

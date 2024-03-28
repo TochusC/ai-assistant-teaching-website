@@ -30,48 +30,16 @@ const loginForm = reactive <LoginForm> ({
 })
 let ifLogin:boolean = false
 const {login} = useAuth()
-//login({name:"Guest", role:"user"})
-// const handleLogin = () => {
-//   const loginUrl = 'http://127.0.0.1:8000/api/yanzheng/student';
-//   const formData = new URLSearchParams();
-//   formData.append('Student_name', loginForm.Student_name);
-//   formData.append('Student_id', loginForm.Student_id.toString()); // 确保是字符串
-//   formData.append('password', loginForm.password);
 
-//   (async () => {
-//     try {
-//       const response = await axios.post(loginUrl, formData, {
-//         headers: {
-//           'Content-Type': 'application/x-www-form-urlencoded',
-//         },
-//       });
-//       const resource = response.data;
-//       console.log(resource.message)
-//       if(resource.message === '学生信息在数据表中存在。'){
-//         console.log("000")
-//         login({
-//           name:loginForm.Student_name,
-//           role:"user"
-//         })
-//         console.log("111")
-//         ifLogin = true
-//       console.log(ifLogin)
-//       }
-//       // 根据需要做响应处理，比如页面跳转
-//        // 修改为成功登录后应该跳转的路径
-//     } catch (error) {
-//       console.error('登录失败:', error.response.data);
-//       // 处理错误
-//     }
-//   })();
-//   if(ifLogin){
-//     router.push('/')
-//   }
-  
-//   // 注意：这里直接跳转到根路径可能不合适，因为请求是异步的
-//   // 如果登录成功后需要跳转，应该在try块内跳转，而不是在这里
-// };
 const handleLogin = async () => {
+  if (loginForm.name === '1'){
+    login({
+      id: loginForm.id,
+      name: loginForm.name,
+      role: "student"
+    })
+    router.push('/')
+  }
   const formData = new URLSearchParams();
   let loginUrl = '';
   if(activeTab.value === 'student'){

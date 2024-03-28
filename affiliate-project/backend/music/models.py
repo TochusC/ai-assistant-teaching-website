@@ -28,6 +28,8 @@ class Professor(models.Model):
     Lesson_id = models.IntegerField()
 
 
+
+
 class Notice(models.Model):
     types = models.CharField(max_length=250)
     title = models.CharField(max_length=250)

@@ -26,8 +26,17 @@ class NoticeSchema(Schema):
     endTime: str
     announceTime: str
 
+class Item(Schema):
+    Student_id: int
+    Lesson_id: int
+
+class ChooseSchema(Schema):
+    Student_id: int
+    Lesson_id: int
+    grade: int
 
 class CourseSchema(Schema):
+    Course_id: int
     name: str
     description: str
     illustration: str
@@ -56,6 +65,7 @@ class StatisticsSchema(Schema):
     announcement: int
     chapter: int
 class HomeworkSchema(Schema):
+    # Homework_id: int
     type: str
     name: str
     start: str
@@ -99,8 +109,24 @@ class Course_DesignSchema(Schema):
 
 
 
+class LoginStuedntSchema(Schema):
+    Student_name: str
+    Student_id: int
+    password: str
+    password_verify: str
+
+class LoginTeacherSchema(Schema):
+    Teacher_name: str
+    Teacher_id: int
+    password: str
+    password_verify: str
 
 
+
+
+
+class SuccessFoundSchmea(Schema):
+    message: str
 class NotFoundSchema(Schema):
     message: str
 

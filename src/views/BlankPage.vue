@@ -12,7 +12,8 @@ import HeadNavi from "@/components/utils/HeadNavi.vue";
     <el-main >
       <div class="Center-Flex">
         <div id="content">
-         <slot/>
+            <el-backtop :right="100" :bottom="100" />
+            <slot/>
         </div>
       </div>
     </el-main>

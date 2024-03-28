@@ -4,8 +4,8 @@ import UnityComponent from "@/components/UnityComponent.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
 import {useAuth} from "@/assets/static/js/useAuth.js";
 import router from "@/router";
-import BasicInfo from "@/components/AccountPage/BasicInfo.vue";
-import {StarFilled} from "@element-plus/icons-vue";
+import { NConfigProvider } from 'naive-ui'
+import {particleOption} from "@/assets/static/js/particleOption.js";
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
@@ -20,14 +20,17 @@ const buttonText = ref('嗨，小慧！')
 // 用来存放Unity组件的引用
 const unityComponent = ref(null)
 // 是否是深色模式
-const isDark = ref(false)
+const isDark = useDark()
 const cdnServerUrl = ref("http://localhost:3000/assests/")
 // 是否显示粒子效果
 const showParticles = ref(true)
+import { darkTheme } from 'naive-ui'
+import {useDark} from "@vueuse/core";
 
 // 提供给子组件的数据
 provide('showAssistant', showAssistant);
 provide('windowWidth', windowWidth);
+provide('windowHeight', windowHeight);
 provide('isDark', isDark);
 provide('unityComponent', unityComponent);
 provide('cdnServerUrl', cdnServerUrl);
@@ -94,25 +97,41 @@ const handleChangeRemoteServer = (id) => {
   console.log(id)
 }
 
+const themeOverrides = {
+  common: {
+    primaryColor: '#8080ff',
+    infoColor: '#8080ff',
+    successColor: 'var(--el-color-success)',
+    warningColor: 'var(--el-color-warning)',
+    errorColor: 'var(--el-color-error)',
+  },
+}
+
+const darkThemeOverrides = {
+  common: {
+    primaryColor: '#8080ff',
+    infoColor: '#8080ff',
+  },
+}
 </script>
 
 <template>
+  <el-backtop :right="100" :bottom="100" />
   <div id="AllContainer" >
     <div id="WebsiteContainer" ref="websiteContainer">
       <el-backtop :right="100" :bottom="100" />
-        <RouterView v-slot="{ Component }" style="height: 100%">
-          <component :is="Component" />
-        </RouterView>
-
-        <el-button
-            type="primary"
-            class="floating-button"
-            size="large"
-            :loading="isCallBtnLoading"
-            :style="{right: buttonDynamicLeft}"
-            @click="CallAssistant" round>
-          {{ buttonText }}
-        </el-button>
+      <n-config-provider style="height: 100%" :theme-overrides="isDark?darkThemeOverrides:themeOverrides" :theme="isDark?darkTheme:''">
+          <RouterView />
+      </n-config-provider>
+      <el-button
+          type="primary"
+          class="floating-button"
+          size="large"
+          :loading="isCallBtnLoading"
+          :style="{right: buttonDynamicLeft}"
+          @click="CallAssistant" round>
+        {{ buttonText }}
+      </el-button>
     </div>
 
   <!--    用来存放AI教学助理的容器-->
@@ -137,65 +156,7 @@ const handleChangeRemoteServer = (id) => {
   <vue-particles
       v-if="showParticles"
       id="tsparticles"
-      :options="{
-                    fpsLimit: 120,
-                    interactivity: {
-                        events: {
-                            onClick: {
-                                enable: true,
-                                mode: 'push'
-                            },
-                            onHover: {
-                                enable: true,
-                                mode: 'repulse'
-                            },
-                        },
-                        modes: {
-                            bubble: {
-                                distance: 400,
-                                duration: 2,
-                                opacity: 0.8,
-                                size: 40
-                            },
-                            push: {
-                                quantity: 2
-                            },
-                            repulse: {
-                                distance: 50,
-                                duration: 0.4
-                            }
-                        }
-                    },
-                    particles: {
-                        color: {
-                            value: '#8080ff'
-                        },
-                        move: {
-                            direction: 'down',
-                            enable: true,
-                            outModes: 'bounce',
-                            random: false,
-                            speed: 0.4,
-                            straight: false
-                        },
-                        number: {
-                            density: {
-                                enable: true,
-                            },
-                            value: 160
-                        },
-                        opacity: {
-                            value: 0.5
-                        },
-                        shape: {
-                            type: 'circle'
-                        },
-                        size: {
-                            value: { min: 2, max: 6 }
-                        }
-                    },
-                    detectRetina: true
-                }"
+      :options="particleOption"
   />
 </template>
 
@@ -203,7 +164,7 @@ const handleChangeRemoteServer = (id) => {
 
 #AllContainer {
   display: flex;
-  width: 100%;
+  width: 99%;
   height: 100%;
 }
 

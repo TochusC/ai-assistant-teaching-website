@@ -1,11 +1,12 @@
 from typing import List
-from ninja import NinjaAPI
+from ninja import NinjaAPI,Form
 from music.models import (Course,Design,Statistics,Homeworka,Resources,Qa,
-                          Announcement,Catalogs,Sum,Student,Teacher,Lesson,Notice)
+                          Announcement,Catalogs,Sum,Student,Teacher,Lesson,Notice,Choose)
 from music.scheme import (NotFoundSchema,CourseSchema,DesignSchema,Course_DesignSchema,
                           StatisticsSchema,HomeworkSchema,ResourceSchema,QaSchema,AnnouncementSchema,
                           CatalogSchema,CatalogSum,StudentSchema,TeacherSchema,LessonSchema,
-                          NoticeSchema)
+                          NoticeSchema,Item,ChooseSchema,SuccessFoundSchmea,LoginStuedntSchema,
+                          LoginTeacherSchema)
 
 api = NinjaAPI()
 
@@ -13,13 +14,12 @@ api = NinjaAPI()
 #查
 #查询学生
 
-
 @api.get("/student", response=List[StudentSchema])
 def student(request):
     return Student.objects.all()
 
 @api.get("/student/{student_id}", response={200: List[StudentSchema], 404: NotFoundSchema})
-def student(request, student_id: int):
+def students(request, student_id: int):
     try:
         student = Student.objects.get(pk=student_id)
         return [student]
@@ -27,17 +27,22 @@ def student(request, student_id: int):
         return 404, {"message": "Student does not exist"}
 
 
+
+
 #查询老师
 @api.get("/teacher", response=List[TeacherSchema])
 def teacher(request):
     return Teacher.objects.all()
 @api.get("/teacher/{teacher_id}",response={200: List[TeacherSchema], 404: NotFoundSchema})
-def teacher(request, teacher_id: int):
+def teachers(request, teacher_id: int):
     try:
         teacher = Teacher.objects.get(pk=teacher_id)
         return [teacher]
     except Teacher.DoesNotExist as e:
         return 404, {"message": "Teacher does not exist"}
+
+
+
 
 
 #查询课程
@@ -46,7 +51,7 @@ def lesson(request):
     return Lesson.objects.all()
 
 @api.get("/lesson/{lesson_id}", response={200: List[LessonSchema], 404: NotFoundSchema})
-def lesson(request, lesson_id: int):
+def lessons(request, lesson_id: int):
     try:
         lesson = Lesson.objects.get(pk=lesson_id)
         return [lesson]
@@ -74,7 +79,7 @@ def creat_lesson(request, lesson: LessonSchema):
 def notice(request):
     return Notice.objects.all()
 @api.get("/notice/{notice_id}",response={200: List[NoticeSchema], 404: NotFoundSchema})
-def notice(request, notice_id: int):
+def notices(request, notice_id: int):
     try:
         notice = Notice.objects.get(pk=notice_id)
         return [notice]
@@ -82,7 +87,95 @@ def notice(request, notice_id: int):
         return 404, {"message": "Notice does not exist"}
 
 
+#验证学生登录
+@api.post("/yanzheng/student",response={200:SuccessFoundSchmea, 404:NotFoundSchema})
+def yanzheng_student(request,item:Form[StudentSchema]):
+    student_exists = Student.objects.filter(
+        Student_name = item.Student_name,
+        Student_id = item.Student_id,
+        password = item.password
+    ).exists()
 
+    if student_exists:
+        # 如果匹配的学生存在
+        return {"message": "学生信息在数据表中存在。"}
+    else:
+        # 如果没有找到匹配的学生
+        return 404, {"message": "学生信息不在数据表中。"}
+
+#验证教师登录
+@api.post("/yanzheng/teacher",response={200:SuccessFoundSchmea, 404:NotFoundSchema})
+def yanzheng_teacher(request,item:Form[TeacherSchema]):
+
+    teacher_exists = Teacher.objects.filter(
+        Teacher_name = item.Teacher_name,
+        Teacher_id = item.Teacher_id,
+        password = item.password
+    ).exists()
+
+    if teacher_exists:
+        # 如果匹配的老师存在
+        return {"message": "老师信息在数据表中存在。"}
+    else:
+        # 如果没有找到匹配的老师
+        return 404, {"message": "老师信息不在数据表中。"}
+
+
+
+#学生注册
+@api.post("/zhuce/student", response={200:SuccessFoundSchmea, 404:NotFoundSchema})
+def zhuce_student(request, item:Form[LoginStuedntSchema]):
+    if item.password == item.password_verify:
+        Student.objects.create(
+             Student_name=item.Student_name,
+             Student_id=item.Student_id,
+             password=item.password
+        )
+        return {"message": "学生创建成功。"}
+    else:
+        return {"message": "学生创建失败。"}
+
+
+
+#老师注册
+@api.post("/zhuce/teacher", response={200:SuccessFoundSchmea, 404:NotFoundSchema})
+def zhuce_teacher(request, item:Form[LoginTeacherSchema]):
+    if item.password == item.password_verify:
+        Teacher.objects.create(
+             Teacher_name=item.Teacher_name,
+             Teacher_id=item.Teacher_id,
+             password=item.password
+        )
+        return {"message": "老师创建成功。"}
+    else:
+        return {"message": "老师创建失败。"}
+
+
+
+
+#选课
+@api.post("/choose",response={200: List[ChooseSchema],404: List[NotFoundSchema]})
+def choose(request, item:Form[Item]):
+    try:
+        Student_id = item.Student_id
+        Lesson_id = item.Lesson_id
+        Choose.objects.create(
+            Student_id = Student_id,
+            Lesson_id = Lesson_id,
+            grade = 0
+        )
+        return Choose.objects.all()
+    except Choose.DoesNotExist as e:
+        return 404, {"message": "Choose does not exist"}
+
+#查课
+@api.get("/choose/{student_id}", response=List[ChooseSchema])
+def query(request, student_id: int):
+    try:
+        choose = Choose.objects.filter(Student_id=student_id)
+        return choose
+    except Choose.DoesNotExist as e:
+        return 404, {"message": "Choose does not exist"}
 
 
 
@@ -182,12 +275,12 @@ def catalog_id(id):
 
 #查单个课程基本属性
 @api.get("/course/{course_id}", response={200: List[CourseSchema], 404: NotFoundSchema})
-def course(request, course_id: int):
+def courses(request, course_id: int):
     try:
         course = Course.objects.get(pk=course_id)
         # 使用 Pydantic 的 .dict() 方法排除字段
-        course_data = CourseSchema.from_orm(course).dict(exclude={"Course_id"})
-        return [course_data]
+        #course_data = CourseSchema.from_orm(course).dict(exclude={"Course_id"})
+        return [course]
     except Course.DoesNotExist as e:
         return 404, {"message": "course does not exist"}
 
@@ -196,7 +289,7 @@ def course(request, course_id: int):
 
 #查单个design基本属性
 @api.get("/design/{design_id}", response={200: List[DesignSchema], 404: NotFoundSchema})
-def course(request, design_id: int):
+def designs(request, design_id: int):
     try:
         design = Design.objects.get(pk=design_id)
         # 使用 Pydantic 的 .dict() 方法排除字段
@@ -220,6 +313,7 @@ def course_design(request, course_design_id: int):
     cd = Sum.objects.get(pk=course_design_id)
     #sbs = Sum.objects.all()
 
+
     results = []
 
     # 获取相应的课程和设计
@@ -231,6 +325,7 @@ def course_design(request, course_design_id: int):
     res = Resources.objects.filter(resource_id=cd.resource_id)
     hos =Homeworka.objects.filter(Homework_id=cd.homework_id)
     statistic =Statistics.objects.get(Statistics_id=cd.Statistics_id)
+
 
     ca_list = []
     mmax=0

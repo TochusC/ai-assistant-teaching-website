@@ -13,7 +13,7 @@ const props = defineProps({
   <el-card shadow="hover" id="course-card">
     <img
         style="width: 196px"
-        src= "@/assets/static/img/course/1/course.jpg"
+        :src="props.brief.image"
         class="image"
         alt="计算机网络原理"
     />

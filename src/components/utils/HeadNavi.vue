@@ -48,7 +48,7 @@
           class="input-with-select"
           size="large"
       >
-        <template #prepend>
+        <template #prepend v-if="showSearchSelection">
           <el-select  placeholder="搜索内容" style="width: 115px" size="large">
             <el-option label="课程" value="1" />
             <el-option label="文章" value="2" />
@@ -121,7 +121,7 @@
               src="../../assets/static/img/boy.png" alt="" style="height:52px; width: auto"/>
         </template>
         <el-menu>
-          <el-menu-item index="1">个人中心</el-menu-item>
+          <el-menu-item @click="toUserCenter" index="1">个人中心</el-menu-item>
           <el-menu-item @click="showLogoutDialog=true">退出登录</el-menu-item>
         </el-menu>
       </el-popover>
@@ -146,8 +146,24 @@ const isCollapse = ref(true)
 const showLogoutDialog = ref(false)
 const showParticles = inject('showParticles')
 
+const showSearchSelection = ref(true)
 // 响应式搜索栏宽度
 const dynamicSearchBarWidth = ref('560px')
+
+const toUserCenter = () => {
+  if(route.path === '/user'){
+    ElNotification({
+      message: '你已经在个人中心啦',
+      type: 'success',
+      offset: 64,
+      duration: 1000
+    })
+    return
+  }
+  else{
+    router.push('/user')
+  }
+}
 
 // 注入全局状态
 const showAssistant = inject('showAssistant')
@@ -182,9 +198,15 @@ const rescaleElement = () => {
   dynamicSearchBarWidth.value = (windowWidth.value - logoContainer.value.offsetWidth - mineContainer.value.offsetWidth) * 0.75 + 'px'
 
 
-  if (windowWidth.value < 1024) {
-    tittle.value.style.fontSize = '0px'
-    isCollapse.value = true
+  if (windowWidth.value < 1186) {
+    tittle.value.style.fontSize = '0px';
+    isCollapse.value = true;
+    if(windowWidth < 1024){
+      showSearchSelection.value = false
+    }
+    else{
+      showSearchSelection.value = true
+    }
   }
   else {
     tittle.value.style.fontSize = '18px'
@@ -242,7 +264,7 @@ const handleToMainPage = () => {
   margin: 0px;
   padding-top: 36px;
   padding-bottom: 36px;
-  box-shadow: 0 0 4px #101010;
+  box-shadow: 0 0 8px #8080ff;
   background: var(--el-bg-color);
   display: inline-flex;
   align-items: center;
