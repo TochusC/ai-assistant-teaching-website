@@ -4,8 +4,8 @@ import UnityComponent from "@/components/UnityComponent.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
 import {useAuth} from "@/assets/static/js/useAuth.js";
 import router from "@/router";
+import BasicInfo from "@/components/AccountPage/BasicInfo.vue";
 import {StarFilled} from "@element-plus/icons-vue";
-
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
@@ -99,7 +99,7 @@ const handleChangeRemoteServer = (id) => {
 <template>
   <div id="AllContainer" >
     <div id="WebsiteContainer" ref="websiteContainer">
-        <el-backtop :right="100" :bottom="100" />
+      <el-backtop :right="100" :bottom="100" />
         <RouterView v-slot="{ Component }" style="height: 100%">
           <component :is="Component" />
         </RouterView>
@@ -119,7 +119,6 @@ const handleChangeRemoteServer = (id) => {
     <div id="AssistantContainer">
       <el-watermark
           :content="'通慧智教'">
-
       <UnityInteraction
           :is-call-btn-loading="isCallBtnLoading"
           :show-assistant="showAssistant"
@@ -132,7 +131,6 @@ const handleChangeRemoteServer = (id) => {
             :initial-unity-canvas-width="windowWidth / 3"
         />
       </el-watermark>
-
     </div>
   </div>
 

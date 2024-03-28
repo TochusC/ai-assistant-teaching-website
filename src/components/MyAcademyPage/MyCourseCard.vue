@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import router from "@/router";
+import { onMounted , ref} from "vue";
+
 
 const props = defineProps({
   brief: {
     type: Object,
     required: true
   },
+})
+
+onMounted(() => {
+  console.log("image",props.brief.image.toString())
 })
 
 </script>
@@ -46,7 +52,7 @@ const props = defineProps({
               {{ props.brief.illustration }}
             </el-text>
           </div>
-          <el-button type="primary" style="width: 128px" @click="router.push('academy/my-course/' + props.brief.id)">去学习</el-button>
+          <el-button type="primary" style="width: 128px" @click="router.push('academy/my-course/' + props.brief.Course_id)">去学习</el-button>
         </div>
       </div>
     </div>

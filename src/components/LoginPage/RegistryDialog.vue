@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import {onMounted, ref, reactive} from "vue";
-import {Lock, OfficeBuilding, User} from "@element-plus/icons-vue";
+import {Lock, UserFilled, User} from "@element-plus/icons-vue";
+import axios from "axios";
 
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
 
+const emit = defineEmits(['closeregister'])
 // dialog中v-model绑定内容
 interface registerForm{
-  university:String
-  userName:String
+  name:String
+  id:String
   password:String
   rePassword:String
 }
 const registerForm = reactive <registerForm> ({
-  university:'',
-  userName:'',
+  name:'',
+  id:'',
   password:'',
   rePassword:''
 })
@@ -23,6 +25,51 @@ const rescaleElement = () => {
   windowWidth.value = window.innerWidth
   windowHeight.value = window.innerHeight
 }
+
+const handleRegister = async () => {
+  const formData = new URLSearchParams();
+  let registerUrl = '';
+  if(activeTab.value === 'student'){
+    registerUrl = 'http://5o2007f873.imdo.co/api/zhuce/student';
+    console.log("student111")
+    formData.append('Student_name', registerForm.name);
+    formData.append('Student_id', registerForm.id); // 确保是字符串
+    formData.append('password', registerForm.password);
+    formData.append('password_verify',registerForm.rePassword)
+  }else if(activeTab.value === 'teacher'){
+    registerUrl = 'http://5o2007f873.imdo.co/api/zhuce/teacher';
+    console.log("teacher111")
+
+    formData.append('Teacher_name', registerForm.name);
+    formData.append('Teacher_id', registerForm.id); // 确保是字符串
+    formData.append('password', registerForm.password);
+    formData.append('password_verify',registerForm.rePassword);
+  }
+  try {
+    const response = await axios.post(registerUrl, formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    const resource = response.data;
+    if(resource.message === '学生创建成功。'){
+      emit('closeregister')
+      registerForm.name = ''
+      registerForm.id = ''
+      registerForm.password = ''
+      registerForm.rePassword = ''
+    }else if(resource.message === '老师创建成功。'){
+      registerForm.name = ''
+      registerForm.id = ''
+      registerForm.password = ''
+      registerForm.rePassword = ''
+      emit('closeregister')
+    }
+  } catch (error) {
+    console.error('登录失败:', error.response ? error.response.data : error);
+    // 处理错误
+  }
+};
 
 onMounted(() => {
   window.addEventListener('resize', () => {
@@ -46,11 +93,11 @@ const activeTab = ref('student')
               <el-form-item>
                 <el-input
                     class="registryInput"
-                    placeholder="输入你的学校"
-                    v-model="registerForm.university"
+                    placeholder="输入你的名字"
+                    v-model="registerForm.name"
                     size="large">
                   <template #prepend>
-                    <el-button :icon="OfficeBuilding" />
+                    <el-button :icon="UserFilled" />
                   </template>
                 </el-input>
               </el-form-item>
@@ -58,7 +105,7 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="你的学号"
-                    v-model="registerForm.userName"
+                    v-model="registerForm.id"
                     size="large">
                   <template #prepend>
                     <el-button :icon="User" />
@@ -100,11 +147,11 @@ const activeTab = ref('student')
               <el-form-item>
                 <el-input
                     class="registryInput"
-                    placeholder="输入你的学校"
-                    v-model="registerForm.university"
+                    placeholder="输入你的姓名"
+                    v-model="registerForm.name"
                     size="large">
                   <template #prepend>
-                    <el-button :icon="OfficeBuilding" />
+                    <el-button :icon="UserFilled" />
                   </template>
                 </el-input>
               </el-form-item>
@@ -112,7 +159,7 @@ const activeTab = ref('student')
                 <el-input
                     class="registryInput"
                     placeholder="你的教工号"
-                    v-model="registerForm.userName"
+                    v-model="registerForm.id"
                     size="large">
                   <template #prepend>
                     <el-button :icon="User" />
@@ -154,6 +201,7 @@ const activeTab = ref('student')
       <div class="Center-Flex">
         <el-button
             type="primary"
+            @click="handleRegister"
             class="registryButton"
             size="large">
           注册</el-button>

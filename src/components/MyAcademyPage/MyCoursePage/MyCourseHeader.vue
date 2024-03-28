@@ -41,10 +41,10 @@ onMounted(()=>{
       <div style="width: 100%" class="Space-Between-Flex">
         <div>
           <div style="display: flex; white-space: nowrap">
-              <h2 style="white-space: nowrap;">{{ props.name }}</h2>
-              <el-link style="font-size: 16px; margin-left: 16px" type="primary" @click="router.push(`/course/`+ props.courseId)">
-                课程主页
-              </el-link>
+            <h2 style="white-space: nowrap;">{{ props.name }}</h2>
+            <el-link style="font-size: 16px; margin-left: 16px" type="primary" @click="router.push(`/course/`+ props.courseId)">
+              课程主页
+            </el-link>
           </div>
           <el-text style="white-space: nowrap; width: 100%">{{props.illustration}}</el-text>
         </div>
