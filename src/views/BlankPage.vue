@@ -9,7 +9,7 @@ import HeadNavi from "@/components/utils/HeadNavi.vue";
       <HeadNavi/>
     </el-header>
 
-    <el-main id="content-container">
+    <el-main>
       <div class="Center-Flex">
         <div id="content">
          <slot/>
@@ -20,11 +20,6 @@ import HeadNavi from "@/components/utils/HeadNavi.vue";
 </template>
 
 <style scoped>
-#content-container {
-  padding: 36px 128px 12px;
-  width: 100%;
-  height: 100%;
-}
 #content{
   padding: 32px;
   width: 100%;

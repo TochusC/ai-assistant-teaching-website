@@ -2,7 +2,9 @@
 import {onMounted, ref} from "vue";
 import router from "@/router";
 import {useAuth} from "@/assets/static/js/useAuth.js";
-const { login, logout } = useAuth();
+
+
+
 
 const props = defineProps({
   initialUnityCanvasHeight: {
@@ -22,7 +24,7 @@ function unityShowBanner(msg, type) {
   function updateBannerVisibility() {
     warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
   }
-  var div = document.createElement('div');
+  let div = document.createElement('div');
   div.innerHTML = msg;
   warningBanner.appendChild(div);
   if (type == 'error') div.style = 'background: red; padding: 10px;';
@@ -84,66 +86,28 @@ function initRecord(opt = {}) {
   );
 }
 
-var container = null
-var canvas = null
-var loadingBar = null
-var progressBarFull = null
-var fullscreenButton = null
-var warningBanner = null
+let container = null
+let canvas = null
+let loadingBar = null
+let progressBarFull = null
+let fullscreenButton = null
+let warningBanner = null
 
-var buildUrl = "/src/assets/static/Unity/Build";
-var loaderUrl = buildUrl + "/WebGL_Build.loader.js";
-var config = {
-  dataUrl: buildUrl + "/WebGL_Build.data.br",
-  frameworkUrl: buildUrl + "/WebGL_Build.framework.js.br",
-  codeUrl: buildUrl + "/WebGL_Build.wasm.br",
+let buildUrl = "/src/assets/static/Unity/Build";
+let loaderUrl = buildUrl + "/AI-Assistant(WebGL).loader.js";
+let config = {
+  dataUrl: buildUrl + "/AI-Assistant(WebGL).data",
+  frameworkUrl: buildUrl + "/AI-Assistant(WebGL).framework.js",
+  codeUrl: buildUrl + "/AI-Assistant(WebGL).wasm",
   streamingAssetsUrl: "StreamingAssets",
   companyName: "DefaultCompany",
   productName: "AI-Asssistant(WebGL)",
   productVersion: "0.1.0",
   showBanner: unityShowBanner,
 };
-var script = null;
-
-// Shows a temporary message banner/ribbon for a few seconds, or
-// a permanent error message on top of the canvas if type=='error'.
-// If type=='warning', a yellow highlight color is used.
-// Modify or remove this function to customize the visually presented
-// way that non-critical warnings and error messages are presented to the
-// user.
-
-
-// By default, Unity keeps WebGL canvas render target size matched with
-// the DOM size of the canvas element (scaled by window.devicePixelRatio)
-// Set this to false if you want to decouple this synchronization from
-// happening inside the engine, and you would instead like to size up
-// the canvas DOM size and WebGL render target sizes yourself.
-// config.matchWebGLToCanvasSize = false;
+let script = null;
 
 onMounted(() =>{
-
-  window.handleUnityTransmission = function(str) {
-    var currentRoute = router.path;
-    if(str === "打开注册表单" || str === "打开登录表单" || str === "退出登录"){
-      if(currentRoute !== '/login'){
-        logout();
-      }
-
-      if (str === "打开注册表单") {
-        router.push({path: '/login', query: {form: 'register'}})
-      }
-      else if (str === "打开登录表单") {
-        router.push({path: '/login', query: {form: 'login'}})
-      }
-      else{
-        router.push({path: '/login'})
-      }
-    }
-    if(str === "打开课程：计算机网络原理"){
-      router.push({path: '/course/1'})
-    }
-  }
-
   container = document.querySelector("#unity-container");
   canvas = document.querySelector("#unity-canvas");
   loadingBar = document.querySelector("#unity-loading-bar");
@@ -156,7 +120,7 @@ onMounted(() =>{
   if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
     // Mobile device style: fill the whole browser client area with the game canvas:
 
-    var meta = document.createElement('meta');
+    let meta = document.createElement('meta');
     meta.name = 'viewport';
     meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
     document.getElementsByTagName('head')[0].appendChild(meta);

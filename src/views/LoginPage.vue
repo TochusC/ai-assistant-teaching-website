@@ -48,6 +48,7 @@ onMounted(() => {
   box-shadow: inset 0 0 16px #8080FF;
   height: 100%;
   width: 100%;
+  background: var(--el-bg-color);
 }
 
 #slogan{

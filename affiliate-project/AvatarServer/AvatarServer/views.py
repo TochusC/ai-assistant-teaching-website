@@ -14,68 +14,66 @@ voice_access_token = STT.get_voice_access_token()
 LLM_access_token = LLM.get_LLM_access_token()
 
 
-def chat_with_llm(user_text):
-    response_llm = LLM.chat_with_LLM(user_text, LLM_access_token)
-    llm_reply = response_llm.get("result")
-    if "><" in llm_reply:
-        expression, action, reply = llm_reply.split("><")[0:3]
-        expression = expression[1:]
-        reply = reply[:-1]
-    else:
-        reply = llm_reply
-        expression = "无"
-        action = "无"
-
-    reply.replace(" ", "")
-    reply.replace("\n", "")
-
-    print("大语言模型的回复: " + llm_reply + "\n")
-
-    # response_audio = TTS.get_audio_from_text(reply,
-    #                                          voice_access_token)
-
-    response_audio = TTS.sovits_get_audio_from_text(reply)
-
-    with open("out.wav", 'wb') as f:
-        f.write(response_audio)
-
-    response_audio = open("out.wav", 'rb').read()
-
-    response = HttpResponse(content_type="audio/wav")
-    response.write(response_audio)
-    response["Reply"] = reply
-    response["Expression"] = expression
-    response["Action"] = action
-    return response
-
 @csrf_exempt
 @require_http_methods(["POST", "OPTIONS"])
-def text_chat(request):
+def chat_with_llm(request):
     user_text = request.POST["userText"]
+    llm_reply = LLM.chat_with_LLM(user_text, LLM_access_token)
 
-    print("用户输入的文本:", user_text)
-    return chat_with_llm(user_text);
+    print("LLM回复:", llm_reply)
+
+    return HttpResponse(llm_reply)
 
 
-# 表单
-# POST
 @csrf_exempt
 @require_http_methods(["POST", "OPTIONS"])
-def voice_chat(request):
+def voice_recognize(request):
     audio_data = request.FILES.get("file")
 
     response_stt = STT.get_text_from_audio(audio_data, voice_access_token)
 
     user_text = response_stt.get("result")[0]
 
-    print("用户语音的文本识别结果: " + user_text + "\n")
+    print("用户输入的文本:", user_text)
 
-    return chat_with_llm(user_text)
+    return HttpResponse(user_text)
 
 
-def test(request):
-    response_audio = open("out.wav", 'rb').read()
+@csrf_exempt
+@require_http_methods(["POST", "OPTIONS"])
+def voice_synthesis(request):
+    llm_reply = request.POST["llmReply"]
+    response_audio = TTS.get_audio_from_text(llm_reply,
+                                             voice_access_token)
 
-    respone = HttpResponse(content_type="audio/wav")
-    respone.write(response_audio)
-    return respone
+    response = HttpResponse(content_type="audio/wav")
+    response.write(response_audio)
+    return response
+
+# @csrf_exempt
+# @require_http_methods(["GET", "OPTIONS"])
+# def testField(request):
+#     llm_reply = request.GET["llmReply"]
+#     response_audio = TTS.get_audio_from_text(llm_reply,
+#                                              voice_access_token)
+#
+#     # with open("out.wav", 'wb') as f:
+#     #     f.write(response_audio)
+#     #
+#     # response_audio = open("out.wav", 'rb').read()
+#
+#     response = HttpResponse(content_type="audio/wav")
+#     response.write(response_audio)
+#     return response
+
+@csrf_exempt
+@require_http_methods(["GET", "OPTIONS"])
+def testField(request):
+    user_text = request.GET["userText"]
+    print("用户输入的文本:", user_text)
+    response_llm = LLM.chat_with_LLM(user_text, LLM_access_token)
+    llm_reply = response_llm.get("result")
+    print("LLM回复:", llm_reply)
+    return HttpResponse(llm_reply)
+
+

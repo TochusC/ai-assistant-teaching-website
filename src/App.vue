@@ -133,6 +133,7 @@ const handleChangeRemoteServer = (id) => {
         />
     </div>
   </div>
+
   <vue-particles
       v-if="showParticles"
       id="tsparticles"
