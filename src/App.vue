@@ -4,10 +4,12 @@ import UnityComponent from "@/components/UnityComponent.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
 import {useAuth} from "@/assets/static/js/useAuth.js";
 import router from "@/router";
+import BasicInfo from "@/components/AccountPage/BasicInfo.vue";
 
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
+
 
 // 决定是否显示AI助手
 const showAssistant = ref(false)
@@ -98,11 +100,11 @@ const handleChangeRemoteServer = (id) => {
 <template>
   <div id="AllContainer" >
     <div id="WebsiteContainer" ref="websiteContainer">
-
+      
         <RouterView v-slot="{ Component }" style="height: 100%">
           <component :is="Component" />
         </RouterView>
-
+      
         <el-button
             type="primary"
             class="floating-button"
@@ -112,6 +114,8 @@ const handleChangeRemoteServer = (id) => {
             @click="CallAssistant" round>
           {{ buttonText }}
         </el-button>
+
+
     </div>
 
   <!--    用来存放AI教学助理的容器-->
@@ -220,7 +224,8 @@ const handleChangeRemoteServer = (id) => {
 
 .floating-button {
   position: absolute;
-  bottom: 50%
+  bottom: 50%;
+
 }
 #tsparticles {
   position: fixed;

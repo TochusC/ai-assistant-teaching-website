@@ -28,12 +28,12 @@ const course = {
 
 let resourceRootUrl = null;
 
-onMounted( async () => {
+onMounted( async () => { 
   resourceRootUrl = cdnServerUrl.value + `course/` + course.course.id + `/`
       + course.id + `/`;
 
   const response = await axios.get(resourceRootUrl + 'description.json');
-
+    
   resources = response.data;
 
   console.log(resources)

@@ -9,24 +9,27 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "serve": "vue serve"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "@tsparticles/vue3": "^3.0.1",
     "axios": "^1.6.8",
+    "echarts": "^5.5.0",
     "element-plus": "^2.6.0",
     "install": "^0.13.0",
     "npm": "^10.5.0",
     "pinia": "^2.1.7",
     "tsparticles": "^3.3.0",
     "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",
     "@types/jsdom": "^21.1.6",
-    "@types/node": "^20.11.10",
+    "@types/node": "^20.11.30",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "@vue/test-utils": "^2.4.4",
