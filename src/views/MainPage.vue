@@ -27,11 +27,25 @@ const course_brief = [
     image: "@/assets/static/img/course/1/course.jpg",
   },
   {
-    id: 1,
-    name: "计算机网络原理",
-    description: "深入剖析数字世界的联通之道",
+    id: 2,
+    name: "计算机组成原理",
+    description: "深入探索计算机系统的核心构造",
     illustration: "国家级 | 工学 (08)/计算机类 (0809)",
-    image: "@/assets/static/img/course/1/course.jpg",
+    image: "@/assets/static/img/course/1/course1.jpg",
+  },
+  {
+    id: 3,
+    name: "计算机操作系统",
+    description: "深入理解现代操作系统的设计与实现",
+    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
+    image: "@/assets/static/img/course/1/course1.jpg",
+  },
+  {
+    id: 4,
+    name: "数据结构",
+    description: "探索数据组织、管理和存储的高效方法",
+    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
+    image: "@/assets/static/img/course/1/course1.jpg",
   }
 ]
 
@@ -98,11 +112,11 @@ const propagandaImages = [
               </el-scrollbar>
             </div>
 
-            <el-divider
+            <!-- <el-divider
                 content-position="left"
                 class="info-divider">
                <h1>我的课程</h1>
-            </el-divider>
+            </el-divider> -->
 
             <div class="course-container">
             </div>

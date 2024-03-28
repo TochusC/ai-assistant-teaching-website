@@ -62,7 +62,7 @@ onMounted( //用户选课信息已经初始化了
       let GetClassUrl = 'http://127.0.0.1:8000/api/course/' + lesson.Lesson_id;
       const course = await axios.get(GetClassUrl)
       const CouseData = course.data
-      //console.log(CouseData[0])
+      console.log("brief数据",CouseData[0])
       course_brief.value.push(CouseData[0])
     }
 }

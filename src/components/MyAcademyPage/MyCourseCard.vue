@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import router from "@/router";
-import { onMounted } from "vue";
+import { onMounted , ref} from "vue";
+
 
 const props = defineProps({
   brief: {
@@ -10,7 +11,7 @@ const props = defineProps({
 })
 
 onMounted(() => {
-  console.log("card",props.brief)
+  console.log("image",props.brief.image.toString())
 })
 
 </script>
