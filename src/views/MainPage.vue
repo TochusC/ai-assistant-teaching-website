@@ -5,8 +5,12 @@ import {useAuth} from "@/assets/static/js/useAuth"
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import AIOpinion from "@/components/utils/AIOpinion.vue";
+import axios from "axios";
+import { backendUrl} from "@/assets/static/js/severConfig.js";
+import {ElNotification} from "element-plus";
 
 const router = useRouter()
+const isLoadingCourse = ref(true)
 
 const dynamicCarouselHeight = ref('480px')
 const rescaleElement = ref('')
@@ -15,63 +19,35 @@ const handleClickCourse = (id) => {
   router.push(`/course/${id}`)
 }
 
-onMounted(() => {
 
+
+
+const course_brief = ref(null)
+
+const fetchCourseBrief = () => {
+  isLoadingCourse.value = true
+  axios.get(backendUrl+'api/course')
+      .then((res) => {
+        course_brief.value = res.data
+        isLoadingCourse.value = false
+      })
+      .catch((err) => {
+        ElNotification({
+          title: '错误',
+          message: '获取课程信息失败' + err,
+          type: 'error',
+          offset: 64,
+          duration: 2000
+        })
+        isLoadingCourse.value = false
+      })
+}
+
+onMounted(() => {
+  fetchCourseBrief()
 })
 
-const course_brief = [
-  {
-    id: 1,
-    name: "计算机网络原理",
-    description: "深入剖析数字世界的联通之道",
-    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
-    image: "@/assets/static/img/course/1/course.jpg",
-  },
-  {
-    id: 2,
-    name: "计算机组成原理",
-    description: "深入探索计算机系统的核心构造",
-    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
-    image: "@/assets/static/img/course/1/course1.jpg",
-  },
-  {
-    id: 3,
-    name: "计算机操作系统",
-    description: "深入理解现代操作系统的设计与实现",
-    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
-    image: "@/assets/static/img/course/1/course1.jpg",
-  },
-  {
-    id: 4,
-    name: "数据结构",
-    description: "探索数据组织、管理和存储的高效方法",
-    illustration: "国家级 | 工学 (08)/计算机类 (0809)",
-    image: "@/assets/static/img/course/1/course1.jpg",
-  }
-]
 
-const propagandaImages = [
-  {
-    name: "AI Empowered",
-    image: "../assets/static/img/propaganda/1.jpg"
-  },
-  {
-    name: "AI Empowered",
-    image: "@/assets/static/img/propaganda/2.jpg"
-  },
-  {
-    name: "AI Empowered",
-    image: "@/assets/static/img/propaganda/2.jpg"
-  },
-  {
-    name: "AI Empowered",
-    image: "@/assets/static/img/propaganda/2.jpg"
-  },
-  {
-    name: "AI Empowered",
-    image: "@/assets/static/img/propaganda/2.jpg"
-  },
-]
 </script>
 
 <template>
@@ -112,21 +88,32 @@ const propagandaImages = [
 
             <AIOpinion :prompt="'你好小慧，给大家说一句激起未来希望的话！'"/>
 
-
             <div id="primary-container">
               <el-divider content-position="left">
                 <h1>精选好课</h1>
               </el-divider>
 
-              <div class="course-container">
+              <div class="course-container" v-loading="isLoadingCourse">
                 <el-scrollbar>
+
+                  <el-result
+                      v-if="course_brief === null"
+                      icon="error"
+                      title="获取课程失败"
+                      sub-title="请稍后再试一试吧？"
+                  >
+                    <template #extra>
+                      <el-button type="primary" @click="fetchCourseBrief">重试</el-button>
+                    </template>
+                  </el-result>
                   <course-card
                       style="display: inline-flex"
+                      v-else
                       v-for="course in course_brief"
-                      :key="course.id"
+                      :key="course.Course_id"
                       :brief="course"
-                      @click = "handleClickCourse(course.id)"
-                    />
+                      @click = "handleClickCourse(course.Course_id)"
+                  />
                 </el-scrollbar>
               </div>
             </div>

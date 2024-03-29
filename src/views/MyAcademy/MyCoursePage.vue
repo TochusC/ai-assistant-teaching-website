@@ -6,6 +6,7 @@ import CourseTabs from "@/components/MyAcademyPage/MyCoursePage/CourseTabs.vue";
 import { onMounted ,ref} from "vue";
 import router from "@/router";
 import axios from "axios";
+import {backendUrl} from "@/assets/static/js/severConfig.js";
 
 const route = router.currentRoute.value
 const courseId = route.params.id //获取到当前界面你需要查询的courseid
@@ -14,7 +15,7 @@ const isLoading = ref(true)
 const course = ref(null)
 onMounted(
   async() => {
-    const courseUrl = 'http://127.0.0.1:8000/api/course-design/' + courseId
+    const courseUrl = backendUrl + 'api/course-design/' + courseId
     const response = await axios.get(courseUrl)
     course.value=response.data
     course.value = course.value[0]

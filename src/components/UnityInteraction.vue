@@ -51,8 +51,11 @@ window.handleUnityTransmission = function(str) {
         router.push({path: '/login'})
       }
     }
-    if(command === "打开课程：计算机网络原理"){
+    else if(command === "打开课程：计算机网络原理"){
       router.push({path: '/course/1'})
+    }
+    else if(command === "打开我的学堂"){
+      router.push({path: '/academy'})
     }
   }
   else if(str.startsWith("<用户输入>")){

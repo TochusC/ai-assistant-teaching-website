@@ -89,8 +89,8 @@ const CallAssistant = () => {
 
   buttonText.value = showAssistant.value ? '再见，小慧！' : '嗨，小慧！'
 
-  const event = new Event('showAssistant')
-  window.dispatchEvent(event)
+  const event1 = new Event('showAssistant')
+  window.dispatchEvent(event1)
 }
 
 const handleChangeRemoteServer = (id) => {

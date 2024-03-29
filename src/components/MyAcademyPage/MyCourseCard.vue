@@ -19,7 +19,7 @@ onMounted(() => {
   <el-card id="course-card">
     <div class="Space-Between-Flex">
       <img
-          src="@/assets/static/img/course/1/course.jpg"
+          :src="props.brief.image"
           id="course-image" alt=""/>
 
       <div id="info-container">

@@ -10,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <el-card shadow="hover" id="course-card">
+  <el-card shadow="hover" id="course-card" style="width: 240px;">
     <img
         style="width: 196px"
         :src="props.brief.image"
@@ -21,7 +21,7 @@ const props = defineProps({
       <el-text style="display: block">
         {{props.brief.name}}
       </el-text>
-      <el-text>
+      <el-text truncated>
         {{ props.brief.description }}
       </el-text>
     </div>
@@ -35,6 +35,7 @@ const props = defineProps({
 }
 #info-container{
   padding: 8px;
+  width: 210px;
   padding-bottom: 0;
 }
 </style>

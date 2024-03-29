@@ -46,7 +46,7 @@ onMounted(() => {
     <div>
       <div class="Center-Flex">
         <h1 ref="websiteTittle" id="tittle">
-          AI赋能 | 智能教学运营平台
+          通慧智教 | 智能教学服务平台
         </h1>
       </div>
 

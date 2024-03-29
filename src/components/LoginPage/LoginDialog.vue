@@ -4,7 +4,7 @@ import {Lock, UserFilled, User} from "@element-plus/icons-vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import axios from "axios";
 import router from "@/router";
-
+import {backendUrl} from "@/assets/static/js/severConfig";
 const active = ref('student'); 
 const user = useAuth()
 const windowWidth = ref(window.innerWidth)
@@ -43,12 +43,12 @@ const handleLogin = async () => {
   const formData = new URLSearchParams();
   let loginUrl = '';
   if(activeTab.value === 'student'){
-    loginUrl = 'http://127.0.0.1:8000/api/yanzheng/student';
+    loginUrl = backendUrl + 'api/yanzheng/student';
     formData.append('Student_name', loginForm.name);
     formData.append('Student_id', loginForm.id); // 确保是字符串
     formData.append('password', loginForm.password);
   }else if(activeTab.value === 'teacher'){
-     loginUrl = 'http://5o2007f873.imdo.co/api/yanzheng/teacher';
+     loginUrl = backendUrl + 'api/yanzheng/teacher';
     formData.append('Teacher_name', loginForm.name);
     formData.append('Teacher_id', loginForm.id); // 确保是字符串
     formData.append('password', loginForm.password);

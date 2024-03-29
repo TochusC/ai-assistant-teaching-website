@@ -23,7 +23,7 @@ const showIntroduction = ref(false)
 <template>
   <div class="Space-Between-Flex">
     <img
-        src="@/assets/static/img/course/1/course.jpg"
+        :src="imageUrl"
         id="course-image"/>
     <div>
       <div class="Space-Between-Flex" style="margin-bottom: 12px">

@@ -8,6 +8,8 @@ import axios from "axios";
 import * as echarts from 'echarts/core';
 import { useThemeVars } from 'naive-ui'
 import AIOpinion from "@/components/utils/AIOpinion.vue";
+import {ElMessage} from "element-plus";
+import {backendUrl} from "@/assets/static/js/severConfig.js";
 
 const themeVars = useThemeVars()
 const {user} = useAuth();
@@ -77,129 +79,124 @@ const isDark = inject('isDark')
 const course_brief = ref([])
 const chartContainer = ref(null)
 
+let myChart = null
+const option = { // 指定图表的配置项和数据
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['总学习时长', '计算机网络原理', '计算机组成原理', '操作系统', '数据结构']
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: ['2024-03-22', '2024-03-23', '2024-03-24', '2024-03-25', '2024-03-26', '2024-03-27', '2024-03-28']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: '计算机网络原理',
+      type: 'line',
+      smooth: true,
+      stack: 'Total',
+      data: [120, 132, 101, 134, 90, 230, 210]
+    },
+    {
+      name: '计算机组成原理',
+      type: 'line',
+      stack: 'Total',
+      smooth: true,
+      data: [220, 182, 191, 234, 290, 330, 310]
+    },
+    {
+      name: '操作系统',
+      type: 'line',
+      stack: 'Total',
+      smooth: true,
+      data: [150, 232, 201, 154, 190, 330, 410]
+    },
+    {
+      name: '数据结构',
+      type: 'line',
+      stack: 'Total',
+      smooth: true,
+      data: [320, 332, 301, 334, 390, 330, 320]
+    },
+    {
+      name: '总学习时长',
+      type: 'line',
+      stack: 'Total',
+      smooth: true,
+      data: [820, 932, 901, 934, 1290, 1330, 1320]
+    }
+
+  ]
+};
+
+
 onMounted( //用户选课信息已经初始化了
   async() => {
     const formData = new URLSearchParams();
-    let GetLessonUrl = 'http://127.0.0.1:8000/api/choose/' + user.value.id;
+    let GetLessonUrl = backendUrl + 'api/choose/' + user.value.id;
     const response = await axios.get(GetLessonUrl);
     const resource = response.data;
     for (let lesson of resource){
       //console.log(lesson.Lesson_id) //用户选课的id
-      let GetClassUrl = 'http://127.0.0.1:8000/api/course/' + lesson.Lesson_id;
+      let GetClassUrl = backendUrl + 'api/course/' + lesson.Lesson_id;
       const course = await axios.get(GetClassUrl)
       const CouseData = course.data
       console.log("brief数据",CouseData[0])
       course_brief.value.push(CouseData[0])
     }
 
-    // 指定图表的配置项和数据
-    let option = {
-      tooltip: {
-        trigger: 'axis'
-      },
-      legend: {
-        data: ['总学习时长', '计算机网络原理', '计算机组成原理', '操作系统', '数据结构']
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['2024-03-22', '2024-03-23', '2024-03-24', '2024-03-25', '2024-03-26', '2024-03-27', '2024-03-28']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          name: '计算机网络原理',
-          type: 'line',
-          smooth: true,
-          stack: 'Total',
-          data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name: '计算机组成原理',
-          type: 'line',
-          stack: 'Total',
-          smooth: true,
-          data: [220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-          name: '操作系统',
-          type: 'line',
-          stack: 'Total',
-          smooth: true,
-          data: [150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-          name: '数据结构',
-          type: 'line',
-          stack: 'Total',
-          smooth: true,
-          data: [320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name: '总学习时长',
-          type: 'line',
-          stack: 'Total',
-          smooth: true,
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
-        }
 
-      ]
-    };
-
-    let myChart = null;
-    // 使用刚指定的配置项和数据显示图表。
-    if(isDark.value) {
-      myChart = echarts.init(chartContainer.value, 'dark');
-      option = {
-        ...option,
-        backgroundColor: '#1a1a1a'
-      }
-    }
-    else {
-      myChart = echarts.init(chartContainer.value, 'light');
-    }
-
-    myChart.setOption(option);
+    initChart()
 
     watch(isDark, (newVal) => {
-      if(newVal) {
-        myChart.dispose()
-        myChart = echarts.init(chartContainer.value, 'dark');
-        option = {
-          ...option,
-          backgroundColor: themeVars.backgroundColorBase
-        }
-        myChart.setOption(option);
-      }
-      else {
-        myChart.dispose()
-        myChart = echarts.init(chartContainer.value, 'light');
-        option = {
-          ...option,
-          backgroundColor: themeVars.backgroundColorBase
-        }
-        myChart.setOption(option);
-      }
+     initChart()
     })
 
     window.addEventListener('resize', () => {
       myChart.resize()
     })
-}
+
+    window.addEventListener('showAssistant', () => {
+      myChart.dispose()
+      setTimeout(() => {
+        initChart()
+      }, 200)
+    })
+  }
 )
+
+const initChart = ()=>{
+  // 使用刚指定的配置项和数据显示图表。
+  if(isDark.value) {
+    myChart = echarts.init(chartContainer.value, 'dark');
+    let option = {
+      ...option,
+      backgroundColor: '#1a1a1a'
+    }
+  }
+  else {
+    myChart = echarts.init(chartContainer.value, 'light');
+  }
+
+  myChart.setOption(option);
+}
 </script>
 
 <template>
@@ -276,7 +273,7 @@ onMounted( //用户选课信息已经初始化了
             </div>
             <AIOpinion
                 style="margin-top: 36px"
-                :prompt="'以下是我的各课学习进度，给我来点一句简短的建议：' + course_progress"/>
+                :prompt="'以下是我的各课学习进度，给我来点一句简短的建议：' + JSON.stringify(course_progress)"/>
           </div>
         </el-scrollbar>
       </div>
@@ -294,7 +291,7 @@ onMounted( //用户选课信息已经初始化了
         </el-scrollbar>
         <AIOpinion
             style="margin-top: 36px"
-            :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + learning_activity"/>
+            :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(learning_activity)"/>
       </div>
 
       <div id="course-div">
