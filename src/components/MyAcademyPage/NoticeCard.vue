@@ -17,7 +17,7 @@ const tagTextClass = ref('primary-text')
 
 onMounted(()=>{
   if(props.notice){
-    if(props.notice.type === "作业")
+    if(props.notice.type === "简答")
     {
       tagType.value = "primary"
       tagTextClass.value = "primary-text"
@@ -34,7 +34,7 @@ onMounted(()=>{
 })
 
 const handleCheckout = () => {
-  if(props.notice.type === "作业"){
+  if(props.notice.type === "简答"){
     router.push('/academy/homework/' + props.notice.id)
   }
   else if(props.notice.type === "考勤"){

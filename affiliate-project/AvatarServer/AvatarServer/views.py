@@ -22,6 +22,16 @@ def chat_with_llm(request):
 
     return HttpResponse(llm_reply)
 
+@csrf_exempt
+@require_http_methods(["POST", "OPTIONS"])
+def chat_with_basic_llm(request):
+    user_text = request.POST["userText"]
+    llm_reply = LLM.chat_with_basic_llm(user_text, LLM_access_token)
+
+    print("LLM回复:", llm_reply)
+
+    return HttpResponse(llm_reply)
+
 
 @csrf_exempt
 @require_http_methods(["POST", "OPTIONS"])
@@ -48,30 +58,5 @@ def voice_synthesize(request):
     response.write(response_audio)
     return response
 
-# @csrf_exempt
-# @require_http_methods(["GET", "OPTIONS"])
-# def testField(request):
-#     llm_reply = request.GET["llmReply"]
-#     response_audio = TTS.get_audio_from_text(llm_reply,
-#                                              voice_access_token)
-#
-#     # with open("out.wav", 'wb') as f:
-#     #     f.write(response_audio)
-#     #
-#     # response_audio = open("out.wav", 'rb').read()
-#
-#     response = HttpResponse(content_type="audio/wav")
-#     response.write(response_audio)
-#     return response
-
-@csrf_exempt
-@require_http_methods(["GET", "OPTIONS"])
-def testField(request):
-    user_text = request.GET["userText"]
-    print("用户输入的文本:", user_text)
-    response_llm = LLM.chat_with_LLM(user_text, LLM_access_token)
-    llm_reply = response_llm.get("result")
-    print("LLM回复:", llm_reply)
-    return HttpResponse(llm_reply)
 
 

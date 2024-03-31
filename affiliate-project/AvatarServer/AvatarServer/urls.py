@@ -21,6 +21,6 @@ from AvatarServer import views
 urlpatterns = [
     path('chat/synthesis/', views.voice_synthesize),
     path("chat/llm/", views.chat_with_llm),
-    path('test/', views.testField),
+    path("chat/llm/basic/", views.chat_with_basic_llm),
     path("chat/recognize/", views.voice_recognize),
 ]

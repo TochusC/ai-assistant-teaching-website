@@ -30,6 +30,31 @@ def get_LLM_access_token():
     response = requests.request("POST", url, headers=headers, data=payload)
     return response.json().get("access_token")
 
+
+def chat_with_basic_llm(messages, access_token):
+    url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions?access_token=" + access_token
+
+    payload = json.dumps({
+        "messages": [
+            {
+                "role": "user",
+                "content": messages
+            }
+        ]
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    print(response.json())
+    reply = response.json().get("result")
+    reply = emoji.demojize(reply)
+    reply = remove_enclosed_text(reply, enclosure=":")
+
+    return reply
+
+
 def chat_with_LLM(messages, access_token):
     url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions?access_token=" + access_token
 
@@ -48,7 +73,7 @@ def chat_with_LLM(messages, access_token):
                 "content": messages
             }
         ],
-        "system" :
+        "system":
             '''
             你是智能教学运营平台的虚拟教学助手，小慧，你应该用可爱且口语化的语气进行回复，尽量友善且平易近人，
             你的回复应该保持在正常口语交谈的长度，不宜过长。你可以做表情和动作，但可做的表情和动作有限，
@@ -85,7 +110,6 @@ def chat_with_LLM(messages, access_token):
     reply = remove_enclosed_text(reply, enclosure=":")
 
     return reply
-
 
 
 def main():

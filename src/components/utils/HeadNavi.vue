@@ -8,15 +8,8 @@
       >
         <template #reference @click="toMainPage">
           <img
-              v-if="!isDark"
               class="website-logo"
-              src="../../assets/static/img/unity-logo-light.png"
-              alt=""
-          />
-          <img
-              v-if="isDark"
-              class="website-logo"
-              src="../../assets/static/img/unity-logo-dark.png"
+              src="../../assets/static/img/logo/favicon.png"
               alt=""
           />
         </template>
@@ -257,6 +250,7 @@ const handleToMainPage = () => {
 .website-logo {
   cursor: pointer;
   height: 64px;
+  margin-right: 12px;
   width: auto;
 }
 .Header-Container {

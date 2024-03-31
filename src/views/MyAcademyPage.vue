@@ -10,6 +10,8 @@ import { useThemeVars } from 'naive-ui'
 import AIOpinion from "@/components/utils/AIOpinion.vue";
 import {ElMessage} from "element-plus";
 import {backendUrl} from "@/assets/static/js/severConfig.js";
+import {StarFilled} from "@element-plus/icons-vue";
+import AITextLong from "@/components/utils/AITextLong.vue";
 
 const themeVars = useThemeVars()
 const {user} = useAuth();
@@ -17,17 +19,8 @@ const {user} = useAuth();
 const notice = [
   {
     id: 1,
-    type: "作业",
-    tittle: "第一次课堂作业",
-    course: "计算机网络原理",
-    startTime: "2024.03.16 21:23",
-    endTime: "2024.04.15 00.00",
-    announceTime: "2024.03.16 21:23",
-  },
-  {
-    id: 1,
-    type: "考勤",
-    tittle: "第一次课堂考勤",
+    type: "简答",
+    tittle: "网络结构基础",
     course: "计算机网络原理",
     startTime: "2024.03.16 21:23",
     endTime: "2024.04.15 00.00",
@@ -36,7 +29,34 @@ const notice = [
   {
     id: 1,
     type: "课程",
-    tittle: "第一章课程",
+    tittle: "应用层基础",
+    course: "计算机网络原理",
+    startTime: "2024.03.16 21:23",
+    endTime: "2024.04.15 00.00",
+    announceTime: "2024.03.16 21:23",
+  },
+  {
+    id: 3,
+    type: "简答",
+    tittle: "TCP数据报",
+    course: "计算机网络原理",
+    startTime: "2024.03.16 21:23",
+    endTime: "2024.04.15 00.00",
+    announceTime: "2024.03.16 21:23",
+  },
+  {
+    id: 4,
+    type: "简答",
+    tittle: "TCP数据报",
+    course: "计算机网络原理",
+    startTime: "2024.03.16 21:23",
+    endTime: "2024.04.15 00.00",
+    announceTime: "2024.03.16 21:23",
+  },
+  {
+    id: 5,
+    type: "简答",
+    tittle: "TCP数据报",
     course: "计算机网络原理",
     startTime: "2024.03.16 21:23",
     endTime: "2024.04.15 00.00",
@@ -162,7 +182,6 @@ onMounted( //用户选课信息已经初始化了
       course_brief.value.push(CouseData[0])
     }
 
-
     initChart()
 
     watch(isDark, (newVal) => {
@@ -197,118 +216,159 @@ const initChart = ()=>{
 
   myChart.setOption(option);
 }
+
+const handleUpdateValue = (value) => {
+  if(value === 'tab2'){
+    setTimeout(() => {
+      myChart.resize()
+    }, 200)
+  }
+}
+
+const currentTab = ref('tab1')
 </script>
 
 <template>
   <el-scrollbar>
 
   <BlankPage>
-    <template #default>
-      <div id="info-div">
-        <el-scrollbar>
-          <el-divider content-position="left">
-            <el-text style="font-size: 22px">
-              重要提醒
-            </el-text>
-          </el-divider>
-          <div id="info-container">
-            <NoticeCard  v-for="noticeSingleton in notice" :notice="noticeSingleton"/>
-          </div>
-        </el-scrollbar>
-      </div>
 
-      <div id="course-div">
-        <el-scrollbar>
-          <el-divider content-position="left">
-            <el-text style="font-size: 22px">
-              学习进度
-            </el-text>
-          </el-divider>
-          <div id="course-container">
-            <div class="Space-Between-Flex">
-              <div style="width: 70%">
-                <div style="display:flex; margin-bottom: 12px; margin-left: 24px; margin-right: 24px"
-                     v-for="item in course_progress">
-                  <el-text size="large" style="width:160px; white-space: nowrap">
-                    {{ item.course }}：
-                  </el-text>
-                  <n-progress
-                      type="line"
-                      :indicator-placement="'inside'"
-                      :height="24"
-                      :status="item.progress > 80 ? 'success' : item.progress>60 ? 'default': item.progress > 40? 'warning':'error'"
-                      :percentage="item.progress"
-                      processing
-                  />
-                </div>
+    <template #default>
+      <el-tabs
+          v-model="currentTab"
+          @tab-change="handleUpdateValue"
+          animated style="height: 100%">
+        <el-tab-pane name="tab1" label="前往学习" display-directive="show:lazy">
+          <div id="info-div">
+            <el-scrollbar style="margin-top:18px; border: 1px solid #8080ff88; border-radius: 8px; box-shadow: 0 0 3px #8080ff">
+              <el-divider content-position="left">
+                <el-text style="font-size: 22px">
+                  推荐题目
+                </el-text>
+              </el-divider>
+              <div id="info-container">
+                <NoticeCard  v-for="noticeSingleton in notice" :notice="noticeSingleton"/>
               </div>
-              <div style="width: 30%; height:100%;" class="Center-Flex">
-                <n-progress
-                    type="multiple-circle"
-                    processing
-                    :stroke-width="6"
-                    :circle-gap="0.5"
-                    :percentage="[
+            </el-scrollbar>
+            <div style="width: 100%; display: flex; justify-content: flex-end; margin-top: 16px">
+              <el-button type="primary" :icon="StarFilled">点击让小慧换一组推荐题目</el-button>
+            </div>
+          </div>
+          <div id="course-div">
+            <el-scrollbar>
+              <el-divider content-position="left">
+                <el-text style="font-size: 22px">
+                  我的课程
+                </el-text>
+              </el-divider>
+              <div id="course-container">
+                <MyCourseCard
+                    style="margin-bottom: 24px"
+                    v-for="brief in course_brief"
+                    :brief="brief"/>
+              </div>
+            </el-scrollbar>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane  name="tab2" label="学习进度" display-directive="show:lazy">
+          <div id="course-div">
+              <el-divider content-position="left">
+                <el-text style="font-size: 22px">
+                  学习进度
+                </el-text>
+              </el-divider>
+              <div id="course-container">
+                <div class="Space-Between-Flex">
+                  <div style="width: 70%">
+                    <div style="display:flex; margin-bottom: 12px; margin-left: 24px; margin-right: 24px"
+                         v-for="item in course_progress">
+                      <el-text size="large" style="width:160px; white-space: nowrap">
+                        {{ item.course }}：
+                      </el-text>
+                      <n-progress
+                          type="line"
+                          :indicator-placement="'inside'"
+                          :height="24"
+                          :status="item.progress > 80 ? 'success' : item.progress>60 ? 'default': item.progress > 40? 'warning':'error'"
+                          :percentage="item.progress"
+                          processing
+                      />
+                    </div>
+                  </div>
+                  <div style="width: 30%; height:100%;" class="Center-Flex">
+                    <n-progress
+                        type="multiple-circle"
+                        processing
+                        :stroke-width="6"
+                        :circle-gap="0.5"
+                        :percentage="[
                         90,
                         70,
                         50,
                         10,
                       ]"
-                    :color="[
+                        :color="[
                         themeVars.successColor,
                         themeVars.infoColor,
                         themeVars.warningColor,
                         themeVars.errorColor
                       ]"
-                    :rail-style="[
+                        :rail-style="[
                         { stroke: themeVars.successColor, opacity: 0.3 },
                         { stroke: themeVars.infoColor, opacity: 0.3 },
                         { stroke: themeVars.warningColor, opacity: 0.3 },
                         { stroke: themeVars.errorColor, opacity: 0.3 }
                       ]"
-                >
-                  <el-text type="primary" size="large">学习圆环</el-text>
-                </n-progress>
+                    >
+                      <el-text type="primary" size="large">学习圆环</el-text>
+                    </n-progress>
+                  </div>
+                </div>
+                <AIOpinion
+                    style="margin-top: 36px"
+                    :prompt="'以下是我的各课学习进度，给我来点一句简短的建议：' + JSON.stringify(course_progress)"/>
               </div>
-            </div>
-            <AIOpinion
-                style="margin-top: 36px"
-                :prompt="'以下是我的各课学习进度，给我来点一句简短的建议：' + JSON.stringify(course_progress)"/>
           </div>
-        </el-scrollbar>
-      </div>
-
-      <div id="course-div" style="margin-bottom: 24px">
-        <el-scrollbar>
-          <el-divider content-position="left">
-            <el-text style="font-size: 22px">
-              学习活动
-            </el-text>
-          </el-divider>
-          <div id="info-container" style="width: 100%">
-            <div ref="chartContainer" style="width: 100%; height: 360px; box-shadow: 0 0 8px #8080ff; border-radius: 8px"></div>
+          <div id="course-div" style="margin-bottom: 24px; margin-right: 12px; margin-left: 12px">
+              <el-divider content-position="left">
+                <el-text style="font-size: 22px">
+                  学习活动
+                </el-text>
+              </el-divider>
+              <div id="info-container" style="width: 100%">
+                <div ref="chartContainer" style="width: 100%; height: 360px; box-shadow: 0 0 8px #8080ff; border-radius: 8px"></div>
+              </div>
+              <AIOpinion
+                  style="margin-top: 36px; margin-right: 24px"
+                  :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(learning_activity)"/>
           </div>
-        </el-scrollbar>
-        <AIOpinion
-            style="margin-top: 36px"
-            :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(learning_activity)"/>
-      </div>
-
-      <div id="course-div">
-        <el-scrollbar>
-          <el-divider content-position="left">
-            <el-text style="font-size: 22px">
-              我的课程
-            </el-text>
-          </el-divider>
-          <div id="course-container">
-            <MyCourseCard
-                style="margin-bottom: 24px"
-                v-for="brief in course_brief"
-                :brief="brief"/>
+        </el-tab-pane>
+        <el-tab-pane name="tab3" label="做题历史">
+          <div style="height: 720px">
+            <el-scrollbar>
+              <el-divider content-position="left">
+                <el-text style="font-size: 22px">
+                  做题历史
+                </el-text>
+              </el-divider>
+              <NoticeCard  v-for="noticeSingleton in notice" :notice="noticeSingleton"/>
+            </el-scrollbar>
           </div>
-        </el-scrollbar>
-      </div>
+        </el-tab-pane>
+        <el-tab-pane  name="tab4" label="AI评估">
+          <div class="Center-Flex">
+            <el-button type="primary" :icon="StarFilled">让小慧重新生成一份~</el-button>
+          </div>
+          <AITextLong
+              style="margin-top: 36px; margin-left: 8px; margin-right: 8px;"
+              :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(course_progress)
+                + JSON.stringify(learning_activity) + '请你根据这些数据，总结评估我的学习情况，并为我提出个性化学习方案，回复的时候请使用Markdown格式进行排版. 并进行标题分级，内容尽量详细充实。'"/>
+          <div class="Center-Flex" style="flex-direction: column; margin-top: 24px">
+            <el-text>你对小慧为你定制的学习计划感到满意吗？</el-text>
+            <n-rate allow-half />
+          </div>
+        </el-tab-pane>
+      </el-tabs>
     </template>
   </BlankPage>
   </el-scrollbar>
@@ -339,6 +399,7 @@ const initChart = ()=>{
 }
 
 #info-div{
+  padding-right: 24px;
   width: 100%;
   height: 100%;
 }
