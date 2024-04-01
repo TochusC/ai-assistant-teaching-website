@@ -240,13 +240,13 @@ const currentTab = ref('tab1')
           animated style="height: 100%">
         <el-tab-pane name="tab1" label="前往学习" display-directive="show:lazy">
           <div id="info-div">
-            <el-scrollbar style="margin-top:18px; border: 1px solid #8080ff88; border-radius: 8px; box-shadow: 0 0 3px #8080ff">
+            <el-scrollbar style="width: 100%;margin-top:18px; border: 1px solid #8080ff88; border-radius: 8px; box-shadow: 0 0 3px #8080ff">
               <el-divider content-position="left">
                 <el-text style="font-size: 22px">
                   推荐题目
                 </el-text>
               </el-divider>
-              <div id="info-container">
+              <div id="info-container" style="max-width: 720px">
                 <NoticeCard  v-for="noticeSingleton in notice" :notice="noticeSingleton"/>
               </div>
             </el-scrollbar>
@@ -400,7 +400,6 @@ const currentTab = ref('tab1')
 
 #info-div{
   padding-right: 24px;
-  width: 100%;
   height: 100%;
 }
 #course-div{
