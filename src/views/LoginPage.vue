@@ -1,10 +1,11 @@
 <template>
   <div id="all-container">
     <div id="propaganda-container">
+      <canvas style="width: 100%; height: 100%; z-index: 1; position: absolute" ref="canvas" />
       <h1 id="slogan">
         AI Empowered ·
       </h1>
-      <SloganCarousel/>
+      <SloganCarousel style="z-index: 2"/>
     </div>
     <div id="login-container">
       <WelcomeAside/>
@@ -13,23 +14,45 @@
 </template>
 
 
-<script setup lang="ts">
+<script setup>
 
 
 import SloganCarousel from "@/components/LoginPage/SloganCarousel.vue";
 import WelcomeAside from "@/components/LoginPage/WelcomeAside.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
-import {inject, onMounted} from "vue";
+import {inject, onMounted, reactive, ref} from "vue";
 import router from "@/router";
+import {Application} from "@splinetool/runtime";
+
+
+// template ref
+const canvas = ref(null)
+
+// spline state
+const state = reactive({
+  spline: {
+    scene: "https://prod.spline.design/n2atriDKoCIrXiJx/scene.splinecode",
+    app: null,
+    isLoaded: false,
+  },
+});
 
 const { isAuthenticated} = useAuth();
 
 const windowHeight = inject('windowHeight')
 
+const initSpline =   async () =>{
+  const app = new Application(canvas.value);
+  await app.load(state.spline.scene)
+  state.spline.app = app;
+  state.spline.isLoaded = true;
+}
+
 onMounted(() => {
   if(isAuthenticated.value == true){
     router.replace('/')
   }
+  initSpline()
 })
 </script>
 
@@ -45,6 +68,7 @@ onMounted(() => {
   width: 100%;
   background-image: url('@/assets/static/img/background.png');
   background-size: cover;
+  position: relative;
 }
 #login-container{
   flex: 1;

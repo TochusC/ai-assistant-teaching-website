@@ -5,7 +5,6 @@ import BlankPage from "@/views/BlankPage.vue";
 import {onMounted, ref} from "vue";
 import AIOpinion from "@/components/utils/AIOpinion.vue";
 import AITextLong from "@/components/utils/AITextLong.vue";
-import VueMarkdown from 'vue-markdown-render'
 import AIEvaluatePanel from "@/components/utils/AIEvaluatePanel.vue";
 import AISimilarQuestion from "@/components/utils/AISimilarQuestion.vue";
 const route = useRoute()

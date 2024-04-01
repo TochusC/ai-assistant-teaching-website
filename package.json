@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@splinetool/runtime": "^1.0.91",
     "@tsparticles/vue3": "^3.0.1",
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
