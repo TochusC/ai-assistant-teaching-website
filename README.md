@@ -33,7 +33,7 @@
 
 <div align="center">
 
-![example_0.png](example_image%2Fexample_0.png)
+![example_0.png](docs/example_image/example_0.png)
 
 </div>
 
