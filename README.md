@@ -77,7 +77,7 @@
 前端使用了[Naive UI](https://www.naiveui.com/), [Element-Plus](https://element-plus.org/)组件库.
 同时还添加了通过[Spline](https://spline.design/)实现的三维交互模型。
 
-后端使用Django作为服务端框架，项目一共有三个后端服务，均位于`/affiliate-project`目录下。
+后端使用Django作为服务端框架, Python版本3.12.0，项目一共有三个后端服务，均位于`/affiliate-project`目录下。
 
 其分别是:
 - AvatarServer，虚拟人服务端，负责调用百度的语音识别服务、大语言模型服务，以及百度的语音合成服务。

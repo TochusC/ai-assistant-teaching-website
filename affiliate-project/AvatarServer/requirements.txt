@@ -1,0 +1,12 @@
+asgiref==3.8.1
+certifi==2024.2.2
+charset-normalizer==3.3.2
+Django==5.0.4
+django-cors-headers==4.3.1
+emoji==2.11.0
+idna==3.7
+pydub==0.25.1
+requests==2.31.0
+sqlparse==0.4.4
+tzdata==2024.1
+urllib3==2.2.1
