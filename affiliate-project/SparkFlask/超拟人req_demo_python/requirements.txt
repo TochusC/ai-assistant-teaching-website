@@ -1,0 +1,6 @@
+bitstring==3.1.9
+chardet==4.0.0
+jsonpath==0.82
+jsonpath_rw==1.4.0
+tabulate==0.8.9
+websocket_client==1.3.2
