@@ -4,7 +4,7 @@
 
 <template>
   <el-carousel
-      style="top: 56%; height: 280px"
+      style="top: 56%; height: 20%"
       indicator-position="none"
       direction="vertical"
       motion-blur

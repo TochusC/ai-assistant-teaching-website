@@ -9,7 +9,7 @@
         <template #reference @click="toMainPage">
           <img
               class="website-logo"
-              src="../../assets/static/img/logo/favicon.png"
+              src="@/assets/static/img/logo/favicon.png"
               alt=""
           />
         </template>
@@ -26,33 +26,14 @@
       </el-popover>
       <div class="Multiple-Header-Item-Container" @click="toMainPage">
         <h1 class="keyword">
-          AI赋能 |
+          通慧智教 |
         </h1>
         <h1 class="tittle" ref="tittle">
-          &nbsp 智能教学运营服务平台
+          &nbsp 有温度、有感情的个性化智能教学平台
         </h1>
       </div>
     </div>
 
-    <div class="Header-Item"
-         :style="{width:dynamicSearchBarWidth}">
-      <el-input
-          placeholder="搜索更多好课..."
-          class="input-with-select"
-          size="large"
-      >
-        <template #prepend v-if="showSearchSelection">
-          <el-select  placeholder="搜索内容" style="width: 115px" size="large">
-            <el-option label="课程" value="1" />
-            <el-option label="文章" value="2" />
-            <el-option label="视频" value="3" />
-          </el-select>
-        </template>
-        <template #append>
-          <el-button :icon="Search" size="large"/>
-        </template>
-      </el-input>
-    </div>
 
     <div class="Header-Item" style="margin-right: 24px" ref="mineContainer">
       <div class="Multiple-Header-Item-Container">
@@ -82,8 +63,8 @@
           <template #reference>
             <el-badge :value="3" style="margin-right: 36px">
               <el-button
-                         :type="route.path==='/academy'?'primary':'default'"
-                         plain>
+                  :type="route.path==='/academy'?'primary':'default'"
+                  plain>
                 <el-link type="primary"
                          style="
                        font-size: 18px;
@@ -111,7 +92,7 @@
         <template #reference>
           <img
               class="icon"
-              src="../../assets/static/img/boy.png" alt="" style="height:52px; width: auto"/>
+              src="@/assets/static/img/boy.png" alt="" style="height:52px; width: auto"/>
         </template>
         <el-menu>
           <el-menu-item @click="toUserCenter" index="1">个人中心</el-menu-item>
@@ -128,7 +109,7 @@ import {ref, onMounted, inject} from 'vue'
 const activeIndex = ref('1')
 import { useDark } from '@vueuse/core'
 import {MoonNight, Sunset, Search} from "@element-plus/icons-vue";
-import router from "@/router";
+import router from "@/router/index.ts";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
 import {useRoute} from "vue-router";
 import {ElMessage, ElNotification} from "element-plus";
@@ -166,7 +147,6 @@ const isDark = useDark()
 const logoContainer = ref(null)
 const mineContainer = ref(null)
 
-const windowWidth = ref(null)
 const windowHeight = ref(null)
 
 const notification = [
@@ -179,27 +159,13 @@ const notification = [
 const toMainPage = () => {
   router.push('/')
 }
+
+const windowWidth = inject('windowWidth');
 // 响应式调整元素
 const rescaleElement = () => {
-  if(showAssistant.value){
-    windowWidth.value = window.innerWidth / 4 * 3;
-  }
-  else {
-    windowWidth.value = window.innerWidth;
-  }
-
-  dynamicSearchBarWidth.value = (windowWidth.value - logoContainer.value.offsetWidth - mineContainer.value.offsetWidth) * 0.75 + 'px'
-
-
-  if (windowWidth.value < 1186) {
+  if (windowWidth.value < 764) {
     tittle.value.style.fontSize = '0px';
     isCollapse.value = true;
-    if(windowWidth < 1024){
-      showSearchSelection.value = false
-    }
-    else{
-      showSearchSelection.value = true
-    }
   }
   else {
     tittle.value.style.fontSize = '18px'
@@ -233,7 +199,7 @@ const handleToMyAcademy = () => {
   router.push("/academy")
 }
 const handleToMainPage = () => {
-  if(route.path === '/'){
+  if(route.path === '/portal'){
     ElNotification({
       message: '你已经在首页啦',
       type: 'success',
@@ -242,7 +208,7 @@ const handleToMainPage = () => {
     })
     return
   }
-  router.push("/")
+  router.push("/portal")
 }
 </script>
 
@@ -255,26 +221,24 @@ const handleToMainPage = () => {
 }
 .Header-Container {
   width: 100%;
-  margin: 0px;
-  padding-top: 36px;
-  padding-bottom: 36px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   box-shadow: 0 0 8px #8080ff;
   background: var(--el-bg-color);
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
 }
 html.dark .Header-Container{
   width: 100%;
-  margin: 0px;
-  padding-top: 36px;
-  padding-bottom: 36px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   box-shadow: 0 0 4px var(--el-color-primary);
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
 }
 
 .Multiple-Header-Item-Container{

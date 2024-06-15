@@ -21,7 +21,7 @@ import SloganCarousel from "@/components/LoginPage/SloganCarousel.vue";
 import WelcomeAside from "@/components/LoginPage/WelcomeAside.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import {inject, onMounted, reactive, ref} from "vue";
-import router from "@/router";
+import router from "@/router/index.ts";
 import {Application} from "@splinetool/runtime";
 
 
@@ -37,7 +37,7 @@ const state = reactive({
   },
 });
 
-const { isAuthenticated} = useAuth();
+const { isAuthenticated, user} = useAuth();
 
 const windowHeight = inject('windowHeight')
 
@@ -46,13 +46,15 @@ const initSpline =   async () =>{
   await app.load(state.spline.scene)
   state.spline.app = app;
   state.spline.isLoaded = true;
+  setRefresh.value = false
 }
 
+const setRefresh = ref(true);
 onMounted(() => {
-  if(isAuthenticated.value == true){
-    router.replace('/')
+  initSpline();
+  if(isAuthenticated.value === true){
+    router.replace('/portal')
   }
-  initSpline()
 })
 </script>
 

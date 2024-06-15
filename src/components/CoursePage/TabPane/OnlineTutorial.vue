@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  catalog:{
+  chapters:{
     type: Array,
     required: true
   }
@@ -19,7 +19,7 @@ const props = defineProps({
         <el-tree
             :default-expand-all="true"
             style="max-width: 600px"
-            :data="props.catalog"
+            :data="props.chapters"
         />
       </el-scrollbar>
     </div>

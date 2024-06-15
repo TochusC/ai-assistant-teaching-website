@@ -15,7 +15,8 @@ const handleRegister = () => {
   showLoginDialog.value = false;
   showRegistryDialog.value = true;
 }
-const handlecloseRegister = () => {
+const handleLogin = () => {
+  showLoginDialog.value = true;
   showRegistryDialog.value = false;
 }
 
@@ -91,8 +92,8 @@ onMounted(() => {
     </div>
   </div>
 
-  <LoginDialog v-model="showLoginDialog" @showregister="handleRegister"/>
-  <RegistryDialog v-model="showRegistryDialog" @closeregister="handlecloseRegister"/>
+  <LoginDialog v-model="showLoginDialog" @showRegister="handleRegister"/>
+  <RegistryDialog v-model="showRegistryDialog" @showLogin="handleLogin"/>
 
 </template>
 

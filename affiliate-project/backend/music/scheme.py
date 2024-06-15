@@ -4,8 +4,8 @@ from typing import List
 
 
 class StudentSchema(Schema):
-    Student_name: str
-    Student_id: int
+    name: str
+    id: int
     password: str
 
 class TeacherSchema(Schema):
@@ -42,8 +42,6 @@ class CourseSchema(Schema):
     illustration: str
     introduction: str
     image: str
-
-
 
 
 class DesignSchema(Schema):

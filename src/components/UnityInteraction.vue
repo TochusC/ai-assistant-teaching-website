@@ -5,7 +5,7 @@ const { login, logout } = useAuth();
 import { ref} from 'vue'
 import {useRoute} from "vue-router";
 import {ChatLineSquare, Delete, Microphone, More, Promotion} from "@element-plus/icons-vue";
-import router from "@/router";
+import router from "@/router/index.ts";
 import {ElMessage} from "element-plus";
 
 const isChatting = ref(false)
@@ -155,22 +155,6 @@ const interaction = ref(null);
         询问小慧有关当前页面的讯息...
       </el-button>
     </div>
-    <div class="interaction—item">
-      <el-select v-model="remoteServer"
-                  @change="emit('changeRemoteServer', remoteServer)"
-                 placeholder="请选择服务端">
-         <el-option
-             :key="0"
-             :value="0"
-             label="本地服务端"
-         />
-        <el-option
-            :key="1"
-            :value="1"
-            label="云服务端"
-        />
-      </el-select>
-    </div>
     <div id="chat-container">
 
         <el-button :icon="Microphone"
@@ -224,8 +208,6 @@ const interaction = ref(null);
           诉说
         </el-button>
       </div>
-
-
     </div>
   </div>
 </template>

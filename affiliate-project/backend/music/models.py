@@ -60,10 +60,6 @@ class Course_Design(models.Model):
     Design_id = models.IntegerField()
 
 
-
-
-
-
 class Sum(models.Model):
     Course_id = models.IntegerField()
     Design_id = models.IntegerField()

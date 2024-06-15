@@ -1,10 +1,12 @@
-<script setup lang="ts">
+<script setup>
 import {onMounted, ref, reactive} from "vue";
-import {Lock, UserFilled, User} from "@element-plus/icons-vue";
+import {Lock, UserFilled, User, School} from "@element-plus/icons-vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import axios from "axios";
-import router from "@/router";
 import {backendUrl} from "@/assets/static/js/severConfig";
+import {schools} from "@/assets/static/js/resources.js";
+import {ElMessage} from "element-plus";
+import {useRouter} from "vue-router";
 const active = ref('student'); 
 const user = useAuth()
 const windowWidth = ref(window.innerWidth)
@@ -13,83 +15,85 @@ const rescaleElement = () => {
   windowWidth.value = window.innerWidth
   windowHeight.value = window.innerHeight
 }
-let loginUrl = null
 let resource = null
-// dialog中v-model绑定内容
-interface LoginForm{
-  active:String
-  name:String
-  id: String
-  password:String
-}
-const loginForm = reactive <LoginForm> ({
-  active:'student',
-  name:'',
-  id:'',
-  password:''
-})
-let ifLogin:boolean = false
 const {login} = useAuth()
+const loginForm = reactive({
+  school: '',
+  id: '',
+  password: ''
+})
+const emit = defineEmits(['handleClose','showRegister'])
+const activeTab = ref('student')
+const helpDialVis = ref(false)
+const router = useRouter()
+
+const validForm = () => {
+  if (loginForm.school === '' || loginForm.id === '' || loginForm.password === '') {
+    ElMessage({
+      message: '请先把信息填写完整哦',
+      type: 'warning',
+      duration: 2000
+    })
+    return false
+  }
+  return true
+}
 
 const handleLogin = async () => {
-  if (loginForm.name === '1'){
-    login({
-      id: loginForm.id,
-      name: loginForm.name,
-      role: "student"
-    })
-    router.push('/')
-  }
+  if(!validForm()) return
   const formData = new URLSearchParams();
-  let loginUrl = '';
-  if(activeTab.value === 'student'){
-    loginUrl = backendUrl + 'api/yanzheng/student';
-    formData.append('Student_name', loginForm.name);
-    formData.append('Student_id', loginForm.id); // 确保是字符串
-    formData.append('password', loginForm.password);
-  }else if(activeTab.value === 'teacher'){
-     loginUrl = backendUrl + 'api/yanzheng/teacher';
-    formData.append('Teacher_name', loginForm.name);
-    formData.append('Teacher_id', loginForm.id); // 确保是字符串
-    formData.append('password', loginForm.password);
-  }
+  formData.append('request', "login");
+  formData.append('school', loginForm.school);
+  formData.append('id', loginForm.id); // 确保是字符串
+  formData.append('password', loginForm.password);
+  let loginUrl = backendUrl + activeTab.value;
   try {
     const response = await axios.post(loginUrl, formData, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
-    const resource = response.data;
-    if(resource.message === '学生信息在数据表中存在。'){
-      login({
+    if (response.status === 200) {
+      const userData = {
+        role: activeTab.value,
+        name: response.data.message,
+        school: loginForm.school,
         id: loginForm.id,
-        name: loginForm.name,
-        role: "student"
+      }
+      ElMessage({
+        message: '登录成功😊',
+        type: 'success',
+        duration: 2000
       })
-
-      // 设置登录标志
-      ifLogin = true
-      console.log(ifLogin)
-      
-      // 登录成功，跳转到根路径
-      router.push('/');
-    }else if(resource.message === '老师信息在数据表中存在。'){
-      login({
-        id: loginForm.id,
-        name: loginForm.name,
-        role: "teacher"
-      })
-      // 设置登录标志
-      ifLogin = true
-      console.log(ifLogin)
-      
-      // 登录成功，跳转到根路径
-      router.push('/');
+      login(userData);
+      if(activeTab.value === 'student'){
+        router.push('/portal')
+      }
+      else if(activeTab.value === 'teacher'){
+        router.push('/teaching/portal')
+      }
     }
-    console.log("login Id: ",login.id)
-  } catch (error) {
-    console.error('登录失败:', error.response ? error.response.data : error);
-    // 处理错误
+  }
+  catch (error) {
+    if (error.response.data.message === 'pwd'){
+      ElMessage({
+        message: '密码错误❌，请检查您的密码哦',
+        type: 'error',
+        duration: 2000
+      })
+    }
+    else if (error.response.data.message === 'acc'){
+      ElMessage({
+          message: '用户不存在❌，请检查您的输入哦',
+          type: 'error',
+          duration: 2000
+      })
+    }
+    else ElMessage({
+      message: 'Oops，服务器开小差了~',
+      type: 'error',
+      duration: 2000
+    })
   }
 };
 
@@ -99,10 +103,6 @@ onMounted(() => {
     rescaleElement()
   })
 })
-
-const emit = defineEmits(['handleClose','showregister'])
-
-const activeTab = ref('student')
 </script>
 
 <template>
@@ -117,38 +117,39 @@ const activeTab = ref('student')
           <div class="Center-Flex" style="margin-top: 46px">
             <el-form :model="loginForm">
                   <el-form-item>
-                    <el-input
+                    <el-select
+                        :prefix-icon="School"
                         class="loginInput"
-                        placeholder="输入你的姓名"
-                        v-model="loginForm.name"
-                        size="large">
-                      <template #prepend>
-                        <el-button :icon="UserFilled" />
-                      </template>
-                    </el-input>
+                        placeholder="请输入或选择你的学校"
+                        filterable
+                        v-model="loginForm.school"
+                        size="large"
+                    >
+                      <el-option
+                          v-for="item in schools"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                   <el-form-item>
                     <el-input
+                        :prefix-icon="User"
                         class="loginInput"
-                        placeholder="你的学号"
+                        placeholder="这里是你的学号"
                         v-model="loginForm.id"
                         size="large">
-                      <template #prepend>
-                        <el-button :icon="User" />
-                      </template>
                     </el-input>
                   </el-form-item>
-
                   <el-form-item>
                     <el-input
+                        :prefix-icon="Lock"
                         class="loginInput"
-                        placeholder="请输入密码"
+                        placeholder="还有你的密码"
                         v-model="loginForm.password"
                         size="large"
                         show-password>
-                      <template #prepend>
-                        <el-button :icon="Lock" />
-                      </template>
                     </el-input>
                   </el-form-item>
             </el-form>
@@ -159,38 +160,40 @@ const activeTab = ref('student')
           <div class="Center-Flex" style="margin-top: 46px">
             <el-form :model="loginForm">
               <el-form-item>
-                <el-input
+                <el-select
+                    :prefix-icon="School"
                     class="loginInput"
-                    placeholder="输入你的姓名"
-                    v-model="loginForm.name"
-                    size="large">
-                  <template #prepend>
-                    <el-button :icon="UserFilled" />
-                  </template>
-                </el-input>
+                    placeholder="请输入或选择您所在的学校（工作单位）"
+                    filterable
+                    v-model="loginForm.school"
+                    size="large"
+                >
+                  <el-option
+                 p     v-for="item in schools"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                  />
+                </el-select>
               </el-form-item>
               <el-form-item>
                 <el-input
+                    :prefix-icon="User"
                     class="loginInput"
-                    placeholder="你的教工号"
+                    placeholder="请在此输入您的教工号"
                     v-model="loginForm.id"
                     size="large">
-                  <template #prepend>
-                    <el-button :icon="User" />
-                  </template>
                 </el-input>
               </el-form-item>
 
               <el-form-item>
                 <el-input
+                    :prefix-icon="Lock"
                     class="loginInput"
-                    placeholder="请输入密码"
+                    placeholder="请在此输入您的密码"
                     v-model="loginForm.password"
                     size="large"
                     show-password>
-                  <template #prepend>
-                    <el-button :icon="Lock" />
-                  </template>
                 </el-input>
               </el-form-item>
             </el-form>
@@ -206,35 +209,37 @@ const activeTab = ref('student')
             size="large">
           登录</el-button>
       </div>
-
       <el-link type="primary" style="float: right; margin-right: 16px"> 忘记密码 </el-link>
-      <el-link type="primary" style="float: right; margin-right: 24px" @click = "emit('showregister')"> 注册账号 </el-link>
-      <el-divider content-position="center" style="margin-top: 72px; margin-bottom: 48px">其他登录方式</el-divider>
-
-      <div class="Center-Flex">
-        <img
-            style="width: 56px; margin-right: 64px"
-            src="@/assets/static/img/logo/qq_icon.png">
-        <img
-            style="width: 56px; margin-right: 64px"
-            src="@/assets/static/img/logo/wechat_icon.png">
-        <img
-            style="width: 50px; margin-right: 16px"
-            src="@/assets/static/img/logo/github_icon.png">
-      </div>
+      <el-link type="primary" style="float: right; margin-right: 24px" @click = "emit('showRegister')"> 注册账号 </el-link>
+      <el-divider content-position="center" style="margin-top: 72px; margin-bottom: 72px">做有感情、有温度的教育</el-divider>
     </div>
-
-    <div class="Center-Flex" style="margin-top: 96px; margin-bottom: 32px">
+    <div class="Center-Flex" style="margin-top: 0; margin-bottom: 32px">
       <el-text>
         如登录、注册遇到问题，请
       </el-text>
-      <el-link type="primary">
+      <el-link type="primary" @click="helpDialVis = true">
         联系客服
       </el-link>
       <el-text>
         。
       </el-text>
     </div>
+    <el-dialog
+        title="联系客服"
+        v-model="helpDialVis"
+        align-center
+        width="500"
+    >
+      <span>联络方式：tochus@163.com(电子邮箱)</span>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="helpDialVis = false">关闭</el-button>
+          <el-button type="primary" @click="helpDialVis = false">
+            确定
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
   </el-dialog>
 </template>
 
@@ -249,6 +254,6 @@ const activeTab = ref('student')
   margin-bottom: 18px;
 }
 #login-tab-container {
-  margin: 26px;
+  margin: 12px;
 }
 </style>

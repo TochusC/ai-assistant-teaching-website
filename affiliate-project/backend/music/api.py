@@ -10,8 +10,6 @@ from music.scheme import (NotFoundSchema,CourseSchema,DesignSchema,Course_Design
 
 api = NinjaAPI()
 
-
-#查
 #查询学生
 
 @api.get("/student", response=List[StudentSchema])

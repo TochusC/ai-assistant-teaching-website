@@ -52,3 +52,11 @@ html.dark body{
     color: var(--base-text-color-dark); /* 设置文本颜色为白色 */
 }
 
+.glowing-container{
+    background: var(--el-bg-color);
+    padding: 16px;
+    border: #8080FF 1px solid;
+    border-radius: 8px;
+    box-shadow: #8080FF 0 0 4px;
+}
+

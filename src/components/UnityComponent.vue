@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import router from "@/router";
+import router from "@/router/index.ts";
 import {useAuth} from "@/assets/static/js/useAuth.js";
 
 const props = defineProps({

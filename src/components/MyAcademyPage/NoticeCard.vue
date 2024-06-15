@@ -1,7 +1,7 @@
 <script setup>
 import {Notebook } from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";
-import router from "@/router";
+import router from "@/router/index.ts";
 
 const props = defineProps(
     {

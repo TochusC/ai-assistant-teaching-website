@@ -1,5 +1,4 @@
-<script setup lang="ts">
-
+<script setup>
 import CourseDesign from "@/components/CoursePage/TabPane/CourseDesign.vue";
 import OnlineTutorial from "@/components/CoursePage/TabPane/OnlineTutorial.vue";
 import {ChatLineSquare, DataBoard, Edit, MessageBox, Monitor, Tickets} from "@element-plus/icons-vue";
@@ -11,6 +10,26 @@ import CourseHomework from "@/components/CoursePage/TabPane/CourseHomework.vue";
 const props = defineProps({
   course:{
     type: Object,
+    required: true
+  },
+  chapters:{
+    type: Array,
+    required: true
+  },
+  announcements:{
+    type: Array,
+    required: true
+  },
+  questions:{
+    type: Array,
+    required: true
+  },
+  resources:{
+    type: Array,
+    required: true
+  },
+  assignments:{
+    type: Array,
     required: true
   }
 })
@@ -29,7 +48,11 @@ const props = defineProps({
                 </span>
       </template>
 
-      <CourseDesign :design="props.course.design"/>
+      <CourseDesign
+          :background="props.course.background"
+          :target="props.course.target"
+          :principle="props.course.principle"
+      />
     </el-tab-pane>
 
     <el-tab-pane>
@@ -41,7 +64,7 @@ const props = defineProps({
                   <span>在线教程</span>
                 </span>
       </template>
-      <OnlineTutorial :catalog="props.course.catalog"/>
+      <OnlineTutorial :chapters="props.chapters"/>
     </el-tab-pane>
 
     <el-tab-pane>
@@ -54,7 +77,7 @@ const props = defineProps({
                 </span>
       </template>
 
-      <CourseAnnouncement :announcement="props.course.announcement"/>
+      <CourseAnnouncement :announcement="props.announcements"/>
     </el-tab-pane>
 
     <el-tab-pane>
@@ -66,7 +89,7 @@ const props = defineProps({
                   <span>课程问答</span>
                 </span>
       </template>
-      <CourseQA :qa="course.qa"/>
+      <CourseQA :qa="props.questions"/>
     </el-tab-pane>
 
     <el-tab-pane>

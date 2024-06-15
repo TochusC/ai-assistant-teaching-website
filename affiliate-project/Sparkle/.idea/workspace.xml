@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f30635d9-0e40-4caa-b123-866977996a73" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/affiliate-project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/resource/input/1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/resource/output/audio.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/sample/aipass_client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/sample/exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/sample/h26x_client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/sample/nalutypes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/req/sample/ne_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Sparkle.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0002_course.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0003_teacher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0004_assignment_chapterassignment_chapterresource_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0005_courseannouncement_courseassignment_coursequestion_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0006_rename_qid_questionanswer_cid.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/scheme.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sparkle/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/作品设计文档.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—企业要求—作品demo/2401147-Coooooool—【A04】【移动创新院】赛题—作品demo.pptx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—企业要求—作品demo/2401147-Coooooool—【A04】【移动创新院】赛题—作品源码网盘链接.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—企业要求—作品介绍.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—企业要求—作品介绍.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—企业要求—作品演示视频.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—项目概要介绍 .docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—项目概要介绍 .pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—项目演示视频.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—项目简介PPT.pptx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—项目详细方案.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/服创/2401147-Coooooool—【A04】【移动创新院】赛题—项目详细方案.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/系统架构图.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/系统架构图.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/系统通信图.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/系统通信图.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/网挑文档.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../competition/网挑/通慧智教.pptx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/assets/static/js/resources.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachHeadNavi.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachSideNavi.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/views/InfoPage/NotFoundPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/views/TeachingActivity/CourseCreate.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/views/TeachingActivity/TeachOverview.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/views/TeachingActivity/TeachingPortal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AvatarServer/out.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/out.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AvatarServer/received.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/received.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/TTS.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/TTS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarSparkServer/AvatarServer/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkFlask/超拟人req_demo_python/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkFlask/超拟人req_demo_python/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkFlask/超拟人req_demo_python/resource/input/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkFlask/超拟人req_demo_python/resource/input/1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SparkFlask/超拟人req_demo_python/resource/output/audio.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../SparkFlask/超拟人req_demo_python/resource/output/audio.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/music/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/music/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/music/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/music/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/music/scheme.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/music/scheme.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/assets/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/CoursePage/CourseHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/CoursePage/CourseHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/LoginPage/LoginDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/LoginPage/LoginDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/LoginPage/RegistryDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/LoginPage/RegistryDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/LoginPage/SloganCarousel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/LoginPage/SloganCarousel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/LoginPage/WelcomeAside.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/LoginPage/WelcomeAside.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCoursePage/MyCourseHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCoursePage/MyCourseHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/MyAcademyPage/NoticeCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/NoticeCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/UnityComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/UnityComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/UnityInteraction.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/UnityInteraction.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/utils/HeadNavi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/utils/HeadNavi.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/CoursePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/CoursePage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/LoginPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/LoginPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/MyAcademy/MyCoursePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MyAcademy/MyCoursePage.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2hngOQiWxGVf8T5tBVBKifaFdoS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Project/ai-assistant-teaching-website/affiliate-project/Sparkle/Sparkle",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Project\ai-assistant-teaching-website\affiliate-project\Sparkle\Sparkle" />
+      <recent name="D:\Project\ai-assistant-teaching-website\affiliate-project\Sparkle\Sparkle\migrations" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Sparkle" type="Python.DjangoServer" factoryName="Django server">
+      <module name="Sparkle" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f30635d9-0e40-4caa-b123-866977996a73" name="Changes" comment="" />
+      <created>1718235222583</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718235222583</updated>
+      <workItem from="1718235224353" duration="6538000" />
+      <workItem from="1718330783243" duration="1165000" />
+      <workItem from="1718334648350" duration="18128000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

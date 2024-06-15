@@ -1,7 +1,6 @@
 <script setup>
 import HeadNavi from "@/components/utils/HeadNavi.vue";
 import CourseCard from "@/components/MainPage/CourseCard.vue";
-import {useAuth} from "@/assets/static/js/useAuth"
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import AIOpinion from "@/components/utils/AIOpinion.vue";
@@ -12,21 +11,15 @@ import {ElNotification} from "element-plus";
 const router = useRouter()
 const isLoadingCourse = ref(true)
 
-const dynamicCarouselHeight = ref('480px')
-const rescaleElement = ref('')
-
 const handleClickCourse = (id) => {
   router.push(`/course/${id}`)
 }
-
-
-
 
 const course_brief = ref(null)
 
 const fetchCourseBrief = () => {
   isLoadingCourse.value = true
-  axios.get(backendUrl+'api/course')
+  axios.get(backendUrl+'/course')
       .then((res) => {
         course_brief.value = res.data
         isLoadingCourse.value = false
@@ -46,8 +39,6 @@ const fetchCourseBrief = () => {
 onMounted(() => {
   fetchCourseBrief()
 })
-
-
 </script>
 
 <template>
@@ -110,9 +101,9 @@ onMounted(() => {
                       style="display: inline-flex"
                       v-else
                       v-for="course in course_brief"
-                      :key="course.Course_id"
+                      :key="course.id"
                       :brief="course"
-                      @click = "handleClickCourse(course.Course_id)"
+                      @click = "handleClickCourse(course.id)"
                   />
                 </el-scrollbar>
               </div>

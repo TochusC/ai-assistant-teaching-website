@@ -24,7 +24,7 @@ const showIntroduction = ref(false)
   <div class="Space-Between-Flex">
     <img
         :src="imageUrl"
-        id="course-image"/>
+        id="course-image" alt="课程图片"/>
     <div>
       <div class="Space-Between-Flex" style="margin-bottom: 12px">
         <h2 style="white-space: nowrap">课程介绍</h2>
@@ -62,7 +62,7 @@ const showIntroduction = ref(false)
                 color="var(--color-featured)">
               <StarFilled/>
             </el-icon>
-            评分: {{props.statistics.rate}}
+            评分: {{props.statistics.average_rate}}
           </el-text>
         </div>
 
@@ -72,7 +72,7 @@ const showIntroduction = ref(false)
                 size="large">
               <User />
             </el-icon>
-            学习人数: {{props.statistics.student}}
+            学习人数: {{props.statistics.student_number}}
           </el-text>
         </div>
 
@@ -81,7 +81,7 @@ const showIntroduction = ref(false)
             <el-icon size="large">
               <MessageBox />
             </el-icon>
-            课程资源数: {{props.statistics.resources}}
+            课程资源数: {{props.statistics.resource_number}}
           </el-text>
         </div>
       </div>

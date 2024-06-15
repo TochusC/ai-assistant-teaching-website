@@ -3,13 +3,12 @@ import {onMounted, provide, ref} from 'vue'
 import UnityComponent from "@/components/UnityComponent.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
 import {useAuth} from "@/assets/static/js/useAuth.js";
-import router from "@/router";
+import router from "@/router/index.ts";
 import { NConfigProvider } from 'naive-ui'
 import {particleOption} from "@/assets/static/js/particleOption.js";
 // 窗口大小
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
-
 // 决定是否显示AI助手
 const showAssistant = ref(false)
 // 按钮的位置

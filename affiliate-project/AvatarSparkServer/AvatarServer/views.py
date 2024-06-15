@@ -59,4 +59,16 @@ def voice_synthesize(request):
     return response
 
 
+@csrf_exempt
+@require_http_methods(["POST", "OPTIONS"])
+def voice_synthesize(request):
+    llm_reply = request.POST["llmReply"]
+    response_audio = TTS.get_audio_from_text(llm_reply,
+                                             voice_access_token)
+
+    response = HttpResponse(content_type="audio/wav")
+    response.write(response_audio)
+    return response
+
+
 

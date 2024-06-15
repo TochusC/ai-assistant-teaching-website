@@ -1,14 +1,18 @@
-<script setup lang="ts">
-
-import {Edit} from "@element-plus/icons-vue";
-
+<script setup>
 const props = defineProps({
-  design:{
-    type: Object,
+  background:{
+    type: String,
+    required: true
+  },
+  target:{
+    type: String,
+    required: true
+  },
+  principle:{
+    type: String,
     required: true
   }
 })
-
 </script>
 
 <template>
@@ -19,7 +23,7 @@ const props = defineProps({
       </el-divider>
       <div class="info-text-container">
         <el-text>
-          {{props.design.background}}
+          {{props.background}}
         </el-text>
       </div>
     </div>
@@ -30,7 +34,7 @@ const props = defineProps({
       </el-divider>
       <div class="info-text-container">
         <el-text>
-          {{props.design.target}}
+          {{props.target}}
         </el-text>
       </div>
     </div>
@@ -41,7 +45,7 @@ const props = defineProps({
       </el-divider>
       <div class="info-text-container">
         <el-text>
-          {{props.design.principle}}
+          {{props.principle}}
         </el-text>
       </div>
     </div>

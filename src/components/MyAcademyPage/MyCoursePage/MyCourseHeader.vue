@@ -1,6 +1,6 @@
 <script setup>
 import {inject, onMounted, ref} from "vue";
-import router from "@/router";
+import router from "@/router/index.ts";
 
 const showTag = ref(true)
 const props = defineProps({

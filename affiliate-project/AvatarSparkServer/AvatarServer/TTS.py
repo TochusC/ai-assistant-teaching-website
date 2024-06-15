@@ -48,7 +48,21 @@ def get_audio_from_text(text, access_token, per=111):
 
     return response.content
 
+def spark_get_audio_from_text(text):
+    url = "http://127.0.0.1:9880/?text=" + text + "&text_language=zh"
 
+    payload = json.dumps(
+        {
+        "refer_wav_path": "zhou.wav",
+        "prompt_text": "我刚刚还看到有人说，等着我开播就掉小珍",
+        "prompt_language": "zh",
+        "text": text,
+        "text_language": "zh"
+    }
+    )
+
+    response = requests.request("POST", url, data=payload)
+    return response.content
 
 def sovits_get_audio_from_text(text):
     url = "http://127.0.0.1:9880/?text=" + text + "&text_language=zh"

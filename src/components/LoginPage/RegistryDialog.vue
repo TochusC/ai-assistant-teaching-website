@@ -1,24 +1,24 @@
-<script setup lang="ts">
+<script setup>
 import {onMounted, ref, reactive} from "vue";
-import {Lock, UserFilled, User} from "@element-plus/icons-vue";
+import {Lock, UserFilled, User, School} from "@element-plus/icons-vue";
 import axios from "axios";
+import {schools} from "@/assets/static/js/resources.js";
+import {backendUrl} from "@/assets/static/js/severConfig.js";
+import {ElMessage} from "element-plus";
+import {Message} from "@element-plus/icons-vue/global";
 
 const windowWidth = ref(window.innerWidth)
 const windowHeight = ref(window.innerHeight)
 
-const emit = defineEmits(['closeregister'])
+const emit = defineEmits(['showLogin'])
 // dialog中v-model绑定内容
-interface registerForm{
-  name:String
-  id:String
-  password:String
-  rePassword:String
-}
-const registerForm = reactive <registerForm> ({
-  name:'',
-  id:'',
-  password:'',
-  rePassword:''
+const helpDialVis = ref(false)
+const registerForm = reactive({
+  school: '',
+  name: '',
+  id: '',
+  email: '',
+  password: ''
 })
 
 const rescaleElement = () => {
@@ -26,48 +26,72 @@ const rescaleElement = () => {
   windowHeight.value = window.innerHeight
 }
 
-const handleRegister = async () => {
-  const formData = new URLSearchParams();
-  let registerUrl = '';
-  if(activeTab.value === 'student'){
-    registerUrl = 'http://5o2007f873.imdo.co/api/zhuce/student';
-    console.log("student111")
-    formData.append('Student_name', registerForm.name);
-    formData.append('Student_id', registerForm.id); // 确保是字符串
-    formData.append('password', registerForm.password);
-    formData.append('password_verify',registerForm.rePassword)
-  }else if(activeTab.value === 'teacher'){
-    registerUrl = 'http://5o2007f873.imdo.co/api/zhuce/teacher';
-    console.log("teacher111")
-
-    formData.append('Teacher_name', registerForm.name);
-    formData.append('Teacher_id', registerForm.id); // 确保是字符串
-    formData.append('password', registerForm.password);
-    formData.append('password_verify',registerForm.rePassword);
+const validForm = () => {
+  if (registerForm.school === '' || registerForm.name === '' || registerForm.id === '' || registerForm.email === '' || registerForm.password === '') {
+    ElMessage({
+      message: '请先把信息填写完整哦',
+      type: 'warning',
+      duration: 2000
+    })
+    return false
   }
+  if(registerForm.password !== registerForm.rePassword){
+    ELMessage({
+      message: 'Oops，两次输入的密码不一致哦。',
+      type: 'error',
+      duration: 2000
+    })
+    return false
+  }
+  return true
+}
+
+const handleRegister = async () => {
+  if(!validForm()) return;
+  const formData = new URLSearchParams();
+  formData.append('request', "register");
+  formData.append('name', registerForm.name);
+  formData.append('id', registerForm.id); // 确保是字符串
+  formData.append('school', registerForm.school);
+  formData.append('password', registerForm.password);
+  formData.append('email', registerForm.email);
+  let registerUrl = backendUrl + activeTab.value;
   try {
     const response = await axios.post(registerUrl, formData, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
-    const resource = response.data;
-    if(resource.message === '学生创建成功。'){
-      emit('closeregister')
-      registerForm.name = ''
-      registerForm.id = ''
-      registerForm.password = ''
-      registerForm.rePassword = ''
-    }else if(resource.message === '老师创建成功。'){
-      registerForm.name = ''
-      registerForm.id = ''
-      registerForm.password = ''
-      registerForm.rePassword = ''
-      emit('closeregister')
+    if(response.status === 201){
+      ElMessage({
+        message: '账号注册成功😊，欢迎加入通慧智教的大家庭，快去登录吧？',
+        type: 'success',
+        duration: 2000
+      })
+      emit('showLogin');
+    }
+    else{
+      ElMessage({
+        message: '注册失败❌，请检查您的输入哦',
+        type: 'error',
+        duration: 2000
+      })
     }
   } catch (error) {
-    console.error('登录失败:', error.response ? error.response.data : error);
-    // 处理错误
+    if(error.response.status === 405){
+      ElMessage({
+        message: '该账号已经注册过了❌，请前往登录😣。',
+        type: 'error',
+        duration: 2000
+      })
+    }
+    else{
+      ElMessage({
+        message: 'Oops，服务器开小差了~',
+        type: 'error',
+        duration: 2000
+      })
+    }
   }
 };
 
@@ -91,50 +115,67 @@ const activeTab = ref('student')
           <div class="Center-Flex" style="margin-top: 46px">
             <el-form :model="registerForm">
               <el-form-item>
-                <el-input
+                <el-select
+                    placeholder="在这里输入你的学校"
                     class="registryInput"
-                    placeholder="输入你的名字"
+                    v-model="registerForm.school"
+                    :prefix-icon="School"
+                    size="large"
+                    filterable
+                >
+                  <el-option
+                      v-for="item in schools"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-input
+                    :prefix-icon="UserFilled"
+                    class="registryInput"
                     v-model="registerForm.name"
+                    placeholder="在这里输入你的姓名"
                     size="large">
-                  <template #prepend>
-                    <el-button :icon="UserFilled" />
-                  </template>
                 </el-input>
               </el-form-item>
               <el-form-item>
                 <el-input
+                    :prefix-icon="User"
                     class="registryInput"
-                    placeholder="你的学号"
                     v-model="registerForm.id"
+                    placeholder="这里是你的学号"
                     size="large">
-                  <template #prepend>
-                    <el-button :icon="User" />
-                  </template>
                 </el-input>
               </el-form-item>
-
               <el-form-item>
                 <el-input
+                    :prefix-icon="Lock"
                     class="registryInput"
-                    placeholder="请输入密码"
                     v-model="registerForm.password"
+                    placeholder="还有你的密码"
                     size="large"
                     show-password>
-                  <template #prepend>
-                    <el-button :icon="Lock" />
-                  </template>
                 </el-input>
               </el-form-item>
               <el-form-item>
                 <el-input
+                    :prefix-icon="Lock"
                     class="registryInput"
-                    placeholder="请重复输入密码"
                     v-model="registerForm.rePassword"
+                    placeholder="请重复输入密码"
                     size="large"
                     show-password>
-                  <template #prepend>
-                    <el-button :icon="Lock" />
-                  </template>
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input
+                    :prefix-icon="Message"
+                    class="registryInput"
+                    v-model="registerForm.email"
+                    placeholder="别忘了填写电子邮箱"
+                    size="large">
                 </el-input>
               </el-form-item>
             </el-form>
@@ -145,51 +186,68 @@ const activeTab = ref('student')
           <div class="Center-Flex" style="margin-top: 46px">
             <el-form :model="registerForm">
               <el-form-item>
-                <el-input
+                <el-select
+                    placeholder="请输入或选择您所在的学校（工作单位）"
                     class="registryInput"
-                    placeholder="输入你的姓名"
+                    v-model="registerForm.school"
+                    :prefix-icon="School"
+                    size="large"
+                    filterable
+                >
+                  <el-option
+                      v-for="item in schools"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-input
+                    :prefix-icon="UserFilled"
+                    class="registryInput"
                     v-model="registerForm.name"
+                    placeholder="请输入您的姓名"
                     size="large">
-                  <template #prepend>
-                    <el-button :icon="UserFilled" />
-                  </template>
                 </el-input>
               </el-form-item>
+
               <el-form-item>
                 <el-input
+                    :prefix-icon="User"
                     class="registryInput"
-                    placeholder="你的教工号"
                     v-model="registerForm.id"
+                    placeholder="请在此输入您的教工号"
                     size="large">
-                  <template #prepend>
-                    <el-button :icon="User" />
-                  </template>
                 </el-input>
               </el-form-item>
-
               <el-form-item>
                 <el-input
+                    :prefix-icon="Lock"
                     class="registryInput"
-                    placeholder="请输入密码"
                     v-model="registerForm.password"
+                    placeholder="请在此输入您的密码"
                     size="large"
                     show-password>
-                  <template #prepend>
-                    <el-button :icon="Lock" />
-                  </template>
                 </el-input>
               </el-form-item>
-
               <el-form-item>
                 <el-input
+                    :prefix-icon="Lock"
                     class="registryInput"
-                    placeholder="请重复输入密码"
                     v-model="registerForm.rePassword"
+                    placeholder="请重复输入您的密码"
                     size="large"
                     show-password>
-                  <template #prepend>
-                    <el-button :icon="Lock" />
-                  </template>
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input
+                    :prefix-icon="Message"
+                    class="registryInput"
+                    v-model="registerForm.email"
+                    placeholder="请输入您的电子邮箱"
+                    size="large">
                 </el-input>
               </el-form-item>
             </el-form>
@@ -208,13 +266,13 @@ const activeTab = ref('student')
       </div>
 
       <el-text style="float: right">。</el-text>
-      <el-link type="primary" style="float: right"> 登录 </el-link>
+      <el-link type="primary" style="float: right" @click="emit('showLogin')"> 登录 </el-link>
       <el-text style="float: right">已有账号，前往</el-text>
 
-      <el-divider content-position="center" style="margin-top: 72px; margin-bottom: 48px">其他登录方式</el-divider>
+      <el-divider content-position="center" style="margin-top: 64px; margin-bottom: 48px">做有感情、有温度的教育</el-divider>
     </div>
 
-    <div class="Center-Flex" style="margin-top: 96px; margin-bottom: 32px">
+    <div class="Center-Flex" style="margin-top: 36px; margin-bottom: 32px">
       <el-text>
         如登录、注册遇到问题，请
       </el-text>
@@ -225,6 +283,7 @@ const activeTab = ref('student')
         。
       </el-text>
     </div>
+
   </el-dialog>
 </template>
 
@@ -235,10 +294,9 @@ const activeTab = ref('student')
 }
 .registryButton {
   width: 400px;
-  margin-top: 16px;
   margin-bottom: 16px;
 }
 #registry-tab-container {
-  margin: 26px;
+  margin: 12px;
 }
 </style>
