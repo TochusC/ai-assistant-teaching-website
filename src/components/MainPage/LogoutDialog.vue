@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAuth } from "@/assets/static/js/useAuth"
-import router from "@/router";
+import router from "@/router/index.js";
 import {onMounted} from "vue";
 import * as events from "events";
 

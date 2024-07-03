@@ -3,7 +3,7 @@ import {onMounted, provide, ref} from 'vue'
 import UnityComponent from "@/components/UnityComponent.vue";
 import UnityInteraction from "@/components/UnityInteraction.vue";
 import {useAuth} from "@/assets/static/js/useAuth.js";
-import router from "@/router/index.ts";
+import router from "@/router/index.js";
 import { NConfigProvider } from 'naive-ui'
 import {particleOption} from "@/assets/static/js/particleOption.js";
 // 窗口大小
@@ -56,10 +56,6 @@ function rescaleElement() {
 const { isAuthenticated, user } = useAuth();
 
 onMounted(() => {
-  if(isAuthenticated.value !== true){
-    router.replace('/login')
-  }
-
   rescaleElement()
 
   window.addEventListener('resize', () => {
@@ -116,10 +112,25 @@ const darkThemeOverrides = {
 
 <template>
   <el-backtop :right="100" :bottom="100" />
+  <video style="
+                      background: #4ac1f7;
+                      display: none"
+         id="cameraVideo"
+         ref="cameraVideo"
+  />
+  <canvas style="
+                      background: #1f69c0;
+                      display: none"
+          id="cameraPhoto"
+          ref="cameraPhoto"
+  />
   <div id="AllContainer" >
     <div id="WebsiteContainer" ref="websiteContainer">
       <el-backtop :right="100" :bottom="100" />
-      <n-config-provider style="height: 100%" :theme-overrides="isDark?darkThemeOverrides:themeOverrides" :theme="isDark?darkTheme:''">
+      <n-config-provider
+          style="height: 100%"
+          :theme-overrides="isDark?darkThemeOverrides:themeOverrides"
+          :theme="isDark?darkTheme:null">
           <RouterView />
       </n-config-provider>
       <el-button

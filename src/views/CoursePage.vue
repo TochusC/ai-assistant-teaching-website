@@ -1,5 +1,5 @@
 <script setup>
-import router from "@/router/index.ts";
+import router from "@/router/index.js";
 import HeadNavi from "@/components/utils/HeadNavi.vue";
 import InfoTabs from "@/components/CoursePage/InfoTabs.vue";
 import CourseHeader from "@/components/CoursePage/CourseHeader.vue";
@@ -8,6 +8,7 @@ import {backendUrl} from "@/assets/static/js/severConfig";
 
 import {inject, onMounted, ref} from "vue";
 import {ElMessage} from "element-plus";
+import {useAuth} from "@/assets/static/js/useAuth.js";
 
 const route = router.currentRoute.value
 const courseId = route.params.id
@@ -19,27 +20,6 @@ const announcements = ref({})
 const questions = ref({})
 const resources = ref({})
 const assignments = ref({})
-
-const info = ref({
-  course: null,
-  statistics: null,
-  chapters: null,
-  announcements: null,
-  questions: null,
-  resources: null,
-  assignments: null,
-})
-
-const fetchInfo= (infoName) => {
-  axios.get(backendUrl + 'course/'+ infoName + '/' + courseId)
-      .then((res) => {
-        info.value[infoName] = res.data;
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  isLoading.value = false
-}
 
 const dynamicBannerPadding = ref(128)
 const windowWidth = inject("windowWidth")
@@ -56,6 +36,7 @@ const rescaleElements = ()=>{
 
 const tittle = ref(null)
 const isLoading = ref(true)
+const joinBtn = ref(null)
 
 onMounted(()=>{
   rescaleElements()
@@ -65,15 +46,133 @@ onMounted(()=>{
     }
   }, 500);
   window.addEventListener('resize',  rescaleElements);
-  fetchInfo('course')
-  fetchInfo('statistics')
-  fetchInfo('chapters')
-  fetchInfo('announcements')
-  fetchInfo('questions')
-  fetchInfo('resources')
-  fetchInfo('assignments')
 
+  isLoading.value = true
+  axios.get(backendUrl + 'course/' + courseId)
+      .then((res) => {
+        course.value = res.data;
+        isLoading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  isLoading.value = true
+  axios.get(backendUrl + 'course/statistics/' + courseId)
+      .then((res) => {
+        statistics.value = res.data;
+        isLoading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  isLoading.value = true
+  axios.get(backendUrl + 'course/chapter/' + courseId)
+      .then((res) => {
+        chapters.value = res.data;
+        isLoading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  isLoading.value = true
+  axios.get(backendUrl + 'course/announcement/' + courseId)
+      .then((res) => {
+        announcements.value = res.data;
+        isLoading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  isLoading.value = true
+  axios.get(backendUrl + 'course/question/' + courseId)
+      .then((res) => {
+        questions.value = res.data;
+        isLoading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  isLoading.value = true
+  axios.get(backendUrl + 'course/resource/' + courseId)
+      .then((res) => {
+        resources.value = res.data;
+        console.log(resources.value)
+        isLoading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+  isLoading.value = true
+  axios.get(backendUrl + 'course/assignment/' + courseId)
+      .then((res) => {
+        assignments.value = res.data;
+        isLoading.value = false
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 })
+
+const handleSelectCourse =  async () => {
+  const {isAuthenticated, user} = useAuth()
+  if(!isAuthenticated.value){
+    ElMessage({
+      message: '请先前往登录哦😣',
+      type: 'warning',
+      duration: 2000
+    })
+  }
+
+  const formData = new URLSearchParams();
+  formData.append('cid', courseId);
+  formData.append('school', user.value.school);
+  formData.append('id', user.value.id);
+  let selectUrl = backendUrl + 'student/course/'
+      + user.value.school + '/' + user.value.id;
+  try {
+    const response = await axios.post(selectUrl, formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    if(response.status === 201){
+      ElMessage({
+        message: '课程选择成功😊，欢迎加入'+ course.value.name +
+            '。',
+        type: 'success',
+        duration: 2000
+      })
+    }
+    else{
+      ElMessage({
+        message: '课程选择失败❌，请检查您的输入哦',
+        type: 'error',
+        duration: 2000
+      })
+    }
+  } catch (error) {
+    if (error.response.status === 403){
+      ElMessage({
+        message: '你已经加入这门课程啦😣',
+        type: 'error',
+        duration: 2000
+      })
+    }
+    else{
+      ElMessage({
+        message: 'Oops，服务器开小差了~',
+        type: 'error',
+        duration: 2000
+      })
+    }
+  }
+};
 
 
 </script>
@@ -106,9 +205,18 @@ onMounted(()=>{
 
           <el-divider id="add-course-divider">
             <el-button round style="width: 180px"
+                       @click="handleSelectCourse"
+                       ref="joinBtn"
                        type="primary">加入课程</el-button>
           </el-divider>
-          <InfoTabs :course="course"/>
+          <InfoTabs
+              :course="course"
+              :chapters="chapters"
+              :announcements="announcements"
+              :assignments="assignments"
+              :questions="questions"
+              :resources="resources"
+          />
         </div>
       </div>
     </el-main>

@@ -1,7 +1,7 @@
 <script setup>
 
 import OnlineTutorial from "@/components/CoursePage/TabPane/OnlineTutorial.vue";
-import NoticeCard from "@/components/MyAcademyPage/NoticeCard.vue";
+import NoticeCard from "@/components/MyAcademyPage/GoToLearning/NoticeCard.vue";
 import QACard from "@/components/MyAcademyPage/MyCoursePage/CourseTabs/QACard.vue";
 import {Star} from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";

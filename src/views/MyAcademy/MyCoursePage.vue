@@ -4,7 +4,7 @@ import BlankPage from "@/views/BlankPage.vue";
 import MyCourseHeader from "@/components/MyAcademyPage/MyCoursePage/MyCourseHeader.vue";
 import CourseTabs from "@/components/MyAcademyPage/MyCoursePage/CourseTabs.vue";
 import { onMounted ,ref} from "vue";
-import router from "@/router/index.ts";
+import router from "@/router/index.js";
 import axios from "axios";
 import {backendUrl} from "@/assets/static/js/severConfig.js";
 

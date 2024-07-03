@@ -1,5 +1,5 @@
 <template>
-  <div class="Header-Container" >
+  <div class="Header-Container" v-if="user.role === 'student'">
     <div class="Header-Item" ref="logoContainer">
       <el-popover
           placement="top-start"
@@ -61,7 +61,7 @@
 
         <el-popover placement="bottom-start">
           <template #reference>
-            <el-badge :value="3" style="margin-right: 36px">
+            <el-badge :value="assignmentNum + messageNum" style="margin-right: 36px">
               <el-button
                   :type="route.path==='/academy'?'primary':'default'"
                   plain>
@@ -76,14 +76,12 @@
             </el-badge>
           </template>
           <div class="Space-Between-Flex">
-            <el-statistic title="课程" :value="1" />
-            <el-statistic title="考勤" :value="1" />
+            <el-statistic title="待完成作业" :value="assignmentNum" />
           </div>
-          <el-statistic title="待完成作业" :value="1" />
+            <el-statistic title="未读消息数" :value="messageNum" />
         </el-popover>
       </div>
 
-      <!--          头像-->
       <el-popover
           placement="top-start"
           :width="160"
@@ -92,7 +90,9 @@
         <template #reference>
           <img
               class="icon"
-              src="@/assets/static/img/boy.png" alt="" style="height:52px; width: auto"/>
+              :src="basicInfo.avatar"
+              alt=""
+              style="height:52px; width: 52px; border-radius: 52px;"/>
         </template>
         <el-menu>
           <el-menu-item @click="toUserCenter" index="1">个人中心</el-menu-item>
@@ -101,28 +101,31 @@
       </el-popover>
     </div>
   </div>
+  <TeachHeadNavi v-else-if="user.role === 'teacher'"/>
+  <ParentHeadNavi v-else/>
   <LogoutDialog v-model="showLogoutDialog"/>
 </template>
 
 <script setup>
 import {ref, onMounted, inject} from 'vue'
-const activeIndex = ref('1')
 import { useDark } from '@vueuse/core'
-import {MoonNight, Sunset, Search} from "@element-plus/icons-vue";
-import router from "@/router/index.ts";
+import {MoonNight, Sunset} from "@element-plus/icons-vue";
+import router from "@/router/index.js";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
 import {useRoute} from "vue-router";
-import {ElMessage, ElNotification} from "element-plus";
+import {ElNotification} from "element-plus";
+import axios from "axios";
+import {backendUrl} from "@/assets/static/js/severConfig.js";
+import {useAuth} from "@/assets/static/js/useAuth.js";
+import TeachHeadNavi from "@/components/TeachingActivity/utils/TeachHeadNavi.vue";
+import ParentHeadNavi from "@/components/ParentPage/ParentHeadNavi.vue";
 
 
 const tittle = ref(null)
+const { user } = useAuth()
 const isCollapse = ref(true)
 const showLogoutDialog = ref(false)
 const showParticles = inject('showParticles')
-
-const showSearchSelection = ref(true)
-// 响应式搜索栏宽度
-const dynamicSearchBarWidth = ref('560px')
 
 const toUserCenter = () => {
   if(route.path === '/user'){
@@ -147,22 +150,15 @@ const isDark = useDark()
 const logoContainer = ref(null)
 const mineContainer = ref(null)
 
-const windowHeight = ref(null)
-
-const notification = [
-  {
-    type: '作业',
-    num: 1,
-  }
-]
 
 const toMainPage = () => {
-  router.push('/')
+  router.push('/portal')
 }
 
 const windowWidth = inject('windowWidth');
 // 响应式调整元素
 const rescaleElement = () => {
+  if(tittle.value === null) return
   if (windowWidth.value < 764) {
     tittle.value.style.fontSize = '0px';
     isCollapse.value = true;
@@ -172,17 +168,40 @@ const rescaleElement = () => {
     isCollapse.value = false
   }
 }
+const assignmentNum = ref(0)
+const messageNum = ref(0)
+
+const getNotification = () => {
+  const {user} = useAuth()
+  const assignmentsUrl = backendUrl + 'student/assignment/unfinished/'
+      + user.value.school + '/' + user.value.id
+  axios.get(assignmentsUrl)
+      .then((res) => {
+        assignmentNum.value = res.data.length
+      })
+      .catch((err) => {
+        ElNotification({
+          title: '错误',
+          message: '获取通知信息失败' + err,
+          type: 'error',
+          offset: 64,
+          duration: 2000
+        })
+      })
+}
 
 const route = useRoute();
 
 onMounted(() => {
-  rescaleElement()
+  rescaleElement();
+  getNotification();
+  fetchBasicInfo();
 
   window.addEventListener('resize', () => {
-    rescaleElement()
+    rescaleElement();
   })
   window.addEventListener('showAssistant', () => {
-    rescaleElement()
+    rescaleElement();
   })
 })
 
@@ -210,6 +229,15 @@ const handleToMainPage = () => {
   }
   router.push("/portal")
 }
+
+const basicInfo = ref({})
+const fetchBasicInfo = () => {
+  axios.get(backendUrl + 'student/info/basic/' + user.value.ident).then(res => {
+    basicInfo.value = res.data
+  }).catch(err => {
+    console.log(err)
+  })
+}
 </script>
 
 <style scoped>
@@ -222,8 +250,7 @@ const handleToMainPage = () => {
 .Header-Container {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
+  padding: 8px;
   box-shadow: 0 0 8px #8080ff;
   background: var(--el-bg-color);
   display: inline-flex;
@@ -233,8 +260,6 @@ const handleToMainPage = () => {
 html.dark .Header-Container{
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
   box-shadow: 0 0 4px var(--el-color-primary);
   display: inline-flex;
   align-items: center;

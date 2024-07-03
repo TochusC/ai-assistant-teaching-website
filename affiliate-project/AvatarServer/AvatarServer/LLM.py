@@ -1,8 +1,23 @@
 import requests
 import json
 import emoji
+from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
+from sparkai.core.messages import ChatMessage
 
+SPARKAI_URL = 'wss://spark-api.xf-yun.com/v3.5/chat'
+SPARKAI_APP_ID = '3d753ce2'
+SPARKAI_API_SECRET = 'ODIyOTJjZDA5ZWQ5NWU5MjVlOGMyNjgx'
+SPARKAI_API_KEY = '86a20fef1c407cc12d999c28af5c1be9'
+SPARKAI_DOMAIN = 'generalv3.5'
 
+SPARK = ChatSparkLLM(
+            spark_api_url=SPARKAI_URL,
+            spark_app_id=SPARKAI_APP_ID,
+            spark_api_key=SPARKAI_API_KEY,
+            spark_api_secret=SPARKAI_API_SECRET,
+            spark_llm_domain=SPARKAI_DOMAIN,
+            streaming=False,
+        )
 def remove_enclosed_text(text, enclosure="::"):
     while enclosure in text:
         start_index = text.find(enclosure)
@@ -111,6 +126,41 @@ def chat_with_LLM(messages, access_token):
 
     return reply
 
+class Question_Generator:
+    def __init__(self):
+        self.messages = [
+            ChatMessage(role="system", content="你是一个负责相似题目生成的智能助理，你需要根据用户所输入的题目，生成相似题目，并且在生成的题目开头用<>标出相似度，你不需要回答用户的问题。"
+                                               "例如：用户输入“论述具有五层协议的网络体系结构的要点，包括各层的主要功能。”，你需要生成一道相似题目“<90%>论述OSI七层协议网络体系结构的关键要素及其各层的核心功能。”。")
+        ]
+    def generate_question(self, question):
+        self.messages.append(ChatMessage(role="user", content=question))
+        handler = ChunkPrintHandler()
+        response = SPARK.generate([self.messages], callbacks=[handler])
+        reply = response.generations[0][0].text
+        return reply
+
+
+class Question_Analyser:
+    def __init__(self):
+        self.messages = [
+            ChatMessage(role="system", content="你是一个负责分析题目的智能助理，你需要根据用户所输入的题目，以百分制分析题目的难度、重要度、创新度、综合度，并在回复中给出。"
+                                               "你的回复格式仅仅包含数字和分号，难度、重要度、创新度、综合度的分数之间用分号隔开，例如：90;80;70;60")
+        ]
+
+    def question_analysis(self, question):
+        self.messages.append(ChatMessage(role="user", content=question))
+        handler = ChunkPrintHandler()
+        response = SPARK.generate([self.messages], callbacks=[handler])
+        reply = response.generations[0][0].text
+        return reply
+
+def chat_with_question_generate_LLM(messages):
+    agent = Question_Generator()
+    return agent.generate_question(messages)
+
+def chat_with_question_analysis_LLM(messages):
+    agent = Question_Analyser()
+    return agent.question_analysis(messages)
 
 def main():
     """

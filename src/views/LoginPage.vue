@@ -21,7 +21,7 @@ import SloganCarousel from "@/components/LoginPage/SloganCarousel.vue";
 import WelcomeAside from "@/components/LoginPage/WelcomeAside.vue";
 import {useAuth} from "@/assets/static/js/useAuth"
 import {inject, onMounted, reactive, ref} from "vue";
-import router from "@/router/index.ts";
+import router from "@/router/index.js";
 import {Application} from "@splinetool/runtime";
 
 

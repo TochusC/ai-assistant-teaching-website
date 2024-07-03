@@ -1,10 +1,13 @@
-<script setup lang="ts">
+<script setup>
+import {onMounted} from "vue";
 const props = defineProps({
   announcement:{
     type: Array,
     required: true
   }
 })
+
+
 </script>
 
 <template>
@@ -34,7 +37,7 @@ const props = defineProps({
           </el-tag>
 
           <el-text style="margin-left: 8px">
-            {{ item.content }}
+            {{ item.title }}
           </el-text>
           <el-tag
               style="float: right"

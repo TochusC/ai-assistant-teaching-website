@@ -1,4 +1,4 @@
-const http = require('http');
+  const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
@@ -61,13 +61,16 @@ const server = http.createServer((req, res) => {
             }
         }
         else if (req.method === 'POST') {
-            // 处理文件上传
-            const writeStream = fs.createWriteStream(filePath);
+            // 创建文件路径filePath对应的文件, 如果目录不存在，创建目录
+            const dir = path.dirname(filePath);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, {recursive: true});
+            }
+            const writeStream = fs.createWriteStream
+            (filePath, {flags: 'w', encoding: 'utf-8'});
+            // 获取请求的数据并写入文件
             req.pipe(writeStream);
-            req.on('end', () => {
-                res.writeHead(200);
-                res.end('File uploaded successfully');
-            });
+
         }
         else if (req.method === 'DELETE') {
             if(path.isDir(filePath)){

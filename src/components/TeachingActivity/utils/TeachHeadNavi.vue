@@ -49,7 +49,7 @@
         <el-button
             plain
             :type="route.path==='/'?'primary':'default'"
-            style="margin-right: 24px">
+            style="margin-right: 12px">
           <el-link type="primary"
                    style="
                        font-size: 18px;
@@ -59,28 +59,19 @@
           >首页</el-link>
         </el-button>
 
-        <el-popover placement="bottom-start">
-          <template #reference>
-            <el-badge :value="3" style="margin-right: 36px">
-              <el-button
-                  :type="route.path==='/academy'?'primary':'default'"
-                  plain>
-                <el-link type="primary"
-                         style="
-                       font-size: 18px;
-                        white-space: nowrap;
-                       font-weight: bolder"
-                         @click="handleToTeachingPortal"
-                >教学首页</el-link>
-              </el-button>
-            </el-badge>
-          </template>
-          <div class="Space-Between-Flex">
-            <el-statistic title="课程" :value="1" />
-            <el-statistic title="考勤" :value="1" />
-          </div>
-          <el-statistic title="待完成作业" :value="1" />
-        </el-popover>
+
+        <el-button
+            style="margin-right: 24px"
+            :type="route.path==='/academy'?'primary':'default'"
+            plain>
+          <el-link type="primary"
+                   style="
+                 font-size: 18px;
+                  white-space: nowrap;
+                 font-weight: bolder"
+                   @click="handleToTeachingPortal"
+          >教学首页</el-link>
+        </el-button>
       </div>
 
       <!--          头像-->
@@ -95,7 +86,6 @@
               src="@/assets/static/img/boy.png" alt="" style="height:52px; width: auto"/>
         </template>
         <el-menu>
-          <el-menu-item @click="toUserCenter" index="1">个人中心</el-menu-item>
           <el-menu-item @click="showLogoutDialog=true">退出登录</el-menu-item>
         </el-menu>
       </el-popover>
@@ -109,7 +99,7 @@ import {ref, onMounted, inject} from 'vue'
 const activeIndex = ref('1')
 import { useDark } from '@vueuse/core'
 import {MoonNight, Sunset, Search} from "@element-plus/icons-vue";
-import router from "@/router/index.ts";
+import router from "@/router/index.js";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
 import {useRoute} from "vue-router";
 import {ElMessage, ElNotification} from "element-plus";

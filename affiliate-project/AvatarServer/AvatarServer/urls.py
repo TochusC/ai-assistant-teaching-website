@@ -22,5 +22,8 @@ urlpatterns = [
     path('chat/synthesis/', views.voice_synthesize),
     path("chat/llm/", views.chat_with_llm),
     path("chat/llm/basic/", views.chat_with_basic_llm),
+    path("chat/llm/question/generate/", views.generate_question),
+    path("chat/llm/question/analysis/", views.analysis_question),
     path("chat/recognize/", views.voice_recognize),
+    path('face/analysis/', views.face_analysis),
 ]

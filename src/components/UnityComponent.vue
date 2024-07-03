@@ -1,7 +1,5 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import router from "@/router/index.ts";
-import {useAuth} from "@/assets/static/js/useAuth.js";
 
 const props = defineProps({
   initialUnityCanvasHeight: {
@@ -123,13 +121,7 @@ onMounted(() =>{
     document.getElementsByTagName('head')[0].appendChild(meta);
     container.className = "unity-mobile";
     canvas.className = "unity-mobile";
-    // To lower canvas resolution on mobile devices to gain some
-    // performance, uncomment the following line:
-    // config.devicePixelRatio = 1;
-
   } else {
-    // Desktop style: Render the game canvas in a
-    // window that can be maximized to fullscreen:
     canvas.style.width = unityCanvasWidth.value + "px";
     canvas.style.height = unityCanvasHeight.value + "px";
   }
@@ -167,7 +159,7 @@ onMounted(() =>{
     <div id="unity-footer">
       <div id="unity-webgl-logo"></div>
       <div id="unity-fullscreen-button"></div>
-      <div id="unity-build-title">AI Assistant</div>
+      <div id="unity-build-title">AI助教-小慧</div>
     </div>
   </div>
 </template>

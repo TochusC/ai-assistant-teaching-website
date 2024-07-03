@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import router from "@/router";
+import router from "@/router/index.js";
 </script>
 
 <template>

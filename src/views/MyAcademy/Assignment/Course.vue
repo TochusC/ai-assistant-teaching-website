@@ -2,7 +2,7 @@
 
 import BlankPage from "@/views/BlankPage.vue";
 import {ref, onMounted, inject} from "vue";
-import ResourceCard from "@/components/MyAcademyPage/ResourceCard.vue";
+import ResourceCard from "@/components/MyAcademyPage/MyCoursePage/ResourceCard.vue";
 import axios from "axios";
 
 let resources = null;

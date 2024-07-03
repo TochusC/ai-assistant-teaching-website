@@ -1,17 +1,22 @@
-<script setup lang="ts">
+<script setup>
 import HeadNavi from "@/components/utils/HeadNavi.vue";
+
+const props = defineProps({
+  maxWidth: {
+    type: Number,
+    default: 2048
+  }
+})
 </script>
 
 <template>
   <el-container >
-
     <el-header style="padding: 0">
       <HeadNavi/>
     </el-header>
-
-    <el-main >
+    <el-main>
       <div class="Center-Flex">
-        <div id="content">
+        <div id="content" :style="{'max-width': maxWidth}">
             <el-backtop :right="100" :bottom="100" />
             <slot/>
         </div>

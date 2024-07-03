@@ -2,16 +2,17 @@
 import {useAuth} from "@/assets/static/js/useAuth.js";
 
 const { login, logout } = useAuth();
-import { ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import {useRoute} from "vue-router";
 import {ChatLineSquare, Delete, Microphone, More, Promotion} from "@element-plus/icons-vue";
-import router from "@/router/index.ts";
+import router from "@/router/index.js";
 import {ElMessage} from "element-plus";
+import axios from "axios";
+import {backendUrl, llmUrl} from "@/assets/static/js/severConfig.js";
 
 const isChatting = ref(false)
 const userChatText = ref('')
 
-const remoteServer = ref(0)
 
 const props = defineProps({
   showAssistant: {
@@ -131,6 +132,7 @@ const endRecordingVoice = () => {
   isVoiceRecording.value = false;
   UnityIns.SendMessage('ChatManager',
       'EndRecorderFunc');
+  voiceOff();
 }
 
 const sendUserText = () => {
@@ -138,9 +140,125 @@ const sendUserText = () => {
   UnityIns.SendMessage('ChatManager',
       'StartChat', userChatText.value);
   userChatText.value = ""
+  textOff();
 }
 
 const interaction = ref(null);
+const cameraVideo = ref(null)
+const cameraPhoto = ref(null)
+const imageDate = ref('')
+const analysis = ref(null)
+const mediaSteam = ref(null)
+const rawImage = ref('')
+
+const initMedia = () => {
+  navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true,
+  }).then((stream) => {
+    mediaSteam.value = stream
+    let cv = document.getElementById('cameraVideo')
+    let cp = document.getElementById('cameraPhoto')
+    cameraVideo.value = cv
+    cameraPhoto.value = cp
+    cv.srcObject = stream
+  }).catch((err) => {
+    ElMessage({
+      title: '打开麦克风、摄像头失败❌',
+      type: 'error',
+      message: '出现问题啦，我们无法看到你的小表情奥😣' + err,
+      duration: 4000
+    })
+  })
+}
+const voiceOff = () => {
+  const canvas = cameraPhoto.value.getContext('2d')
+  canvas.drawImage(
+      cameraVideo.value,
+      0, 0,
+      cameraPhoto.value.width,
+      cameraPhoto.value.height)
+  fetchFaceAnalysis(3)
+}
+
+const textOff = () => {
+  const canvas = cameraPhoto.value.getContext('2d')
+  canvas.drawImage(
+      cameraVideo.value,
+      0, 0,
+      cameraPhoto.value.width,
+      cameraPhoto.value.height)
+  fetchFaceAnalysis(2)
+}
+
+const fetchFaceAnalysis = (type) => {
+  cameraPhoto.value.toBlob((blob) => {
+    const formData = new FormData()
+    formData.append('img', blob, 'face.png')
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+    const reader = new FileReader()
+    reader.onload = function(e) {
+      rawImage.value = e.target.result;
+    };
+    reader.readAsDataURL(blob)
+    axios.post(llmUrl+'face/analysis/', formData, config)
+        .then((res) => {
+          imageDate.value = 'data:image/png;base64,' + res.data['img']
+          analysis.value = res.data['analysis']
+
+          const formData = new FormData;
+          formData.append('image',
+              rawImage.value)
+          formData.append('type', 1)
+          formData.append('processed_image',
+              imageDate.value)
+          formData.append('age',
+              analysis.value.result.face_list[0].age)
+          formData.append('gender',
+              analysis.value.result.face_list[0].gender.type)
+          formData.append('gender_probability',
+              analysis.value.result.face_list[0].gender.probability)
+          formData.append('emotion',
+              analysis.value.result.face_list[0].emotion.type)
+          formData.append('emotion_probability',
+              analysis.value.result.face_list[0].emotion.probability)
+          formData.append('left_eye_open',
+              analysis.value.result.face_list[0].eye_status.left_eye)
+          formData.append('right_eye_open',
+              analysis.value.result.face_list[0].eye_status.right_eye)
+          formData.append('type', type);
+
+          const {user} = useAuth()
+          axios.post(backendUrl+'student/emotion/' + user.value.ident, formData)
+              .then((res) => {
+                ElMessage({
+                  title: '情绪记录成功✔',
+                  type: 'success',
+                  message: '你的小情绪已经被记录啦😉，快去看看吧！',
+                  duration: 4000
+                })
+              })
+              .catch((err) => {
+                ElMessage({
+                  title: '拍照失败❌',
+                  type: 'error',
+                  message: '出现问题啦，我们无法看到你的小表情奥😣',
+                  duration: 4000
+                })
+              })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  })
+}
+
+const {user} = useAuth();
+initMedia()
 </script>
 
 <template>
@@ -156,7 +274,6 @@ const interaction = ref(null);
       </el-button>
     </div>
     <div id="chat-container">
-
         <el-button :icon="Microphone"
                    type="primary"
                    size="large"

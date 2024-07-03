@@ -6,30 +6,25 @@ import CourseAnnouncement from "@/components/CoursePage/TabPane/CourseAnnounceme
 import CourseQA from "@/components/CoursePage/TabPane/CourseQA.vue";
 import CourseResources from "@/components/CoursePage/TabPane/CourseResources.vue";
 import CourseHomework from "@/components/CoursePage/TabPane/CourseHomework.vue";
+import {onMounted} from "vue";
 
 const props = defineProps({
   course:{
-    type: Object,
     required: true
   },
   chapters:{
-    type: Array,
     required: true
   },
   announcements:{
-    type: Array,
     required: true
   },
   questions:{
-    type: Array,
     required: true
   },
   resources:{
-    type: Array,
     required: true
   },
   assignments:{
-    type: Array,
     required: true
   }
 })
@@ -101,7 +96,7 @@ const props = defineProps({
           <span>课程资源</span>
         </span>
       </template>
-      <CourseResources :resources="course.resources"/>
+      <CourseResources :resources="props.resources"/>
     </el-tab-pane>
 
     <el-tab-pane>
@@ -113,7 +108,7 @@ const props = defineProps({
                   <span>作业测试</span>
                 </span>
       </template>
-      <CourseHomework :homework="course.homework"/>
+      <CourseHomework :homework="props.assignments"/>
     </el-tab-pane>
   </el-tabs>
 </template>

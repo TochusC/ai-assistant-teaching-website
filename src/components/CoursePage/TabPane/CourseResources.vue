@@ -8,6 +8,9 @@ const props = defineProps({
   }
 })
 
+const handleDownload = () =>{
+
+}
 </script>
 
 <template>
@@ -32,7 +35,7 @@ const props = defineProps({
                 {{ item.type }}
               </el-tag>
               <el-text style="margin-left: 8px">
-                {{ item.name }}
+                {{ item.title }}
               </el-text>
             </div>
             <div>

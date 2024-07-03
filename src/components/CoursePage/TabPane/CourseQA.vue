@@ -1,4 +1,6 @@
-<script setup lang="ts">
+<script setup>
+import AIOpinion from "@/components/utils/AIOpinion.vue";
+
 const props = defineProps({
   qa:{
     type: Array,
@@ -26,14 +28,7 @@ const props = defineProps({
               {{ item.question }}
             </el-text>
           </template>
-
-          <el-tag class="target-tag" type="success">
-            回答
-          </el-tag>
-
-          <el-text>
-            {{ item.answer }}
-          </el-text>
+          <AIOpinion :prompt="'请帮我回答一下这个问题' + item.question"/>
         </el-card>
       </div>
       

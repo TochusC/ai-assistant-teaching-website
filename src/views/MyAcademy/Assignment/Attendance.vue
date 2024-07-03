@@ -3,7 +3,7 @@ import {useRoute} from "vue-router";
 import {SuccessFilled, CircleCloseFilled, Loading} from "@element-plus/icons-vue";
 import BlankPage from "@/views/BlankPage.vue";
 import {ref} from "vue";
-import router from "@/router";
+import router from "@/router/index.js";
 
 const route = useRoute()
 

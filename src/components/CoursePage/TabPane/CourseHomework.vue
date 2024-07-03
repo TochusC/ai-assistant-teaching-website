@@ -32,19 +32,14 @@ const props = defineProps({
                 {{ item.type }}
               </el-tag>
               <el-text style="margin-left: 8px">
-                {{ item.name }}
+                {{ item.title }}
               </el-text>
             </div>
             <div>
               <el-tag
                   style="margin-right: 8px"
                   type="info" effect="plain" >
-                开始时间：{{ item.start }}
-              </el-tag>
-              <el-tag
-                  style="margin-right: 8px"
-                  type="info" effect="plain" >
-                截止时间：{{ item.end }}
+                开始时间：{{ item.time }}
               </el-tag>
               <el-button type="primary" size="small">
                 查看

@@ -1,4 +1,6 @@
-<script setup lang="ts">
+<script setup>
+
+import {onMounted} from "vue";
 
 const props = defineProps({
   chapters:{
@@ -6,7 +8,6 @@ const props = defineProps({
     required: true
   }
 })
-
 </script>
 
 <template>
@@ -20,6 +21,10 @@ const props = defineProps({
             :default-expand-all="true"
             style="max-width: 600px"
             :data="props.chapters"
+            :props="{
+              label: 'title',
+              children: 'child'
+            }"
         />
       </el-scrollbar>
     </div>

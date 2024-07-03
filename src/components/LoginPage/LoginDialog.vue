@@ -38,6 +38,7 @@ const validForm = () => {
   }
   return true
 }
+const userData = ref({})
 
 const handleLogin = async () => {
   if(!validForm()) return
@@ -46,6 +47,11 @@ const handleLogin = async () => {
   formData.append('school', loginForm.school);
   formData.append('id', loginForm.id); // 确保是字符串
   formData.append('password', loginForm.password);
+
+  userData.value.school = loginForm.school
+  userData.value.id = loginForm.id
+  userData.value.role = activeTab.value
+
   let loginUrl = backendUrl + activeTab.value;
   try {
     const response = await axios.post(loginUrl, formData, {
@@ -54,23 +60,24 @@ const handleLogin = async () => {
       },
     });
     if (response.status === 200) {
-      const userData = {
-        role: activeTab.value,
-        name: response.data.message,
-        school: loginForm.school,
-        id: loginForm.id,
-      }
       ElMessage({
         message: '登录成功😊',
         type: 'success',
         duration: 2000
       })
-      login(userData);
+      userData.value.name = response.data.name
+      userData.value.email = response.data.email
+      userData.value.ident = response.data.id
+      userData.value.enrollment = response.data.enrollment
+      login(userData.value)
       if(activeTab.value === 'student'){
         router.push('/portal')
       }
       else if(activeTab.value === 'teacher'){
         router.push('/teaching/portal')
+      }
+      else if(activeTab.value === 'parent'){
+        router.push('/parent')
       }
     }
   }
@@ -127,9 +134,9 @@ onMounted(() => {
                     >
                       <el-option
                           v-for="item in schools"
-                          :key="item.value"
+                          :key="item.label"
                           :label="item.label"
-                          :value="item.value"
+                          :value="item.label"
                       />
                     </el-select>
                   </el-form-item>
@@ -169,10 +176,10 @@ onMounted(() => {
                     size="large"
                 >
                   <el-option
-                 p     v-for="item in schools"
-                      :key="item.value"
+                      v-for="item in schools"
+                      :key="item.label"
                       :label="item.label"
-                      :value="item.value"
+                      :value="item.label"
                   />
                 </el-select>
               </el-form-item>
@@ -191,6 +198,50 @@ onMounted(() => {
                     :prefix-icon="Lock"
                     class="loginInput"
                     placeholder="请在此输入您的密码"
+                    v-model="loginForm.password"
+                    size="large"
+                    show-password>
+                </el-input>
+              </el-form-item>
+            </el-form>
+          </div>
+        </el-tab-pane>
+
+        <el-tab-pane label="家长" name="parent">
+          <div class="Center-Flex" style="margin-top: 46px">
+            <el-form :model="loginForm">
+              <el-form-item>
+                <el-select
+                    :prefix-icon="School"
+                    class="loginInput"
+                    placeholder="请输入或选择您孩子所在的学校（工作单位）"
+                    filterable
+                    v-model="loginForm.school"
+                    size="large"
+                >
+                  <el-option
+                      v-for="item in schools"
+                      :key="item.label"
+                      :label="item.label"
+                      :value="item.label"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-input
+                    :prefix-icon="User"
+                    class="loginInput"
+                    placeholder="请在此输入您孩子的学号"
+                    v-model="loginForm.id"
+                    size="large">
+                </el-input>
+              </el-form-item>
+
+              <el-form-item>
+                <el-input
+                    :prefix-icon="Lock"
+                    class="loginInput"
+                    placeholder="请在此输入您的家长认证码"
                     v-model="loginForm.password"
                     size="large"
                     show-password>

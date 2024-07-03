@@ -95,8 +95,8 @@ def main():
         f.write(response.content)
 
 if __name__ == '__main__':
-    # response_audio = get_audio_from_text("我听到你的请求啦，请等小慧思考一下", get_access_token())
-    #
-    # with open("out.wav", 'wb') as f:
-    #     f.write(response_audio)
-    print(get_access_token())
+    response_audio = get_audio_from_text(
+        "不客气不客气，我很高兴能帮到你，如果你还有其他问题或需要帮助，随时都可以告诉我哦~", get_access_token())
+
+    with open("out.wav", 'wb') as f:
+        f.write(response_audio)

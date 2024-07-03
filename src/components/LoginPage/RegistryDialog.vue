@@ -125,9 +125,9 @@ const activeTab = ref('student')
                 >
                   <el-option
                       v-for="item in schools"
-                      :key="item.value"
+                      :key="item.label"
                       :label="item.label"
-                      :value="item.value"
+                      :value="item.label"
                   />
                 </el-select>
               </el-form-item>
@@ -196,9 +196,9 @@ const activeTab = ref('student')
                 >
                   <el-option
                       v-for="item in schools"
-                      :key="item.value"
+                      :key="item.label"
                       :label="item.label"
-                      :value="item.value"
+                      :value="item.label"
                   />
                 </el-select>
               </el-form-item>
