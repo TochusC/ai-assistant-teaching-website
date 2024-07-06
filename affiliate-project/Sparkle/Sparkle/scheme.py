@@ -24,14 +24,17 @@ class TeacherSchema(Schema):
     school: str
     enrollment: str
 
+
 class TeacherStudentSchema(Schema):
     id: int
     sid: int
     name: str
-    school : str
+    school: str
     enrollment: str
     mental: str
     score: int
+
+
 class TeacherStatisticsSchema(Schema):
     course_number: int
     resource_number: int
@@ -50,20 +53,50 @@ class StudentAcademyInfoSchema(Schema):
     s_class: str
 
 
-class StudentFamilyInfoSchema(Schema):
-    id: int
-    sid: int
-    location: str
-    address: str
-    member: List
-
-
 class StudentFamilyMemberSchema(Schema):
     id: int
     fid: int
     name: str
     relationship: str
     phone: str
+
+
+class StudentFamilyInfoSchema(Schema):
+    id: int
+    sid: int
+    location: str
+    address: str
+    member: List[StudentFamilyMemberSchema]
+
+
+class StudentMessageSchema(Schema):
+    id: int
+    sid: int
+    tittle: str
+    sender: str
+    type: str
+    message: str
+    time: str
+
+
+class TeacherMessageSchema(Schema):
+    id: int
+    tid: int
+    tittle: str
+    sender: str
+    type: str
+    message: str
+    time: str
+
+
+class ParentMessageSchema(Schema):
+    id: int
+    sid: int
+    tittle: str
+    sender: str
+    type: str
+    message: str
+    time: str
 
 
 class CourseSchema(Schema):
@@ -76,6 +109,10 @@ class CourseSchema(Schema):
     background: str
     target: str
     principle: str
+
+
+class NumberSchema(Schema):
+    message: float
 
 
 class StudentBasicInfoSchema(Schema):
@@ -147,6 +184,7 @@ class StudentCourseActivitySchema(Schema):
 class DailyTotalActivitySchema(Schema):
     date: str
     time: int
+
 
 class KeyConceptSchema(Schema):
     id: int
@@ -272,6 +310,7 @@ class StudentMentalSchema(Schema):
     sid: int
     type: str
     score: int
+
 
 class ParentSchema(Schema):
     id: int

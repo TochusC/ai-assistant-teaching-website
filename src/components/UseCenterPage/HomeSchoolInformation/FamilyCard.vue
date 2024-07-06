@@ -24,10 +24,11 @@ const handleFamilyEdit = () => {
   }
 }
 const {user} = useAuth()
-const family = ref({ members: []})
+const family = ref({ member: []})
 const fetchFamily = () => {
   axios.get(backendUrl + 'student/info/family/' + user.value.ident).then(res => {
     family.value = res.data
+
   }).catch(err => {
     console.log(err)
   })
@@ -97,17 +98,17 @@ onMounted(() => {
         <el-form-item label="家庭住址" style="width: 100%; margin-right: 24px">
           <el-cascader
               :disabled="!isFamilyEditable"
-              v-model="family.address"
+              v-model="family.location"
               :options="region"
               placeholder="请选择你的家庭住址"
               :props="{value: 'name', label: 'name', children: 'children'}"
-              @change="fetchProvinceIndex"
+              @change="console.log(family.location)"
           />
         </el-form-item>
         <el-form-item label="详细地址" style="width: 100%; margin-right: 24px">
           <el-input
               :disabled="!isFamilyEditable"
-              v-model="family.detailAddress"
+              v-model="family.address"
               placeholder="请输入你的详细地址"
           />
         </el-form-item>
@@ -119,14 +120,14 @@ onMounted(() => {
       </span>
     </el-divider>
       <el-table
-          v-if="family.members.length > 0"
+          v-if="family.member.length > 0"
           height="240px"
-          :data="family.members" style="width: 100%">
+          :data="family.member" style="width: 100%">
         <el-table-column label="姓名">
           <template #default="scope">
             <el-input
                 :disabled="!isFamilyEditable"
-                v-model="family.members[scope.$index].name"
+                v-model="family.member[scope.$index].name"
                 placeholder="在这里输入成员姓名奥"
             />
           </template>
@@ -135,7 +136,7 @@ onMounted(() => {
           <template #default="scope">
             <el-input
                 :disabled="!isFamilyEditable"
-                v-model="family.members[scope.$index].relationship"
+                v-model="family.member[scope.$index].relationship"
                 placeholder="输入你与成员的关系~"
             />
           </template>
@@ -145,7 +146,7 @@ onMounted(() => {
           <template #default="scope">
             <el-input
                 :disabled="!isFamilyEditable"
-                v-model="family.members[scope.$index].phone"
+                v-model="family.member[scope.$index].phone"
                 placeholder="（他/她/它）的联系方式"
             />
           </template>
@@ -158,7 +159,7 @@ onMounted(() => {
                 size="small"
                 type="danger"
                 :icon="Delete"
-                @click="family.members.splice(scope.$index, 1)">
+                @click="family.member.splice(scope.$index, 1)">
               删除
             </el-button>
           </template>

@@ -3,6 +3,8 @@ import {schools} from "@/assets/static/js/resources";
 import {onMounted, ref} from "vue";
 import {Edit, Promotion} from "@element-plus/icons-vue";
 import {useAuth} from "@/assets/static/js/useAuth.js";
+import axios from "axios";
+import {backendUrl} from "@/assets/static/js/severConfig.js";
 
 const {user} = useAuth()
 
@@ -25,14 +27,6 @@ const handleEducationEdit = () => {
   }
 }
 
-const studentInfo = ref({})
-const fetchStudentInfo = () => {
-  axios.get(backendUrl + 'student/info/basic/' + user.value.ident).then(res => {
-    studentInfo.value = res.data
-  }).catch(err => {
-    console.log(err)
-  })
-}
 const schoolIndex = ref(0)
 const departmentIndex = ref(-1)
 const majorIndex = ref(-1)
@@ -61,8 +55,20 @@ const findMajorIndex = (major) => {
   return -1
 }
 
+const authenticationInfo = ref({})
+const fetchAuthenticationInfo = () => {
+  axios.get(backendUrl + 'student/info/academy/' + user.value.ident).then(res => {
+    authenticationInfo.value = res.data
+    schoolIndex.value = findSchoolIndex(user.value.school)
+    departmentIndex.value = findDepartmentIndex(authenticationInfo.value.department)
+    majorIndex.value = findMajorIndex(authenticationInfo.value.major)
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
 onMounted(() => {
-  schoolIndex.value = findSchoolIndex(user.value.school)
+  fetchAuthenticationInfo();
 })
 
 </script>
@@ -120,7 +126,7 @@ onMounted(() => {
         <el-form-item style="flex: 1" label="入学时间">
           <el-date-picker
               :disabled="!isEducationEditable"
-              v-model="studentInfo.entry"
+              v-model="authenticationInfo.enrollment"
               type="date"
               placeholder="请选择入学年份，同学😊"
               style="width: 100%"
@@ -129,7 +135,7 @@ onMounted(() => {
         <el-form-item label="学制" style="flex: 1">
           <el-select
               :disabled="!isEducationEditable"
-              v-model="studentInfo.duration"
+              v-model="authenticationInfo.period"
               placeholder="还有学制奥"
               style="width: 240px"
           >
@@ -154,7 +160,7 @@ onMounted(() => {
       <el-form-item label="教学院部">
         <el-select
             :disabled="!isEducationEditable"
-            v-model="studentInfo.department"
+            v-model="authenticationInfo.department"
             placeholder="嘿，这里是你的教学院部"
             @change="departmentIndex = findDepartmentIndex($event)"
         >
@@ -170,7 +176,7 @@ onMounted(() => {
       <el-form-item label="所属专业">
         <el-select
             :disabled="!isEducationEditable"
-            v-model="studentInfo.major"
+            v-model="authenticationInfo.major"
             placeholder="别忘了确认你的所属专业"
             @change="majorIndex = findMajorIndex($event)"
         >
@@ -186,7 +192,7 @@ onMounted(() => {
       <el-form-item label="所属教学班">
         <el-select
             :disabled="!isEducationEditable"
-            v-model="studentInfo.class"
+            v-model="authenticationInfo.s_class"
             placeholder="最后是你的所在的教学班"
         >
           <el-option

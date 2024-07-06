@@ -21,13 +21,25 @@ const studentInfo = ref({})
 const fetchStudentInfo = () => {
   axios.get(backendUrl + 'student/info/basic/' + sid).then(res => {
     studentInfo.value = res.data
-    schoolIndex.value = findSchoolIndex(studentInfo.value.school)
-    departmentIndex.value = findDepartmentIndex(studentInfo.value.department)
-    majorIndex.value = findMajorIndex(studentInfo.value.major)
+
   }).catch(err => {
     console.log(err)
   })
 }
+
+const authenticationInfo = ref({})
+const fetchAuthenticationInfo = () => {
+  axios.get(backendUrl + 'student/info/academy/' + sid).then(res => {
+    authenticationInfo.value = res.data
+    console.log(authenticationInfo.value)
+    schoolIndex.value = findSchoolIndex(studentInfo.value.school)
+    departmentIndex.value = findDepartmentIndex(authenticationInfo.value.department)
+    majorIndex.value = findMajorIndex(authenticationInfo.value.major)
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
 
 const schoolIndex = ref(0)
 const departmentIndex = ref(-1)
@@ -60,6 +72,7 @@ const findMajorIndex = (major) => {
 onMounted(() => {
   fetchStudent()
   fetchStudentInfo()
+  fetchAuthenticationInfo()
 })
 </script>
 
@@ -87,7 +100,7 @@ onMounted(() => {
         <el-form-item style="flex: 1" label="入学时间">
           <el-date-picker
               disabled
-              v-model="studentInfo.entry"
+              v-model="authenticationInfo.enrollment"
               type="date"
               placeholder="该同学尚未选择入学年份"
               style="width: 100%"
@@ -121,7 +134,7 @@ onMounted(() => {
       <el-form-item label="教学院部">
         <el-select
             disabled
-            v-model="studentInfo.department"
+            v-model="authenticationInfo.department"
             placeholder="该同学尚未选择教学院部"
             @change="departmentIndex = findDepartmentIndex($event)"
         >
@@ -137,7 +150,7 @@ onMounted(() => {
       <el-form-item label="所属专业">
         <el-select
             disabled
-            v-model="studentInfo.major"
+            v-model="authenticationInfo.major"
             placeholder="该同学尚未选择所属专业"
             @change="majorIndex = findMajorIndex($event)"
         >
@@ -153,7 +166,7 @@ onMounted(() => {
       <el-form-item label="所属教学班">
         <el-select
             disabled
-            v-model="studentInfo.class"
+            v-model="authenticationInfo.class"
             placeholder="该同学尚未选择教学班"
         >
           <el-option

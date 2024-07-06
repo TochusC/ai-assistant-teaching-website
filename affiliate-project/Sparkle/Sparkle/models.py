@@ -10,6 +10,7 @@ class Student(models.Model):
     school = models.CharField(max_length=250)
     enrollment = models.CharField(max_length=250)
 
+
 class StudentMessage(models.Model):
     sid = models.IntegerField()
     tittle = models.CharField(max_length=250)
@@ -17,6 +18,7 @@ class StudentMessage(models.Model):
     type = models.CharField(max_length=250)
     message = models.CharField(max_length=250)
     time = models.CharField(max_length=250)
+
 
 class TeacherMessage(models.Model):
     tid = models.IntegerField()

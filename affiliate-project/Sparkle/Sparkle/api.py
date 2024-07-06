@@ -194,7 +194,7 @@ def student_emotion(request, sid: int):
     return reversed(StudentEmotion.objects.filter(sid=sid))
 
 
-@api.get('/student/emotion/status/{sid}', response={200: SuccessFoundSchema})
+@api.get('/student/emotion/status/{sid}', response={200: NumberSchema})
 def student_emotion(request, sid: int):
     emotion_values = {
         'angry': -80,
@@ -227,8 +227,10 @@ def student_emotion(request, sid: int):
 
 
 
-@api.get("/student/info/academy/{sid}", response=StudentAcademyInfoSchema)
+@api.get("/student/info/academy/{sid}", response={200: StudentAcademyInfoSchema, 404: List})
 def student_info_academy(request, sid: int):
+    if not StudentAcademyInfo.objects.filter(sid=sid).exists():
+        return 404, []
     return StudentAcademyInfo.objects.get(sid=sid)
 
 
@@ -246,6 +248,27 @@ def student_info_family(request, sid: int):
     family = StudentFamilyInfo.objects.get(sid=sid)
     family.member = StudentFamilyMember.objects.filter(fid=family.id)
     return 200, family
+
+
+@api.get("/student/info/family/{sid}", response={200: StudentFamilyInfoSchema, 404: List})
+def student_info_family(request, sid: int):
+    if not StudentFamilyInfo.objects.filter(sid=sid).exists():
+        return 404, []
+    family = StudentFamilyInfo.objects.get(sid=sid)
+    family.member = StudentFamilyMember.objects.filter(fid=family.id)
+    return 200, family
+
+@api.get('/student/message/{sid}', response=List[StudentMessageSchema])
+def student_message(request, sid: int):
+    return StudentMessage.objects.filter(sid=sid)
+
+@api.get('/parent/message/{sid}', response=List[ParentMessageSchema])
+def parent_message(request, sid: int):
+    return ParentMessage.objects.filter(sid=sid)
+
+@api.get('/teacher/message/{tid}', response=List[TeacherMessageSchema])
+def teacher_message(request, tid: int):
+    return TeacherMessage.objects.filter(tid=tid)
 
 
 @api.get("/student/info/family/member/{fid}", response=List[StudentFamilyMemberSchema])
@@ -327,6 +350,28 @@ def teacher(request):
 
     except Student.DoesNotExist as e:
         return 404, {"message": "acc"}
+
+
+@api.delete('/student/message/confirm/{mid}', response={200: SuccessFoundSchema, 404: NotFoundSchema})
+def student_message_confirm(request, mid: int):
+    if StudentMessage.objects.filter(id=mid).exists():
+        StudentMessage.objects.filter(id=mid).delete()
+        return 200, {"message": "success"}
+    return 404, {"message": "error"}
+
+@api.delete('/parent/message/confirm/{mid}', response={200: SuccessFoundSchema, 404: NotFoundSchema})
+def parent_message_confirm(request, mid: int):
+    if ParentMessage.objects.filter(id=mid).exists():
+        ParentMessage.objects.filter(id=mid).delete()
+        return 200, {"message": "success"}
+    return 404, {"message": "error"}
+
+@api.delete('/teacher/message/confirm/{mid}', response={200: SuccessFoundSchema, 404: NotFoundSchema})
+def teacher_message_confirm(request, mid: int):
+    if TeacherMessage.objects.filter(id=mid).exists():
+        TeacherMessage.objects.filter(id=mid).delete()
+        return 200, {"message": "success"}
+    return 404, {"message": "error"}
 
 @api.get('/teacher/statistics/{tid}', response=TeacherStatisticsSchema)
 def teacher_statistics(request, tid: int):

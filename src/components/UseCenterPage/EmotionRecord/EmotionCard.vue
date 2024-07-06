@@ -10,7 +10,6 @@ const props = defineProps({
 })
 
 const recordType = parseInt(props.emotionRecord.type)
-console.log(recordType)
 </script>
 
 <template>

@@ -61,7 +61,7 @@
 
         <el-popover placement="bottom-start">
           <template #reference>
-            <el-badge :value="assignmentNum + messageNum" style="margin-right: 36px">
+            <el-badge :value="assignmentNum + messageNum" style="margin-right: 24px">
               <el-button
                   :type="route.path==='/academy'?'primary':'default'"
                   plain>
@@ -78,7 +78,27 @@
           <div class="Space-Between-Flex">
             <el-statistic title="待完成作业" :value="assignmentNum" />
           </div>
-            <el-statistic title="未读消息数" :value="messageNum" />
+        </el-popover>
+
+        <el-popover placement="bottom-start">
+          <template #reference>
+            <el-badge :value="assignmentNum + messageNum" style="margin-right: 36px">
+              <el-button
+                  :type="route.path==='/notice'?'primary':'default'"
+                  plain>
+                <el-link type="primary"
+                         style="
+                       font-size: 18px;
+                        white-space: nowrap;
+                       font-weight: bolder"
+                         @click="handleToNotice"
+                >消息通知</el-link>
+              </el-button>
+            </el-badge>
+          </template>
+          <div class="Space-Between-Flex">
+            <el-statistic title="待阅读消息" :value="assignmentNum" />
+          </div>
         </el-popover>
       </div>
 
@@ -228,6 +248,19 @@ const handleToMainPage = () => {
     return
   }
   router.push("/portal")
+}
+
+const handleToNotice = () => {
+  if(route.path === '/notice'){
+    ElNotification({
+      message: '你已经在消息通知啦',
+      type: 'success',
+      offset: 64,
+      duration: 1000
+    })
+    return
+  }
+  router.push("/notice")
 }
 
 const basicInfo = ref({})

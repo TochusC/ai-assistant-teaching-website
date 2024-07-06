@@ -4,134 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f30635d9-0e40-4caa-b123-866977996a73" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../AvatarServer/AvatarServer/face.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AvatarServer/AvatarServer/photo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0008_rename_time_courseannouncement_atime.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0009_remove_assignment_deadline_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0010_chapterresource_type.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0011_courseannouncement_type.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0012_courseannouncement_time.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0013_chapterresource_time.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0014_chapterresource_size.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0015_courseassignment_time.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0016_studentcourse_time.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0017_studentassignment_answer_studentassignment_response_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0018_chapterkeyconcept_chapterproblem_keyconcept_problem_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0019_studentproblem.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0020_problem_holistic_problem_innovation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0021_studentacademyinfo_studentbasicinfo_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0022_studentemotion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0023_studentemotion_type.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0024_parent_studentactivity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sparkle/migrations/0025_studentmental.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cdn/public/assests/course/1/1/resource/123.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cdn/public/assests/default/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cdn/public/assests/user/1/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cdn/public/assests/user/6/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../competition/网挑/提交/1-2Refactor.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../competition/网挑/提交/6-18晚上.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../competition/网挑/提交/参考内容.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../competition/网挑/提交/张永乾作品A (1).pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../competition/网挑/提交/贾关成作品A (1).pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../competition/网挑/提交/黄子凌设计文档A (1).pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/assets/static/js/area.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/AIEvaluation.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/GoToLearning.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/GoToLearning/ProblemCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/LearningProgress.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/ProblemHistory.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/ProblemHistory/ProblemHistoryCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/ProblemPage/ProblemInspect.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/ProblemPage/SimilarProblemDialog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentHeadNavi.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/ChildEmotionRecord.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/ChildHomeSchoolInformation.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/ChildInformation.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/ChildInformation/ChildBasicInfoCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/ChildInformation/ChildSchoolAuthentication.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/EmotionRecord/EmotionCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/HomeSchoolInformation/ChildFamilyCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs/HomeSchoolInformation/ChildInstructorCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/StudentInfo/StudentEmotionRecord.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/StudentInfo/StudentHomeSchoolAuthentication.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/StudentInfo/StudentHomeSchoolAuthentication/StudentFamilyCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/StudentInfo/StudentHomeSchoolAuthentication/StudentInstructorCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/StudentInfo/StudentInformation.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/StudentInfo/StudentInformation/StudentBasicInfoCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/StudentInfo/StudentInformation/StudentSchoolAuthentication.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/EmotionRecord.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/EmotionRecord/EmotionCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/HomeSchoolInformation.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/HomeSchoolInformation/FamilyCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/HomeSchoolInformation/InstructorCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/UserInformation/BasicInfoCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/UserInformation/StudentAuthentication.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/utils/NegativeProgressBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/components/utils/PositiveProgressBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/views/MyAcademy/ProblemPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/views/ParentPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/views/TeachingPortal/StudentManagement/StudentInfo.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../src/views/TeachingPortal/StudentManagement/StudentOverview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AvatarServer/AvatarServer/LLM.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/AvatarServer/LLM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AvatarServer/AvatarServer/TTS.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/AvatarServer/TTS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AvatarServer/AvatarServer/out.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/AvatarServer/out.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AvatarServer/AvatarServer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/AvatarServer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AvatarServer/AvatarServer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/AvatarServer/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AvatarServer/out.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/out.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AvatarServer/received.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/received.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sparkle/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sparkle/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sparkle/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sparkle/asgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sparkle/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sparkle/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sparkle/scheme.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sparkle/scheme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cdn/cdn-server.js" beforeDir="false" afterPath="$PROJECT_DIR$/../cdn/cdn-server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/DataDescription.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/assets/static/js/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/assets/static/js/resources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/AccountPage/BasicInfo.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/CoursePage/InfoTabs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/CoursePage/InfoTabs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseAnnouncement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseAnnouncement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseHomework.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseHomework.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseQA.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseQA.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseResources.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/CourseResources.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/OnlineTutorial.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/CoursePage/TabPane/OnlineTutorial.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/LoginPage/LoginDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/LoginPage/LoginDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/LoginPage/RegistryDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/LoginPage/RegistryDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/LoginPage/WelcomeAside.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/LoginPage/WelcomeAside.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/MainPage/LogoutDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MainPage/LogoutDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCourseCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/GoToLearning/MyCourseCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCoursePage/CourseTabs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCoursePage/CourseTabs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCoursePage/MyCourseHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCoursePage/MyCourseHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/MyAcademyPage/NoticeCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/GoToLearning/NoticeCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/MyAcademyPage/ResourceCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/MyCoursePage/ResourceCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachHeadNavi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachHeadNavi.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachSideNavi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachSideNavi.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/UnityComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/UnityComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/UnityInteraction.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/UnityInteraction.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/UseCenterPage/AccountManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/AccountManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/UseCenterPage/UserInformation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/UseCenterPage/UserInformation.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/utils/AISimilarQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/utils/AISimilarQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/components/utils/HeadNavi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/utils/HeadNavi.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/BlankPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/BlankPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/CoursePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/CoursePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/InfoPage/NotFoundPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/InfoPage/NotFoundPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/LoginPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/LoginPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MainPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/MyAcademy/Assignment/Attendance.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MyAcademy/Assignment/Attendance.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/MyAcademy/Assignment/Course.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MyAcademy/Assignment/Course.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/MyAcademy/MyCoursePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MyAcademy/MyCoursePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/MyAcademyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MyAcademy/MyAcademyPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/TeachingActivity/CourseCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/TeachingPortal/CourseManagement/CourseCreate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/TeachingActivity/TeachOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/TeachingPortal/TeachOverview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/TeachingActivity/TeachingPortal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/TeachingPortal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/views/UserCenterPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/UserCenterPage.vue" afterDir="false" />
-    </list>
+    <list default="true" id="f30635d9-0e40-4caa-b123-866977996a73" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,7 +38,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Project/ai-assistant-teaching-website/affiliate-project/AvatarServer&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Project/ai-assistant-teaching-website/affiliate-project/Sparkle&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -247,6 +120,12 @@
       <workItem from="1718846959937" duration="4590000" />
       <workItem from="1719538477006" duration="509000" />
       <workItem from="1719738479135" duration="2813000" />
+      <workItem from="1720065567961" duration="6108000" />
+      <workItem from="1720143233473" duration="1362000" />
+      <workItem from="1720144859964" duration="2607000" />
+      <workItem from="1720168872433" duration="1824000" />
+      <workItem from="1720186796452" duration="1330000" />
+      <workItem from="1720228712844" duration="5103000" />
     </task>
     <servers />
   </component>

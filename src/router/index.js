@@ -17,6 +17,7 @@ import CourseCreate from "@/views/TeachingPortal/CourseManagement/CourseCreate.v
 import StudentOverview from "@/views/TeachingPortal/StudentManagement/StudentOverview.vue";
 import StudentInfo from "@/views/TeachingPortal/StudentManagement/StudentInfo.vue";
 import ParentPage from "@/views/ParentPage.vue";
+import NoticePage from "@/views/NoticePage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -91,6 +92,7 @@ const router = createRouter({
         ]
     },
       {path: "/parent", component: ParentPage, meta: {requiresAuth: true, role: "parent"}},
+      {path: "/notice", component: NoticePage, meta: {requiresAuth: true, role: "parent"}},
   ]
 })
 

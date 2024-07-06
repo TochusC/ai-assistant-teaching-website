@@ -1,6 +1,4 @@
 <script setup>
-import NoticeCard from "@/components/MyAcademyPage/GoToLearning/NoticeCard.vue";
-import MyCourseCard from "@/components/MyAcademyPage/GoToLearning/MyCourseCard.vue";
 import BlankPage from "@/views/BlankPage.vue";
 import {useAuth} from "@/assets/static/js/useAuth.js"
 import {inject, onMounted, ref, watch} from "vue";
@@ -8,53 +6,21 @@ import axios from "axios";
 import * as echarts from 'echarts/core';
 import { useThemeVars } from 'naive-ui'
 import AIOpinion from "@/components/utils/AIOpinion.vue";
-import {ElMessage, ElNotification} from "element-plus";
-import {backendUrl, llmApi} from "@/assets/static/js/severConfig.js";
+import {backendUrl} from "@/assets/static/js/severConfig.js";
 import {StarFilled} from "@element-plus/icons-vue";
 import AITextLong from "@/components/utils/AITextLong.vue";
-import ProblemCard from "@/components/MyAcademyPage/GoToLearning/ProblemCard.vue";
 import ProblemHistory from "@/components/MyAcademyPage/ProblemHistory.vue";
 import GoToLearning from "@/components/MyAcademyPage/GoToLearning.vue";
 
-const themeVars = useThemeVars()
+const analysis = ref();
+
+
 const {user} = useAuth();
 
-const learning_activity = [
-  {
-    name: '计算机网络原理',
-    data: [120, 132, 101, 134, 90, 230, 210]
-  },
-  {
-    name: '计算机组成原理',
-    data: [220, 182, 191, 234, 290, 330, 310]
-  },
-  {
-    name: '操作系统',
-    data: [150, 232, 201, 154, 190, 330, 410]
-  },
-  {
-    name: '数据结构',
-    data: [320, 332, 301, 334, 390, 330, 320]
-  },
-  {
-    name: '总学习时长',
-    data: [820, 932, 901, 934, 1290, 1330, 1320]
-  }
-]
-
-const course_progress = [
-  {course: '计算机网络原理', progress: 90},
-  {course: '计算机组成原理', progress: 70},
-  {course: '操作系统', progress: 50},
-  {course: '数据结构', progress: 10},
-]
-
+const themeVars = useThemeVars()
 const isDark = inject('isDark')
-
 const chartContainer = ref(null)
-
 let myChart = null
-const analysis = ref();
 
 const initChart = ()=>{
   if(isDark.value) {
@@ -149,8 +115,8 @@ const handleUpdateValue = (value) => {
 
 onMounted( //用户选课信息已经初始化了
     async() => {
-      fetchProgress()
-      fetchActivity()
+      await fetchProgress()
+      await fetchActivity()
 
       watch(isDark, (newVal) => {
         initChart()
@@ -189,7 +155,6 @@ const activity = ref([])
 const fetchActivity = async () => {
   axios.get(backendUrl + 'student/activity/' + user.value.ident).then(res => {
     activity.value = res.data
-    console.log(activity.value)
     initChart()
   }).catch(err => {
     console.log(err)
@@ -260,7 +225,7 @@ const fetchActivity = async () => {
                 </div>
                 <AIOpinion
                     style="margin-top: 36px"
-                    :prompt="'以下是我的各课学习进度，给我来点一句简短的建议：' + JSON.stringify(course_progress)"/>
+                    :prompt="'以下是我的各课学习进度，给我来点一句简短的建议：' + JSON.stringify(progress)"/>
               </div>
           </div>
           <div id="course-div" style="margin-bottom: 24px; margin-right: 12px; margin-left: 12px">
@@ -276,7 +241,7 @@ const fetchActivity = async () => {
               </div>
               <AIOpinion
                   style="margin-top: 36px; margin-right: 24px"
-                  :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(learning_activity)"/>
+                  :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(activity)"/>
           </div>
         </el-tab-pane>
 

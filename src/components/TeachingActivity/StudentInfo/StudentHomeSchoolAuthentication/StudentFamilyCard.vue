@@ -43,7 +43,7 @@ onMounted(() => {
         <el-form-item label="家庭住址" style="width: 100%; margin-right: 24px">
           <el-cascader
               disabled
-              v-model="family.address"
+              v-model="family.location"
               :options="region"
               placeholder="该同学尚未选择家庭住址"
               :props="{value: 'name', label: 'name', children: 'children'}"
@@ -52,7 +52,7 @@ onMounted(() => {
         <el-form-item label="详细地址" style="width: 100%; margin-right: 24px">
           <el-input
               disabled
-              v-model="family.detailAddress"
+              v-model="family.address"
               placeholder="该同学尚未输入详细地址"
           />
         </el-form-item>

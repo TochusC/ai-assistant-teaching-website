@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { StarFilled, User, MessageBox } from "@element-plus/icons-vue";
 import {ref} from "vue";
 
