@@ -69,9 +69,30 @@
                  font-size: 18px;
                   white-space: nowrap;
                  font-weight: bolder"
-                   @click="handleToTeachingPortal"
+                   @click="handleToParentPortal"
           >家长门户</el-link>
         </el-button>
+
+        <el-popover placement="bottom-start">
+          <template #reference>
+            <el-badge :value="notice.length" style="margin-right: 36px">
+              <el-button
+                  :type="route.path==='/notice'?'primary':'default'"
+                  plain>
+                <el-link type="primary"
+                         style="
+                       font-size: 18px;
+                        white-space: nowrap;
+                       font-weight: bolder"
+                         @click="handleToNotice"
+                >消息通知</el-link>
+              </el-button>
+            </el-badge>
+          </template>
+          <div class="Space-Between-Flex">
+            <el-statistic title="待阅读消息" :value="notice.length" />
+          </div>
+        </el-popover>
       </div>
 
       <!--          头像-->
@@ -102,7 +123,11 @@ import router from "@/router/index.js";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
 import {useRoute} from "vue-router";
 import {ElMessage, ElNotification} from "element-plus";
+import axios from "axios";
+import {backendUrl} from "@/assets/static/js/severConfig.js";
+import {useAuth} from "@/assets/static/js/useAuth.js";
 
+const {user} = useAuth();
 
 const tittle = ref(null)
 const isCollapse = ref(true)
@@ -159,6 +184,7 @@ const route = useRoute();
 
 onMounted(() => {
   rescaleElement()
+  fetchNotice()
 
   window.addEventListener('resize', () => {
     rescaleElement()
@@ -168,7 +194,7 @@ onMounted(() => {
   })
 })
 
-const handleToTeachingPortal = () => {
+const handleToParentPortal = () => {
   if(route.path === '/parent'){
     ElNotification({
       message: '您已经在家长门户页面啦',
@@ -178,7 +204,7 @@ const handleToTeachingPortal = () => {
     })
     return
   }
-  router.push("/academy")
+  router.push("/parent")
 }
 const handleToMainPage = () => {
   if(route.path === '/portal'){
@@ -191,6 +217,27 @@ const handleToMainPage = () => {
     return
   }
   router.push("/")
+}
+
+const handleToNotice = () => {
+  if(route.path === '/notice'){
+    ElNotification({
+      message: '你已经在消息通知啦',
+      type: 'success',
+      offset: 64,
+      duration: 1000
+    })
+    return
+  }
+  router.push("/notice")
+}
+const notice = ref([])
+const fetchNotice = () => {
+  axios.get(backendUrl + user.value.role + '/message/' + user.value.ident).then(res => {
+    notice.value = res.data
+  }).catch(err => {
+    console.log(err)
+  })
 }
 </script>
 

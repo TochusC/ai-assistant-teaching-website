@@ -117,6 +117,7 @@ onMounted( //用户选课信息已经初始化了
     async() => {
       await fetchProgress()
       await fetchActivity()
+      await fetchEmotion()
 
       watch(isDark, (newVal) => {
         initChart()
@@ -135,6 +136,9 @@ onMounted( //用户选课信息已经初始化了
     }
 )
 
+const isActivityReady = ref(false)
+const isProgressReady = ref(false)
+
 const currentTab = ref('tab1')
 
 const progress = ref([])
@@ -145,7 +149,7 @@ const fetchProgress = async () => {
     for (let i = 0; i < progress.value.length; i++) {
       progressValue.value.push(progress.value[i].progress)
     }
-    console.log(progress.value)
+    isProgressReady.value = true
   }).catch(err => {
     console.log(err)
   })
@@ -155,7 +159,19 @@ const activity = ref([])
 const fetchActivity = async () => {
   axios.get(backendUrl + 'student/activity/' + user.value.ident).then(res => {
     activity.value = res.data
+    isActivityReady.value = true
     initChart()
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
+const isEmotionReady = ref(false)
+const emotion = ref('')
+const fetchEmotion = async () => {
+  axios.get(backendUrl + 'student/emotion/status/' + user.value.ident).then(res => {
+    emotion.value = res.data.message
+    isEmotionReady.value = true
   }).catch(err => {
     console.log(err)
   })
@@ -225,7 +241,8 @@ const fetchActivity = async () => {
                 </div>
                 <AIOpinion
                     style="margin-top: 36px"
-                    :prompt="'以下是我的各课学习进度，给我来点一句简短的建议：' + JSON.stringify(progress)"/>
+                    v-if="isProgressReady"
+                    :prompt="'以下是我的各课学习进度，给我来一句简短的建议：' + JSON.stringify(progress)"/>
               </div>
           </div>
           <div id="course-div" style="margin-bottom: 24px; margin-right: 12px; margin-left: 12px">
@@ -241,21 +258,25 @@ const fetchActivity = async () => {
               </div>
               <AIOpinion
                   style="margin-top: 36px; margin-right: 24px"
-                  :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(activity)"/>
+                  v-if="isActivityReady"
+                  :prompt="'以下是我的各课学习时长，请给我来一句简短的建议：' + JSON.stringify(activity)"/>
           </div>
         </el-tab-pane>
 
         <el-tab-pane name="tab3" label="做题历史">
           <ProblemHistory/>
         </el-tab-pane>
-        <el-tab-pane  name="tab4" label="AI评估">
+        <el-tab-pane  name="tab4" label="🌟AI评估">
           <div class="Center-Flex">
             <el-button type="primary" :icon="StarFilled">让小慧重新生成一份~</el-button>
           </div>
           <AITextLong
               style="margin-top: 36px; margin-left: 8px; margin-right: 8px;"
-              :prompt="'以下是我的各课学习时长，给我来点一句简短的建议：' + JSON.stringify(course_progress)
-                + JSON.stringify(learning_activity) + '请你根据这些数据，总结评估我的学习情况，并为我提出个性化学习方案，回复的时候请使用Markdown格式进行排版. 并进行标题分级，内容尽量详细充实。'"/>
+              v-if="isActivityReady&&isProgressReady&&isEmotionReady"
+              :prompt="'以下是我的各课学习进度：' + JSON.stringify(progress)
+              + '以下是我的每日学习时长' + JSON.stringify(activity)
+              + '以下是我的当前情绪活跃度（范围0-100）' + emotion +
+              '请你根据这些数据，结合我的情绪活跃度，总结评估我的学习情况，并为我提出个性化学习方案，回复的时候请使用Markdown格式进行排版. 并进行标题分级，内容尽量详细充实。'"/>
           <div class="Center-Flex" style="flex-direction: column; margin-top: 24px">
             <el-text>你对小慧为你定制的学习计划感到满意吗？</el-text>
             <n-rate allow-half />

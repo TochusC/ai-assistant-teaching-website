@@ -13,7 +13,6 @@ const fetchStudents = async () => {
   axios.get(studentUrl)
       .then((response) => {
         students.value = response.data
-        console.log(students.value)
       })
       .catch((error) => {
         console.log(error)

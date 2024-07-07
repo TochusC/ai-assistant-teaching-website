@@ -10,7 +10,6 @@ const isLoading = ref(true)
 const llmReply = ref('')
 
 onMounted(() => {
-
   const formData = new FormData();
   formData.append('userText', prop.prompt);
   axios.post(llmApi, formData).then((response) => {

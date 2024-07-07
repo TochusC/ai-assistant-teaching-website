@@ -1,5 +1,5 @@
 <template>
-  <div class="Header-Container" >
+  <div class="Header-Container" v-if="user.role === 'student'">
     <div class="Header-Item" ref="logoContainer">
       <el-popover
           placement="top-start"
@@ -49,7 +49,7 @@
         <el-button
             plain
             :type="route.path==='/'?'primary':'default'"
-            style="margin-right: 12px">
+            style="margin-right: 24px">
           <el-link type="primary"
                    style="
                        font-size: 18px;
@@ -59,19 +59,26 @@
           >首页</el-link>
         </el-button>
 
-
-        <el-button
-            style="margin-right: 24px"
-            :type="route.path==='/academy'?'primary':'default'"
-            plain>
-          <el-link type="primary"
-                   style="
-                 font-size: 18px;
-                  white-space: nowrap;
-                 font-weight: bolder"
-                   @click="handleToTeachingPortal"
-          >教学首页</el-link>
-        </el-button>
+        <el-popover placement="bottom-start">
+          <template #reference>
+            <el-badge :value="assignmentNum + messageNum" style="margin-right: 24px">
+              <el-button
+                  :type="route.path==='/academy'?'primary':'default'"
+                  plain>
+                <el-link type="primary"
+                         style="
+                       font-size: 18px;
+                        white-space: nowrap;
+                       font-weight: bolder"
+                         @click="handleToMyAcademy"
+                >我的学堂</el-link>
+              </el-button>
+            </el-badge>
+          </template>
+          <div class="Space-Between-Flex">
+            <el-statistic title="待完成作业" :value="assignmentNum" />
+          </div>
+        </el-popover>
 
         <el-popover placement="bottom-start">
           <template #reference>
@@ -95,7 +102,6 @@
         </el-popover>
       </div>
 
-
       <el-popover
           placement="top-start"
           :width="160"
@@ -104,9 +110,12 @@
         <template #reference>
           <img
               class="icon"
-              src="@/assets/static/img/boy.png" alt="" style="height:52px; width: auto"/>
+              :src="basicInfo.avatar"
+              alt=""
+              style="height:52px; width: 52px; border-radius: 52px;"/>
         </template>
         <el-menu>
+          <el-menu-item @click="toUserCenter" index="1">个人中心</el-menu-item>
           <el-menu-item @click="showLogoutDialog=true">退出登录</el-menu-item>
         </el-menu>
       </el-popover>
@@ -117,26 +126,24 @@
 
 <script setup>
 import {ref, onMounted, inject} from 'vue'
-const activeIndex = ref('1')
 import { useDark } from '@vueuse/core'
-import {MoonNight, Sunset, Search} from "@element-plus/icons-vue";
+import {MoonNight, Sunset} from "@element-plus/icons-vue";
 import router from "@/router/index.js";
 import LogoutDialog from "@/components/MainPage/LogoutDialog.vue";
 import {useRoute} from "vue-router";
-import {ElMessage, ElNotification} from "element-plus";
+import {ElNotification} from "element-plus";
 import axios from "axios";
 import {backendUrl} from "@/assets/static/js/severConfig.js";
 import {useAuth} from "@/assets/static/js/useAuth.js";
+import TeachHeadNavi from "@/components/TeachingActivity/utils/TeachHeadNavi.vue";
+import ParentHeadNavi from "@/components/ParentPage/ParentHeadNavi.vue";
 
-const {user} = useAuth()
 
 const tittle = ref(null)
+const { user } = useAuth()
 const isCollapse = ref(true)
 const showLogoutDialog = ref(false)
 const showParticles = inject('showParticles')
-
-// 响应式搜索栏宽度
-const dynamicSearchBarWidth = ref('560px')
 
 const toUserCenter = () => {
   if(route.path === '/user'){
@@ -161,30 +168,15 @@ const isDark = useDark()
 const logoContainer = ref(null)
 const mineContainer = ref(null)
 
-const windowWidth = ref(null)
-
-const notification = [
-  {
-    type: '作业',
-    num: 1,
-  }
-]
 
 const toMainPage = () => {
-  router.push('/')
+  router.push('/portal')
 }
+
+const windowWidth = inject('windowWidth');
 // 响应式调整元素
 const rescaleElement = () => {
-  if(showAssistant.value){
-    windowWidth.value = window.innerWidth / 4 * 3;
-  }
-  else {
-    windowWidth.value = window.innerWidth;
-  }
-
-  dynamicSearchBarWidth.value = (windowWidth.value - logoContainer.value.offsetWidth - mineContainer.value.offsetWidth) * 0.75 + 'px'
-
-
+  if(tittle.value === null) return
   if (windowWidth.value < 764) {
     tittle.value.style.fontSize = '0px';
     isCollapse.value = true;
@@ -194,25 +186,48 @@ const rescaleElement = () => {
     isCollapse.value = false
   }
 }
+const assignmentNum = ref(0)
+const messageNum = ref(0)
+
+const getNotification = () => {
+  const {user} = useAuth()
+  const assignmentsUrl = backendUrl + 'student/assignment/unfinished/'
+      + user.value.school + '/' + user.value.id
+  axios.get(assignmentsUrl)
+      .then((res) => {
+        assignmentNum.value = res.data.length
+      })
+      .catch((err) => {
+        ElNotification({
+          title: '错误',
+          message: '获取通知信息失败' + err,
+          type: 'error',
+          offset: 64,
+          duration: 2000
+        })
+      })
+}
 
 const route = useRoute();
 
 onMounted(() => {
-  rescaleElement()
-  fetchNotice()
+  rescaleElement();
+  getNotification();
+  fetchBasicInfo();
+  fetchNotice();
 
   window.addEventListener('resize', () => {
-    rescaleElement()
+    rescaleElement();
   })
   window.addEventListener('showAssistant', () => {
-    rescaleElement()
+    rescaleElement();
   })
 })
 
-const handleToTeachingPortal = () => {
-  if(route.path === '/teaching/portal'){
+const handleToMyAcademy = () => {
+  if(route.path === '/academy'){
     ElNotification({
-      message: '您已经在教学首页啦',
+      message: '你已经在我的学堂啦',
       type: 'success',
       offset: 64,
       duration: 1000
@@ -221,7 +236,18 @@ const handleToTeachingPortal = () => {
   }
   router.push("/academy")
 }
-
+const handleToMainPage = () => {
+  if(route.path === '/portal'){
+    ElNotification({
+      message: '你已经在首页啦',
+      type: 'success',
+      offset: 64,
+      duration: 1000
+    })
+    return
+  }
+  router.push("/portal")
+}
 
 const handleToNotice = () => {
   if(route.path === '/notice'){
@@ -235,6 +261,7 @@ const handleToNotice = () => {
   }
   router.push("/notice")
 }
+
 const notice = ref([])
 const fetchNotice = () => {
   axios.get(backendUrl + user.value.role + '/message/' + user.value.ident).then(res => {
@@ -244,17 +271,14 @@ const fetchNotice = () => {
   })
 }
 
-const handleToMainPage = () => {
-  if(route.path === '/portal'){
-    ElNotification({
-      message: '你已经在首页啦',
-      type: 'success',
-      offset: 64,
-      duration: 1000
-    })
-    return
-  }
-  router.push("/")
+
+const basicInfo = ref({})
+const fetchBasicInfo = () => {
+  axios.get(backendUrl + 'student/info/basic/' + user.value.ident).then(res => {
+    basicInfo.value = res.data
+  }).catch(err => {
+    console.log(err)
+  })
 }
 </script>
 
@@ -268,8 +292,7 @@ const handleToMainPage = () => {
 .Header-Container {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
+  padding: 8px;
   box-shadow: 0 0 8px #8080ff;
   background: var(--el-bg-color);
   display: inline-flex;
@@ -279,8 +302,6 @@ const handleToMainPage = () => {
 html.dark .Header-Container{
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
   box-shadow: 0 0 4px var(--el-color-primary);
   display: inline-flex;
   align-items: center;

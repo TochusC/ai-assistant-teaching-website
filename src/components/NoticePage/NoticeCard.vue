@@ -1,6 +1,6 @@
 <script setup>
 
-import {Check} from "@element-plus/icons-vue";
+import {Bell, Check} from "@element-plus/icons-vue";
 import axios from "axios";
 import {useAuth} from "@/assets/static/js/useAuth.js";
 import {backendUrl} from "@/assets/static/js/severConfig.js";
@@ -30,30 +30,29 @@ const confirmMessage = () => {
 <template>
   <el-card>
     <div class="Space-Between-Flex">
-      <div style="display:flex; align-content: center">
-
-        <el-tag type="primary" plain style="margin-right: 8px">
-          <el-text
-              style="
-                font-size: 12px"
-          >{{props.message.type}}</el-text>
+      <div style="display:flex; align-content: center; justify-content: center">
+        <el-tag
+            :type="props.message.type == '提醒'? 'warning' : props.message.type === '预警'? 'danger' : props.message.type === '通知'? 'primary' : 'success'"
+            style="margin-right: 8px">
+          <div style="display: flex; align-content: center">
+            <el-icon style="margin-right: 2px"><Bell/></el-icon>
+            {{props.message.type}}
+          </div>
         </el-tag>
-
         <el-text
             style="
-              font-weight: bold;
-              font-size: 16px"
+              font-weight: bold;"
         >{{props.message.tittle}}</el-text>
       </div>
 
       <div>
-        <el-tag type="info" plain>
+        <el-tag effect="plain" style="margin-right: 8px" type="info">
           <el-text
               style="
                 font-size: 12px"
           >{{props.message.sender}}</el-text>
         </el-tag>
-        <el-tag type="info" plain>
+        <el-tag effect="plain" type="info" plain>
           <el-text
               style="
                 font-size: 12px"

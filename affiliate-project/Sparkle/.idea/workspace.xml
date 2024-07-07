@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f30635d9-0e40-4caa-b123-866977996a73" name="Changes" comment="" />
+    <list default="true" id="f30635d9-0e40-4caa-b123-866977996a73" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../src/components/MyAcademyPage/StudentHeadNavi.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AvatarServer/out.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/out.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AvatarServer/received.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../AvatarServer/received.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/NoticePage/NoticeCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/NoticePage/NoticeCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/ParentPage/ParentTabs.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachHeadNavi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/TeachingActivity/utils/TeachHeadNavi.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/utils/HeadNavi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/components/utils/HeadNavi.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/MyAcademy/MyAcademyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/MyAcademy/MyAcademyPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/NoticePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/NoticePage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/TeachingPortal/StudentManagement/StudentInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/views/TeachingPortal/StudentManagement/StudentInfo.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +137,7 @@
       <workItem from="1720144859964" duration="2607000" />
       <workItem from="1720168872433" duration="1824000" />
       <workItem from="1720186796452" duration="1330000" />
-      <workItem from="1720228712844" duration="5103000" />
+      <workItem from="1720228712844" duration="16672000" />
     </task>
     <servers />
   </component>
