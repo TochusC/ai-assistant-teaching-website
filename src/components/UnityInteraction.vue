@@ -152,33 +152,39 @@ const mediaSteam = ref(null)
 const rawImage = ref('')
 
 const initMedia = () => {
-  navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: true,
-  }).then((stream) => {
-    mediaSteam.value = stream
-    let cv = document.getElementById('cameraVideo')
-    let cp = document.getElementById('cameraPhoto')
-    cameraVideo.value = cv
-    cameraPhoto.value = cp
-    cv.srcObject = stream
-  }).catch((err) => {
-    ElMessage({
-      title: '打开麦克风、摄像头失败❌',
-      type: 'error',
-      message: '出现问题啦，我们无法看到你的小表情奥😣' + err,
-      duration: 4000
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert("浏览器不支持getUserMedia! 将无法进行语音交互");
+  }
+  else{
+    navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true,
+    }).then((stream) => {
+      mediaSteam.value = stream
+      let cv = document.getElementById('cameraVideo')
+      let cp = document.getElementById('cameraPhoto')
+      cameraVideo.value = cv
+      cameraPhoto.value = cp
+      cv.srcObject = stream
+    }).catch((err) => {
+      ElMessage({
+        title: '打开麦克风、摄像头失败❌',
+        type: 'error',
+        message: '出现问题啦，我们无法看到你的小表情奥😣' + err,
+        duration: 4000
+      })
     })
-  })
-}
-const voiceOff = () => {
-  const canvas = cameraPhoto.value.getContext('2d')
-  canvas.drawImage(
-      cameraVideo.value,
-      0, 0,
-      cameraPhoto.value.width,
-      cameraPhoto.value.height)
-  fetchFaceAnalysis(3)
+  }
+  const voiceOff = () => {
+    const canvas = cameraPhoto.value.getContext('2d')
+    canvas.drawImage(
+        cameraVideo.value,
+        0, 0,
+        cameraPhoto.value.width,
+        cameraPhoto.value.height)
+    fetchFaceAnalysis(3)
+  }
+
 }
 
 const textOff = () => {
