@@ -153,7 +153,14 @@ const rawImage = ref('')
 
 const initMedia = () => {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    alert("浏览器不支持getUserMedia! 将无法进行语音交互");
+    ElMessage(
+        {
+          title: '打开麦克风、摄像头失败❌',
+          type: 'error',
+          message: '出现问题啦，我们无法获取到您的麦克风及摄像头权限😣' + err,
+          duration: 4000
+        }
+    )
   }
   else{
     navigator.mediaDevices.getUserMedia({
@@ -175,6 +182,7 @@ const initMedia = () => {
       })
     })
   }
+
   const voiceOff = () => {
     const canvas = cameraPhoto.value.getContext('2d')
     canvas.drawImage(
