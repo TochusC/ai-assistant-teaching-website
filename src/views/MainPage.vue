@@ -70,14 +70,15 @@ const initMedia = () => {
       ElMessage({
         title: '打开麦克风、摄像头失败❌',
         type: 'error',
-        message: '出现问题啦，我们无法看到你的小表情奥😣' + err,
+        message: '出现问题啦，我们无法看到你的小表情奥😣',
         duration: 4000
       })
     })
   }
+}
 
 
-  const handleCamera = () => {
+const handleCamera = () => {
   const canvas = cameraPhoto.value.getContext('2d')
   canvas.drawImage(
       cameraVideo.value,

@@ -182,17 +182,16 @@ const initMedia = () => {
       })
     })
   }
+}
 
-  const voiceOff = () => {
-    const canvas = cameraPhoto.value.getContext('2d')
-    canvas.drawImage(
-        cameraVideo.value,
-        0, 0,
-        cameraPhoto.value.width,
-        cameraPhoto.value.height)
-    fetchFaceAnalysis(3)
-  }
-
+const voiceOff = () => {
+  const canvas = cameraPhoto.value.getContext('2d')
+  canvas.drawImage(
+      cameraVideo.value,
+      0, 0,
+      cameraPhoto.value.width,
+      cameraPhoto.value.height)
+  fetchFaceAnalysis(3)
 }
 
 const textOff = () => {
