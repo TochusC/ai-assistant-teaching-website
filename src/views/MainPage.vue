@@ -75,9 +75,10 @@ const initMedia = () => {
       })
     })
   }
+}
 
 
-  const handleCamera = () => {
+const handleCamera = () => {
   const canvas = cameraPhoto.value.getContext('2d')
   canvas.drawImage(
       cameraVideo.value,
