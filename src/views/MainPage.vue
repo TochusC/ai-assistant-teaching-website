@@ -50,7 +50,7 @@ const initMedia = () => {
         {
           title: '打开麦克风、摄像头失败❌',
           type: 'error',
-          message: '出现问题啦，我们无法获取到您的麦克风及摄像头权限😣' + err,
+          message: '出现问题啦，我们无法获取到您的麦克风及摄像头权限😣',
           duration: 4000
         }
     )
