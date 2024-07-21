@@ -79,14 +79,15 @@ onMounted(() => {
         <h3 style="margin-right: 8px">
           Powered by</h3>
         <img
-            style="width: 128px; margin-right: 6px"
-            src="@/assets/static/img/logo/baidu_logo.png"/>
-        <img
-            style="width: 36px; margin-right: 6px"
+            style="width: 47px; margin-right: 6px"
             src="@/assets/static/img/logo/vue_logo.png"/>
         <img
+            style="width: 96px; margin-right: 6px"
+            src="@/assets/static/img/logo/three_logo.png"/>
+
+        <img
             style="width: 86px; margin-right: 6px"
-            src="@/assets/static/img/logo/unity_logo.png"/>
+            src="@/assets/static/img/logo/django_logo.png"/>
 
       </div>
     </div>
