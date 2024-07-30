@@ -32,6 +32,11 @@ const server = http.createServer((req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     // 获取请求的文件路径
     const filePath = path.join(staticRoot, req.url);
+    if (path.normalize(decodeURI(req.url)) !== decodeURI(req.url)) {
+        res.statusCode = 403;
+        res.end();
+        return;
+    }
 
     try {
         if(req.method === 'GET') {
