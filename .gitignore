@@ -13,6 +13,9 @@ build/
 .vscode/
 develop-eggs/
 dist/
+*/.idea/
+*/.vscode/
+.vscode/
 downloads/
 eggs/
 .eggs/
