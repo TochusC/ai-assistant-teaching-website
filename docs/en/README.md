@@ -7,6 +7,8 @@ An intelligent teaching assistant platform supporting **natural language interac
 
 [**简体中文**](./README.md) | [**English**](./../en/README.md)
 
+---
+
 Congratulations to **AI Assistant - Xiaohui** for winning national awards in the following competitions👏:
 
 [(16th) China College Students Computer Design Competition](https://jsjds.blcu.edu.cn/)-Software Application and Development Track-**National First Prize**
@@ -23,9 +25,6 @@ Congratulations to **AI Assistant - Xiaohui** for winning national awards in the
 
 ## Vue3 + Unity(WebGL) Intelligent Teaching Assistant Platform📚
 ![example.png](../example_image/example.png)
-***
-### Phase Completion, Construction Temporarily Halted🛠️...
-***
 
 Use large language models as your personal assistant to help you navigate the teaching platform, query teaching information, summarize web content, solve your problems, meet your needs, and even chat about anything!
 
