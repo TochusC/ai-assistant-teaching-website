@@ -1,61 +1,70 @@
 <div align="center">
-<h1> Intelligent Teaching Assistant Platform Empowered by AI 💯</h1>
+<h1> AI-Powered Intelligent Teaching Assistant Platform💯</h1>
 
 An intelligent teaching assistant platform supporting **natural language interaction**
 
 [![madewithlove](https://img.shields.io/badge/made_with-%E2%9D%A4-red?style=for-the-badge&labelColor=orange)](https://github.com/TochusC/ai-assistant-teaching-website)
 
-[**简体中文**](./README.md) | [**English**](./../en/README.md) | [**日本語**](./../jp/README.md)
+[**简体中文**](./README.md) | [**English**](./../en/README.md)
+
+Congratulations to **AI Assistant - Xiaohui** for winning national awards in the following competitions👏:
+
+[(16th) China College Students Computer Design Competition](https://jsjds.blcu.edu.cn/)-Software Application and Development Track-**National First Prize**
+
+[13th "China Software Cup" College Students Software Design Competition](https://www.cnsoftbei.com/)-A5-Intelligent Education Application Software Development Track based on iFLYTEK AI Platform-**National Second Prize**
+
+[2024 China College Students Computer Competition - Network Technology Challenge](http://net.c4best.cn/)-A1 Creative Track-**National Third Prize**
+
+
 
 </div>
 
 ---
 
-## Intelligent Teaching Assistant Platform with Vue3 + Unity(WebGL) 📚
+## Vue3 + Unity(WebGL) Intelligent Teaching Assistant Platform📚
 ![example.png](../example_image/example.png)
 ***
-### Phase completion, construction temporarily paused 🛠️...
+### Phase Completion, Construction Temporarily Halted🛠️...
 ***
 
-Utilizing a large language model as your personal assistant, let (him/her/it) assist you in navigating the teaching platform, querying teaching information, summarizing webpage content, solving your difficulties, fulfilling your requests, and even engaging in casual conversation, exchanging affections, and more!
+Use large language models as your personal assistant to help you navigate the teaching platform, query teaching information, summarize web content, solve your problems, meet your needs, and even chat about anything!
 
 ***
-### Introducing a New Web Interaction Logic 👾!
-No more clicking through various webpage items and navigation menus with a mouse; no more learning complex webpage business logic and operations; no more analyzing cold and rigid chart data displays.
-#### Operate webpages through text and voice in a natural language ✨!
-Through text or voice communication with the intelligent teaching assistant, it will help you navigate to the corresponding webpage modules, assist you in summarizing webpage content, analyzing chart data, and help you navigate the teaching platform smoothly to complete teaching tasks.
-### Real-time Feedback from the Large Model, Customized Learning Assessment 🌟!
+### Offering a New Web Interaction Logic👾!
+No more clicking through complex web items and navigation with a mouse; no more learning complicated web business logic and operations; no more analyzing cold, hard data from web charts.
+#### Operate the web through text and voice using natural language✨!
+Communicate with the intelligent teaching assistant through text or voice, and the assistant will help you navigate to the relevant web modules, summarize web content, analyze chart data, and assist you in seamlessly exploring the teaching platform and completing teaching tasks.
+### Real-time Feedback from Large Models, Customized Learning Assessment🌟!
 ***
-### Meet Your Intelligent Teaching Assistant — Xiao Hui ❤️!
+### Meet Your Intelligent Teaching Assistant - Xiaohui❤️!
 
-Through technologies such as Speech-to-Text (STT), a large language model (LLM), Text-to-Speech (TTS), etc.,
-we have created the intelligent teaching assistant Xiao Hui and introduce her to you 🥰.
+Using technologies like Speech-to-Text (STT), Large Language Models (LLM), and Text-to-Speech (TTS),
+we have created the intelligent teaching assistant Xiaohui and introduced her to you🥰.
 
 <div align="center">
-
-![example_0.png](../example_image/example_0.png)
-
+<img src="../example_image/example_0.png" width="auto" height="320px" />
 </div>
 
 Don't want to learn the complex business logic of the teaching platform? No problem!
 
-~~Let Xiao Hui help students submit assignments, complete tasks; help teachers take attendance, assign homework, and other tedious operations.~~
+~~Let Xiaohui help students submit assignments, complete tasks; help teachers with attendance and assignment operations.~~
 
-Unfortunately, at present, Xiao Hui can only perform routing navigation, but functions such as assigning homework, querying backend data, filling out forms, etc., are **theoretically feasible**.
+Unfortunately, Xiaohui can currently only perform routing navigation, but functions like assignment submission, backend data querying, and form filling are **theoretically achievable**.
 
-For any task, just say a word to Xiao Hui, and she will do her best to fulfill your needs!
+For any task, just say a word to Xiaohui, and she will go all out🔥 to meet your needs!
 
 ***
-##### Speech-to-Text (STT) is implemented using Baidu's Rapid Phrase Speech Recognition Service
-##### Large Language Model (LMM) is Baidu's ERNIE 3.5
+##### Speech-to-Text (STT) is implemented using Baidu's Short Speech Recognition Express Edition service
+##### Large Language Model (LLM) is provided by Baidu's ERNIE 3.5
 ##### ~~Text-to-Speech (TTS) is implemented through the GitHub project [GPT-SoVits](https://github.com/RVC-Boss/GPT-SoVITS)~~
-##### Text-to-Speech (TTS) is implemented through Baidu's short text-to-speech synthesis service (speaker is per6-Du Xiao Meng)
+##### Text-to-Speech (TTS) is implemented through Baidu's Short Text-to-Speech synthesis (voice actor: per6-Du Xiaomeng)
 
 
 ### Platform Preview❓
 
 ---
 #### Website Homepage
+
 ![example_1.png](../example_image/example_1.png)
 
 #### Learning Progress Assessment
@@ -64,60 +73,53 @@ For any task, just say a word to Xiao Hui, and she will do her best to fulfill y
 #### Personalized Learning Plan Generation
 ![example_3.png](../example_image/example_3.png)
 
-#### My School Page (Dark Mode)
+#### My Classroom Page (Dark Mode)
 ![example_3.png](../example_image/example_3.png)
 
 
-### Run the Project 🚀:
-#### Environment Setup 🔨:
+### Running the Project🚀:
+#### Environment Preparation🔨:
 ***
 
 The project uses Node.js v18.18.0 as the runtime environment and is developed using the Vue3 framework.
 
-The frontend uses [Naive UI](https://www.naiveui.com/), [Element-Plus](https://element-plus.org/) component libraries.
-It also includes three-dimensional interactive models implemented through [Spline](https://spline.design/).
+The frontend uses [Naive UI](https://www.naiveui.com/) and [Element-Plus](https://element-plus.org/) component libraries.
+Additionally, it includes 3D interactive models implemented through [Spline](https://spline.design/).
 
-The backend uses Django as the server-side framework. The project has three backend services, all located in the `/affiliate-project` directory.
+The backend uses Django as the server framework, with Python version 3.12.0. The project has three backend services located in the `/affiliate-project` directory.
 
 They are:
-- AvatarServer, the virtual assistant server responsible for calling Baidu's speech recognition service, large language model service, and Baidu's speech synthesis service.
-- backend, the data server using SQLite database, responsible for storing website backend data, including user information, course information, homework information, etc.
-- cdn, the static file server responsible for storing the website's static files, including images, audio, video, etc.
+- AvatarServer, the virtual human server, responsible for calling Baidu's speech recognition service, large language model service, and speech synthesis service.
+- backend, the data server, using SQLite database, responsible for storing website backend data, including user information, course information, assignment information, etc.
+- cdn, the static file server, responsible for storing website static files, including images, audio, video, etc.
 
 Before running the project, please use:
 ```shell
 npm install
 ```
+to install the necessary libraries and dependencies listed in `package.json`.
 
-to install the required libraries and dependencies specified in package.json.
-
-Then start the three backend services separately:
-
-Navigate to the AvatarServer, backend, cdn directories under the `/affiliate-project` directory,
-
-#### Before running the Django backend,
-make sure you have installed Python and the necessary libraries, 
-such as Django, Requests, etc. 
-Refer to the `requirements.txt` and `readme.md` files in each backend.
-
-Run the `run.bat` file in each directory to start the corresponding backend service.
-
-Finally, use
+Use
 ```shell
 npm run dev
 ```
+to start the frontend. You can then meet Xiaohui by visiting [http://127.0.0.1:5173/](http://127.0.0.1:5173/).
 
-to start the frontend project.
+However, to enter the teaching website and let Xiaohui start working, you need to start the three backend services separately:
 
-Enjoy 😉!
+Navigate to the `AvatarServer`, `backend`, and `cdn` directories under `/affiliate-project`.
 
-### Notes ❗:
+##### Before running the Django backend, please ensure you have installed Python and the necessary libraries such as Django, Requests, etc. Refer to the `requirements.txt` and `readme.md` files in each backend directory.
 
----
-The intelligent virtual assistant Xiao Hui can assist users in routing navigation by describing your needs in natural language. Xiao Hui will help you complete the navigation.
+Run the `run.bat` file in each corresponding directory to start the backend services.
 
-Please refer to the `/src/components/UnityInteraction.vue` file for the specific implementation process.
+Enjoy😉!
 
-Apart from the virtual teaching assistant Xiao Hui, there are no other highlights in the project.
+### Notes❗:
+***
+The intelligent assistant Xiaohui can help users with routing navigation functions. Just describe your needs in natural language, and Xiaohui will help you navigate.
 
-We have implemented the virtual character Xiao Hui in the `/src/components/UnityComponent.vue component`. Welcome everyone to discuss together 🤗.
+For the specific implementation process, please refer to the `/src/components/UnityInteraction.vue` file.
+
+Apart from the virtual teaching assistant Xiaohui, there are no other highlights in the project.
+The virtual assistant Xiaohui is implemented in the `/src/components/UnityComponent.vue` component. We welcome everyone to discuss and explore together🤗.div align="center">

@@ -5,7 +5,17 @@
 
 [![madewithlove](https://img.shields.io/badge/made_with-%E2%9D%A4-red?style=for-the-badge&labelColor=orange)](https://github.com/TochusC/ai-assistant-teaching-website)
 
-[**简体中文**](./README.md) | [**English**](./docs/en/README.md) | [**日本語**](./docs/jp/README.md)
+[**简体中文**](./README.md) | [**English**](./docs/en/README.md)
+
+恭喜**AI助理-小慧**在下列赛事中荣获国家级奖项👏：
+
+[(第16届)中国大学生计算机设计大赛](https://jsjds.blcu.edu.cn/)-软件应用与开发赛道-**国家一等奖**
+
+[第13届“中国软件杯”大学生软件设计大赛](https://www.cnsoftbei.com/)-A5-基于讯飞人工智能平台数智化教育应用软件开发赛道-**国家二等奖**
+
+[2024中国高校计算机大赛-网络技术挑战赛](http://net.c4best.cn/)-A1创意赛道-**国家三等奖**
+
+
 
 </div>
 
@@ -32,9 +42,7 @@
 我们创造了智能教学助理小慧，并把她介绍给你🥰。
 
 <div align="center">
-
-![example_0.png](docs/example_image/example_0.png)
-
+<img src="docs/example_image/example_0.png" width="auto" height="320px" />
 </div>
 
 不想学习复杂的教学平台的业务逻辑？没关系！
@@ -56,6 +64,7 @@
 
 ---
 #### 网站主页
+
 ![example_1.png](docs/example_image/example_1.png)
 
 #### 学习进度评估
@@ -90,19 +99,19 @@ npm instal
 ```
 来安装package.json中所需要的库和依赖
 
-接下来分别启动三种后端服务:
+使用
+```shell
+npm run dev
+```
+即可启动项目前端，通过访问[http://127.0.0.1:5173/](http://127.0.0.1:5173/)即可遇见小慧啦。
+
+但如果想要进入教学网站中，并让小慧开始工作，则需要分别启动三种后端服务:
 
 分别进入`/affiliate-project`目录下的`AvatarServer`、`backend`、`cdn`目录，
 
 ##### 在运行Django后端之前，请确认你已经安装了Python及相应库，如Django、Requests等，详见各后端下的`requirements.txt`及`readme.md`文件。
 
 分别运行对应目录下的`run.bat`文件，即可启动后端服务。
-
-最后使用
-```shell
-npm run dev
-```
-即可启动项目前端。
 
 玩好😉！
 
