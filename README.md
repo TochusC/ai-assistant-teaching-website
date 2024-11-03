@@ -77,7 +77,7 @@
 ![example_3.png](docs/example_image/example_3.png)
 
 #### 我的学堂页面（深色模式）
-![example_3.png](docs/example_image/example_3.png)
+![example_3.png](docs/example_image/example_4.png)
 
 
 ### 运行项目🚀：
